@@ -1,0 +1,34 @@
+{
+  "name": "@atlas/ui",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "description": "General-purpose component library for GPUIX (native GPU UI, no DOM).",
+  "keywords": ["gpuix", "gpu-ui", "react", "components", "ui"],
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json"
+  },
+  "exports": {
+    ".": "./src/index.ts",
+    "./tokens": "./src/tokens.ts",
+    "./icons": "./src/icons.ts",
+    "./atoms": "./src/atoms/index.ts",
+    "./overlays": "./src/overlays/index.ts",
+    "./layout": "./src/layout/index.ts",
+    "./inputs": "./src/inputs/index.ts",
+    "./effects": "./src/effects/index.ts",
+    "./display": "./src/display/index.ts",
+    "./dataviz": "./src/dataviz/index.ts",
+    "./ai": "./src/ai/index.ts",
+    "./finance": "./src/finance/index.ts",
+    "./hooks": "./src/hooks/index.ts",
+    "./core": "./src/core/index.ts",
+    "./composites": "./src/composites/index.ts",
+    "./desktop": "./src/desktop/index.ts"
+  },
+  "peerDependencies": {
+    "@gpuix/react": "^0.7.0",
+    "react": "^19.2.8"
+  }
+}

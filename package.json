@@ -1,0 +1,31 @@
+{
+  "name": "lucid-hubble",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "workspaces": ["packages/*"],
+  "scripts": {
+    "dev": "bun --hot src/app.tsx",
+    "start": "bun src/app.tsx",
+    "gallery": "bun src/gallery.tsx",
+    "verify": "bun run scripts/verify-render.tsx",
+    "test": "bun run scripts/verify-all.ts",
+    "build:ui": "tsc -p packages/ui/tsconfig.build.json",
+    "release:preview": "bun run scripts/release-preview.mjs",
+    "release:pack": "bun run build:ui && bun run scripts/release-preview.mjs --pack",
+    "typecheck": "tsc --noEmit && tsc --noEmit -p packages/ui/tsconfig.json"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.4.1",
+    "@types/node": "^26.4.1",
+    "@types/react": "^19.2.18"
+  },
+  "peerDependencies": {
+    "typescript": "^7.0.2"
+  },
+  "dependencies": {
+    "@atlas/ui": "workspace:*",
+    "@gpuix/react": "^0.7.0",
+    "react": "^19.2.8"
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "name": "@atlas/ui",
+  "version": "0.1.0",
+  "description": "General-purpose component library for GPUIX (native GPU UI, no DOM).",
+  "keywords": [
+    "gpuix",
+    "gpu-ui",
+    "react",
+    "components",
+    "ui"
+  ],
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./tokens": {
+      "types": "./dist/tokens/index.d.ts",
+      "default": "./dist/tokens/index.js"
+    },
+    "./icons": {
+      "types": "./dist/icons/index.d.ts",
+      "default": "./dist/icons/index.js"
+    },
+    "./atoms": {
+      "types": "./dist/atoms/index.d.ts",
+      "default": "./dist/atoms/index.js"
+    },
+    "./overlays": {
+      "types": "./dist/overlays/index.d.ts",
+      "default": "./dist/overlays/index.js"
+    },
+    "./layout": {
+      "types": "./dist/layout/index.d.ts",
+      "default": "./dist/layout/index.js"
+    },
+    "./inputs": {
+      "types": "./dist/inputs/index.d.ts",
+      "default": "./dist/inputs/index.js"
+    },
+    "./effects": {
+      "types": "./dist/effects/index.d.ts",
+      "default": "./dist/effects/index.js"
+    },
+    "./display": {
+      "types": "./dist/display/index.d.ts",
+      "default": "./dist/display/index.js"
+    },
+    "./dataviz": {
+      "types": "./dist/dataviz/index.d.ts",
+      "default": "./dist/dataviz/index.js"
+    },
+    "./ai": {
+      "types": "./dist/ai/index.d.ts",
+      "default": "./dist/ai/index.js"
+    },
+    "./finance": {
+      "types": "./dist/finance/index.d.ts",
+      "default": "./dist/finance/index.js"
+    },
+    "./hooks": {
+      "types": "./dist/hooks/index.d.ts",
+      "default": "./dist/hooks/index.js"
+    },
+    "./core": {
+      "types": "./dist/core/index.d.ts",
+      "default": "./dist/core/index.js"
+    },
+    "./composites": {
+      "types": "./dist/composites/index.d.ts",
+      "default": "./dist/composites/index.js"
+    },
+    "./desktop": {
+      "types": "./dist/desktop/index.d.ts",
+      "default": "./dist/desktop/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "COMPONENTS.md",
+    "LICENSE"
+  ],
+  "sideEffects": false,
+  "engines": {
+    "node": ">=18"
+  },
+  "peerDependencies": {
+    "@gpuix/react": "^0.7.0",
+    "react": "^19.2.8"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

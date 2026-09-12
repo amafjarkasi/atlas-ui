@@ -1,0 +1,4 @@
+[2026-09-07T03:12:27Z ERROR gpui_windows::window] unable to get cursor position: Access is denied. (0x80070005)
+[2026-09-07T03:12:27Z ERROR gpui_windows::window] unable to get cursor position: Access is denied. (0x80070005)
+[gpuix] created native window
+[gpuix] mount complete
