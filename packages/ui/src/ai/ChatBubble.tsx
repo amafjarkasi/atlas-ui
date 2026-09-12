@@ -25,6 +25,35 @@ export interface ChatBubbleProps {
   markdown?: boolean
 }
 
+const AVATAR_SIZE = 28
+const BUBBLE_PAD = 12
+const AVATAR_GAP = 10
+const NAME_GAP = 8
+const CONTENT_INDENT = AVATAR_SIZE + AVATAR_GAP
+
+function AvatarSlot({
+  avatarSrc,
+  avatarLetter,
+  fallbackLetter,
+}: {
+  avatarSrc?: string
+  avatarLetter?: string
+  fallbackLetter: string
+}) {
+  return (
+    <div
+      style={{
+        width: AVATAR_SIZE,
+        height: AVATAR_SIZE,
+        flexShrink: 0,
+        marginRight: AVATAR_GAP,
+      }}
+    >
+      <Avatar src={avatarSrc} letter={avatarLetter ?? fallbackLetter} size={AVATAR_SIZE} />
+    </div>
+  )
+}
+
 export function ChatBubble({
   role,
   content,
@@ -36,78 +65,156 @@ export function ChatBubble({
 }: ChatBubbleProps) {
   const isUser = role === 'user'
   const bubbleBg = isUser ? semantic.accent : surface.card
+  const fallbackLetter = isUser ? 'U' : 'A'
+
+  const nameLabel = name ? (
+    <text
+      style={{
+        fontSize: 11,
+        color: text.muted,
+        fontFamily: FONT,
+        lineHeight: 1.2,
+      }}
+    >
+      {name}
+    </text>
+  ) : null
+
+  const bubble = (
+    <div
+      style={{
+        paddingLeft: BUBBLE_PAD,
+        paddingRight: BUBBLE_PAD,
+        paddingTop: BUBBLE_PAD,
+        paddingBottom: BUBBLE_PAD,
+        borderRadius: 10,
+        backgroundColor: bubbleBg,
+        borderWidth: isUser ? 0 : 1,
+        borderColor: border.subtle,
+        flexGrow: 1,
+        flexShrink: 1,
+        minWidth: 0,
+        maxWidth: 520,
+      }}
+    >
+      {markdown ? (
+        <markdown
+          source={content}
+          style={{
+            fontSize: 13,
+            lineHeight: 18,
+            color: text.primary,
+            fontFamily: FONT,
+          }}
+        />
+      ) : (
+        <text
+          style={{
+            fontSize: 13,
+            color: isUser ? '#FFFFFF' : text.primary,
+            fontFamily: FONT,
+            whiteSpace: 'normal',
+            lineHeight: 1.5,
+          }}
+        >
+          {content}
+        </text>
+      )}
+    </div>
+  )
+
+  if (isUser) {
+    return (
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'flex-start',
+          justifyContent: 'flex-end',
+          width: '100%',
+        }}
+      >
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: NAME_GAP,
+            alignItems: 'flex-end',
+            maxWidth: 520,
+            marginRight: AVATAR_GAP,
+          }}
+        >
+          {nameLabel}
+          {bubble}
+          {timestamp ? (
+            <text style={{ fontSize: 10, color: text.ghost, fontFamily: FONT, lineHeight: 1.2 }}>{timestamp}</text>
+          ) : null}
+        </div>
+        <div style={{ width: AVATAR_SIZE, height: AVATAR_SIZE, flexShrink: 0 }}>
+          <Avatar src={avatarSrc} letter={avatarLetter ?? fallbackLetter} size={AVATAR_SIZE} />
+        </div>
+      </div>
+    )
+  }
+
+  if (name) {
+    return (
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: NAME_GAP,
+          alignItems: 'flex-start',
+          width: '100%',
+        }}
+      >
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            width: '100%',
+          }}
+        >
+          <AvatarSlot avatarSrc={avatarSrc} avatarLetter={avatarLetter} fallbackLetter={fallbackLetter} />
+          {nameLabel}
+        </div>
+
+        <div style={{ paddingLeft: CONTENT_INDENT, width: '100%' }}>{bubble}</div>
+
+        {timestamp ? (
+          <div style={{ paddingLeft: CONTENT_INDENT, width: '100%' }}>
+            <text style={{ fontSize: 10, color: text.ghost, fontFamily: FONT, lineHeight: 1.2 }}>{timestamp}</text>
+          </div>
+        ) : null}
+      </div>
+    )
+  }
 
   return (
     <div
       style={{
         display: 'flex',
         flexDirection: 'row',
-        gap: 10,
         alignItems: 'flex-start',
-        justifyContent: isUser ? 'flex-end' : 'flex-start',
+        width: '100%',
       }}
     >
-      {!isUser && (
-        <div style={{ flexShrink: 0, display: 'flex', alignItems: 'center' }}>
-          <Avatar src={avatarSrc} letter={avatarLetter ?? 'A'} size={28} />
-        </div>
-      )}
-
+      <AvatarSlot avatarSrc={avatarSrc} avatarLetter={avatarLetter} fallbackLetter={fallbackLetter} />
       <div
         style={{
           display: 'flex',
           flexDirection: 'column',
-          gap: 4,
-          alignItems: isUser ? 'flex-end' : 'flex-start',
-          maxWidth: '75%',
+          gap: NAME_GAP,
+          flexGrow: 1,
+          minWidth: 0,
         }}
       >
-        {name && !isUser ? (
-          <text style={{ fontSize: 11, color: text.muted, fontFamily: FONT, lineHeight: 1 }}>{name}</text>
-        ) : null}
-
-        <div
-          style={{
-            paddingLeft: 14,
-            paddingRight: 14,
-            paddingTop: 8,
-            paddingBottom: 8,
-            minHeight: 36,
-            borderRadius: 10,
-            backgroundColor: bubbleBg,
-            borderWidth: isUser ? 0 : 1,
-            borderColor: border.subtle,
-            display: 'flex',
-            alignItems: 'center',
-          }}
-        >
-          {markdown ? (
-            <markdown source={content} />
-          ) : (
-            <text
-              style={{
-                fontSize: 13,
-                color: isUser ? '#FFFFFF' : text.primary,
-                fontFamily: FONT,
-                whiteSpace: 'normal',
-                lineHeight: 1.5,
-              }}
-            >
-              {content}
-            </text>
-          )}
-        </div>
-
+        {bubble}
         {timestamp ? (
-          <text style={{ fontSize: 10, color: text.ghost, fontFamily: FONT, lineHeight: 1 }}>{timestamp}</text>
+          <text style={{ fontSize: 10, color: text.ghost, fontFamily: FONT, lineHeight: 1.2 }}>{timestamp}</text>
         ) : null}
       </div>
-
-      {isUser && (
-        <div style={{ flexShrink: 0, display: 'flex', alignItems: 'center' }}>
-          <Avatar src={avatarSrc} letter={avatarLetter ?? 'U'} size={28} />
-        </div>
-      )}
     </div>
   )
 }

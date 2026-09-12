@@ -408,7 +408,7 @@ const sampleProps: Record<string, any> = {
     active: false
   },
   SystemPromptCard: {
-    prompt: 'You are Atlas Copilot, an expert AI assistant specialized in native GPU application architecture and Rust systems programming.'
+    value: 'You are Atlas Copilot, an expert AI assistant specialized in native GPU application architecture and Rust systems programming.'
   },
   TaskDoneBanner: {
     title: 'Visual Audit Complete',
