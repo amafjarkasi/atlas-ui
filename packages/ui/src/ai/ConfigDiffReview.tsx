@@ -18,16 +18,17 @@ const toText = (v: string | unknown): string => (typeof v === 'string' ? v : JSO
 
 export function ConfigDiffReview({ before, after, title = 'Proposed change', acceptLabel = 'Accept', rejectLabel = 'Reject', onAccept, onReject }: ConfigDiffReviewProps) {
   const lines = diffLines(toText(before ?? ''), toText(after ?? ''))
+  const scrollable = lines.length > 12
   const color = { add: '#22C55E', del: '#ED4245', keep: '#8A8A90' } as const
   const prefix = { add: '+', del: '-', keep: ' ' } as const
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 16, borderRadius: 10, borderWidth: 1, borderColor: border.subtle, backgroundColor: surface.card }}>
-      <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', height: 28 }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 12, flexGrow: 0, flexShrink: 0, alignSelf: 'flex-start', width: '100%', paddingLeft: 16, paddingRight: 16, paddingTop: 14, paddingBottom: 14, borderRadius: 10, borderWidth: 1, borderColor: border.subtle, backgroundColor: surface.card }}>
+      <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
         <text style={{ fontSize: 13, fontWeight: 600, color: t.primary, fontFamily: FONT, lineHeight: 1 }}>{title}</text>
         <text style={{ fontSize: 11, color: t.muted, fontFamily: FONT, lineHeight: 1 }}>{lines.length} lines</text>
       </div>
-      <div style={{ display: 'flex', flexDirection: 'column', marginTop: 2, maxHeight: 260, overflowY: 'scroll', backgroundColor: surface.code, borderRadius: 8, padding: 8, borderWidth: 1, borderColor: border.subtle }}>
+      <div style={{ ...(scrollable ? { maxHeight: 260, overflowY: 'scroll' as const } : {}), backgroundColor: surface.code, borderRadius: 8, padding: 8, borderWidth: 1, borderColor: border.subtle }}>
         {lines.map((l, i) => (
           <div
             key={i}

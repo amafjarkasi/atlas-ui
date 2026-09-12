@@ -32,7 +32,7 @@ function Pane({ r, onCopy }: { r?: ComparableResponse; onCopy?: (id: string, con
   }
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: 180, borderRadius: 10, borderWidth: 1, borderColor: border.subtle, backgroundColor: surface.card, overflow: 'hidden' }}>
-      <div style={{ paddingLeft: 12, paddingRight: 8, paddingTop: 10, paddingBottom: 10, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', borderBottomWidth: 1, borderColor: border.subtle }}>
+      <div style={{ paddingLeft: 12, paddingRight: 8, paddingTop: 12, paddingBottom: 12, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', borderBottomWidth: 1, borderColor: border.subtle }}>
         <text style={{ fontSize: 12.5, fontWeight: 600, color: textTokens.primary, fontFamily: FONT, lineHeight: 1 }}>{r.label ?? 'Response'}</text>
         <CopyButton value={r.content ?? ''} onCopy={onCopy ? () => onCopy(r.id, r.content ?? '') : undefined} />
       </div>

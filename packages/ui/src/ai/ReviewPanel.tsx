@@ -18,10 +18,10 @@ export interface ReviewPanelProps {
 export function ReviewPanel({ title, feedback, code, language, configBefore, configAfter, onApply, onReject }: ReviewPanelProps) {
   const hasDiffs = code !== undefined || (configBefore !== undefined && configAfter !== undefined)
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 12, width: '100%' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 12, width: '100%', alignSelf: 'flex-start' }}>
       {(title || feedback || !hasDiffs) && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 16, borderRadius: 10, borderWidth: 1, borderColor: border.subtle, backgroundColor: surface.card }}>
-          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', height: 28 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 12, flexGrow: 0, flexShrink: 0, paddingLeft: 16, paddingRight: 16, paddingTop: 14, paddingBottom: 14, borderRadius: 10, borderWidth: 1, borderColor: border.subtle, backgroundColor: surface.card }}>
+          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 8 }}>
               <text style={{ fontSize: 13, fontWeight: 600, color: t.primary, fontFamily: FONT, lineHeight: 1 }}>{title ?? 'Code Review'}</text>
               <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', backgroundColor: '#3B82F61A', borderWidth: 1, borderColor: '#3B82F640', borderRadius: 10, paddingLeft: 8, paddingRight: 8, height: 20 }}>
