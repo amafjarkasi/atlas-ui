@@ -9,7 +9,7 @@
  */
 export interface AudioWaveformProps {
   data: number[]
-  width?: number
+  width?: number | string
   height?: number
   color?: string
   barGap?: number
@@ -19,14 +19,15 @@ export interface AudioWaveformProps {
 
 export function AudioWaveform({
   data,
-  width = 200,
+  width = '100%',
   height = 40,
   color = '#3B82F6',
   barGap = 2,
   progress = 1,
 }: AudioWaveformProps) {
   const n = data.length
-  const barW = n > 0 ? Math.max(1, (width - barGap * (n - 1)) / n) : 0
+  const fullWidth = width === '100%'
+  const barW = !fullWidth && typeof width === 'number' && n > 0 ? Math.max(1, (width - barGap * (n - 1)) / n) : 0
   const played = Math.round(n * Math.max(0, Math.min(1, progress)))
 
   return (
@@ -38,11 +39,10 @@ export function AudioWaveform({
           <div
             key={i}
             style={{
-              width: barW,
+              ...(fullWidth ? { flexGrow: 1, flexBasis: 0 } : { width: barW, flexShrink: 0 }),
               height: h,
               borderRadius: 1,
               backgroundColor: isPlayed ? color : '#3A3A40',
-              flexShrink: 0,
             }}
           />
         )
