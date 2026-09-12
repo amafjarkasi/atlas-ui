@@ -71,10 +71,13 @@ export function PromptInput({
         style={{
           display: 'flex',
           flexDirection: 'row',
-          alignItems: 'flex-end',
+          alignItems: 'center',
           gap: 8,
-          padding: 10,
-          borderRadius: 12,
+          paddingLeft: 12,
+          paddingRight: 8,
+          paddingTop: 6,
+          paddingBottom: 6,
+          borderRadius: 8,
           borderWidth: 1,
           borderColor: border.strong,
           backgroundColor: surface.card,
@@ -84,19 +87,19 @@ export function PromptInput({
           value={value}
           placeholder={placeholder}
           minRows={1}
-          maxRows={6}
+          maxRows={4}
           onChange={(e) => set(e.value ?? '')}
           onSubmit={onSubmit}
-          style={{ flexGrow: 1, fontSize: 13, color: text.primary, fontFamily: FONT }}
+          style={{ flexGrow: 1, fontSize: 12.5, color: text.primary, fontFamily: FONT, lineHeight: 1.4 }}
         />
 
         {loading ? (
           <div
             onClick={onStop}
             style={{
-              width: 30,
-              height: 30,
-              borderRadius: 15,
+              width: 26,
+              height: 26,
+              borderRadius: 13,
               backgroundColor: '#ED4245',
               display: 'flex',
               alignItems: 'center',
@@ -105,15 +108,15 @@ export function PromptInput({
               flexShrink: 0,
             }}
           >
-            <div style={{ width: 10, height: 10, borderRadius: 2, backgroundColor: '#FFFFFF' }} />
+            <div style={{ width: 8, height: 8, borderRadius: 2, backgroundColor: '#FFFFFF' }} />
           </div>
         ) : (
           <div
             onClick={value ? onSubmit : undefined}
             style={{
-              width: 30,
-              height: 30,
-              borderRadius: 15,
+              width: 26,
+              height: 26,
+              borderRadius: 13,
               backgroundColor: value ? semantic.accent : surface.selected,
               display: 'flex',
               alignItems: 'center',
@@ -122,7 +125,7 @@ export function PromptInput({
               flexShrink: 0,
             }}
           >
-            <Icon name="send" size={13} color={value ? '#FFFFFF' : text.muted} />
+            <Icon name="send" size={12} color={value ? '#FFFFFF' : text.muted} />
           </div>
         )}
       </div>

@@ -60,12 +60,12 @@ export function DocumentQAPanel({ chunks = [], question, onQuestionChange, onAsk
       </div>
 
       <div style={{ flexGrow: 1, display: 'flex', flexDirection: 'column', height: '100%' }}>
-        <div style={{ height: 44, flexShrink: 0, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 14, paddingRight: 14, borderBottomWidth: 1, borderColor: border.subtle }}>
-          <text style={{ fontSize: 13, fontWeight: 600, color: t.primary, fontFamily: FONT }}>
+        <div style={{ height: 48, flexShrink: 0, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 16, paddingRight: 16, borderBottomWidth: 1, borderColor: border.subtle }}>
+          <text style={{ fontSize: 13, fontWeight: 600, color: t.primary, fontFamily: FONT, lineHeight: 1 }}>
             {currentChunk?.title ?? 'Document Excerpt'}
           </text>
-          <div style={{ backgroundColor: '#22C55E18', borderWidth: 1, borderColor: '#22C55E33', borderRadius: 4, paddingLeft: 6, paddingRight: 6, paddingTop: 2, paddingBottom: 2 }}>
-            <text style={{ fontSize: 10.5, color: '#22C55E', fontFamily: FONT }}>INDEXED</text>
+          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', backgroundColor: '#22C55E18', borderWidth: 1, borderColor: '#22C55E33', borderRadius: 10, paddingLeft: 8, paddingRight: 8, height: 20 }}>
+            <text style={{ fontSize: 10.5, color: '#22C55E', fontWeight: 600, fontFamily: FONT, lineHeight: 1 }}>INDEXED</text>
           </div>
         </div>
 
@@ -75,7 +75,7 @@ export function DocumentQAPanel({ chunks = [], question, onQuestionChange, onAsk
           </text>
         </div>
 
-        <div style={{ padding: 12, borderTopWidth: 1, borderColor: border.subtle, backgroundColor: surface.card }}>
+        <div style={{ padding: 10, borderTopWidth: 1, borderColor: border.subtle, backgroundColor: surface.card }}>
           <PromptInput value={question ?? ''} onChange={onQuestionChange} onSubmit={ask} loading={loading} placeholder="Ask about this document…" />
         </div>
       </div>

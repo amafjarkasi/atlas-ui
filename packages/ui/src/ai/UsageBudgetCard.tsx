@@ -15,11 +15,11 @@ export function UsageBudgetCard({ title = 'Usage & Quotas', used, limit = 100, l
   const pct = Math.round((safeUsed / (safeLimit || 1)) * 100)
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 14, borderRadius: 10, borderWidth: 1, borderColor: border.subtle, backgroundColor: surface.card, width: '100%' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 14, padding: 16, borderRadius: 10, borderWidth: 1, borderColor: border.subtle, backgroundColor: surface.card, width: '100%' }}>
       <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-        <text style={{ fontSize: 13, fontWeight: 600, color: text.primary, fontFamily: FONT }}>{title}</text>
-        <div style={{ backgroundColor: pct >= 90 ? '#ED42451A' : '#3B82F61A', borderWidth: 1, borderColor: pct >= 90 ? '#ED424540' : '#3B82F640', borderRadius: 10, paddingLeft: 8, paddingRight: 8, paddingTop: 2, paddingBottom: 2 }}>
-          <text style={{ fontSize: 10.5, color: pct >= 90 ? '#ED4245' : '#60A5FA', fontWeight: 600, fontFamily: FONT }}>
+        <text style={{ fontSize: 13, fontWeight: 600, color: text.primary, fontFamily: FONT, lineHeight: 1 }}>{title}</text>
+        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', backgroundColor: pct >= 90 ? '#ED42451A' : '#3B82F61A', borderWidth: 1, borderColor: pct >= 90 ? '#ED424540' : '#3B82F640', borderRadius: 10, paddingLeft: 8, paddingRight: 8, height: 20 }}>
+          <text style={{ fontSize: 10.5, color: pct >= 90 ? '#ED4245' : '#60A5FA', fontWeight: 600, fontFamily: FONT, lineHeight: 1 }}>
             {pct >= 90 ? 'NEARING LIMIT' : 'HEALTHY'}
           </text>
         </div>

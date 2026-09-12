@@ -22,20 +22,20 @@ export function SandboxStepLog({ lines, height = 240 }: SandboxStepLogProps) {
   const innerHeight = typeof height === 'number' ? height - 42 : height
   return (
     <div style={{ backgroundColor: '#0D0D10', borderRadius: 8, borderWidth: 1, borderColor: '#26262B', overflow: 'hidden', height, display: 'flex', flexDirection: 'column' }}>
-      <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 10, paddingRight: 10, height: 32, backgroundColor: '#141418', borderBottomWidth: 1, borderColor: '#26262B' }}>
+      <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 12, paddingRight: 12, height: 32, backgroundColor: '#141418', borderBottomWidth: 1, borderColor: '#26262B' }}>
         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 6 }}>
           <div style={{ width: 9, height: 9, borderRadius: 5, backgroundColor: '#EF4444' }} />
           <div style={{ width: 9, height: 9, borderRadius: 5, backgroundColor: '#F59E0B' }} />
           <div style={{ width: 9, height: 9, borderRadius: 5, backgroundColor: '#10B981' }} />
-          <text style={{ fontSize: 11, color: t.muted, fontFamily: FONT_MONO, marginLeft: 6 }}>sandbox-terminal</text>
+          <text style={{ fontSize: 11, color: t.muted, fontFamily: FONT_MONO, marginLeft: 6, lineHeight: 1 }}>sandbox-terminal</text>
         </div>
-        <text style={{ fontSize: 10.5, color: t.muted, fontFamily: FONT_MONO }}>{lines.length} lines</text>
+        <text style={{ fontSize: 11, color: t.muted, fontFamily: FONT_MONO, lineHeight: 1, whiteSpace: 'nowrap' }}>{`${lines.length} lines`}</text>
       </div>
-      <div style={{ flexGrow: 1, padding: 8 }}>
+      <div style={{ flexGrow: 1, paddingLeft: 12, paddingRight: 12, paddingTop: 10, paddingBottom: 10, overflowY: 'scroll' }}>
         <VirtualList<SandboxLine>
           items={lines}
-          estimatedItemHeight={22}
-          height={innerHeight}
+          estimatedItemHeight={24}
+          height="100%"
           renderItem={(l) => {
             const kind = l.kind ?? 'stdout'
             const prefix = kind === 'prompt' ? '$ ' : kind === 'command' ? '> ' : ''
@@ -44,14 +44,14 @@ export function SandboxStepLog({ lines, height = 240 }: SandboxStepLogProps) {
               <div
                 key={l.id}
                 style={{
-                  minHeight: 20,
-                  paddingLeft: 4,
-                  paddingRight: 4,
-                  paddingTop: 2,
-                  paddingBottom: 2,
+                  minHeight: 22,
+                  paddingTop: 3,
+                  paddingBottom: 3,
+                  display: 'flex',
+                  alignItems: 'center',
                 }}
               >
-                <text style={{ fontSize: 11.5, color: KIND_COLOR[kind], fontFamily: FONT_MONO, lineHeight: 1.45, whiteSpace: 'nowrap' }}>
+                <text style={{ fontSize: 11.5, color: KIND_COLOR[kind], fontFamily: FONT_MONO, lineHeight: 1.4, whiteSpace: 'nowrap' }}>
                   {fullText}
                 </text>
               </div>

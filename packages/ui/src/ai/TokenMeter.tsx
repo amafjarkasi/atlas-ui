@@ -22,7 +22,7 @@ export function TokenMeter({ used = 0, limit = 100, label = 'tokens', color = '#
   const pct = Math.max(0, Math.min(100, (safeUsed / (safeLimit || 1)) * 100))
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 6, width: '100%' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 10, width: '100%' }}>
       <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
         <text style={{ fontSize: 11.5, color: text.secondary, fontFamily: FONT, whiteSpace: 'nowrap' }}>{label}</text>
         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 8 }}>

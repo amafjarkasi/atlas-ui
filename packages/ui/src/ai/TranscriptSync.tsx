@@ -1,4 +1,4 @@
-import { text as t, FONT_MONO } from '../tokens'
+import { border, surface, text as t, FONT_MONO } from '../tokens'
 import { FONT } from '../tokens'
 import { AudioWaveform } from '../dataviz/AudioWaveform'
 
@@ -13,16 +13,33 @@ export interface TranscriptSyncProps {
   waveform?: number[]
   onSeek?: (startMs: number) => void
   durationMs?: number
+  bordered?: boolean
 }
 
-export function TranscriptSync({ segments = [], activeIndex = -1, waveform = [], onSeek, durationMs }: TranscriptSyncProps) {
+export function TranscriptSync({ segments = [], activeIndex = -1, waveform = [], onSeek, durationMs, bordered = true }: TranscriptSyncProps) {
   const safeSegments = segments ?? []
   const maxStart = safeSegments.length > 0 ? Math.max(...safeSegments.map((s) => (typeof s?.startMs === 'number' ? s.startMs : 0)), 1) : 1
   const total = durationMs ?? maxStart
   const progress = activeIndex >= 0 && safeSegments[activeIndex] && typeof safeSegments[activeIndex].startMs === 'number' ? safeSegments[activeIndex].startMs / total : 0
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 10, width: '100%' }}>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 12,
+        width: '100%',
+        ...(bordered
+          ? {
+              padding: 16,
+              borderRadius: 10,
+              borderWidth: 1,
+              borderColor: border.subtle,
+              backgroundColor: surface.card,
+            }
+          : {}),
+      }}
+    >
       {waveform.length > 0 ? <AudioWaveform data={waveform} progress={progress} height={44} /> : null}
       <div style={{ display: 'flex', flexDirection: 'column', maxHeight: 280, overflowY: 'scroll', gap: 2 }}>
         {segments.map((s, i) => {
@@ -35,9 +52,12 @@ export function TranscriptSync({ segments = [], activeIndex = -1, waveform = [],
               style={{
                 display: 'flex',
                 flexDirection: 'row',
-                alignItems: 'flex-start',
-                gap: 10,
-                padding: 8,
+                alignItems: 'center',
+                gap: 12,
+                paddingLeft: 12,
+                paddingRight: 12,
+                paddingTop: 10,
+                paddingBottom: 10,
                 borderRadius: 6,
                 cursor: onSeek ? 'pointer' : 'default',
                 backgroundColor: active ? '#3B82F618' : 'transparent',
@@ -45,10 +65,10 @@ export function TranscriptSync({ segments = [], activeIndex = -1, waveform = [],
                 borderColor: '#3B82F6',
               }}
             >
-              <div style={{ width: 50, minWidth: 50, flexShrink: 0, paddingTop: 1 }}>
-                <text style={{ fontSize: 11, color: active ? '#60A5FA' : t.muted, fontFamily: FONT_MONO, whiteSpace: 'nowrap' }}>{`${sec}s`}</text>
+              <div style={{ width: 44, minWidth: 44, flexShrink: 0 }}>
+                <text style={{ fontSize: 11, color: active ? '#60A5FA' : t.muted, fontFamily: FONT_MONO, whiteSpace: 'nowrap', lineHeight: 1 }}>{`${sec}s`}</text>
               </div>
-              <text style={{ fontSize: 12.5, color: active ? t.primary : t.secondary, fontFamily: FONT, lineHeight: 1.5, flexGrow: 1 }}>{s.text}</text>
+              <text style={{ fontSize: 12.5, color: active ? t.primary : t.secondary, fontFamily: FONT, lineHeight: 1.3, flexGrow: 1 }}>{s.text}</text>
             </div>
           )
         })}

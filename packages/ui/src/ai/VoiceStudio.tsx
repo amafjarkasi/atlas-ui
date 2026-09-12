@@ -18,15 +18,15 @@ export interface VoiceStudioProps {
 export function VoiceStudio({ segments = [], activeIndex, waveform, durationMs, recording = false, onToggleRecord, onSeek }: VoiceStudioProps) {
   const safeSegments = segments ?? []
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 10, padding: 12, borderRadius: 10, borderWidth: 1, borderColor: border.subtle, backgroundColor: surface.card }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 14, padding: 16, borderRadius: 10, borderWidth: 1, borderColor: border.subtle, backgroundColor: surface.card, width: '100%' }}>
       <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 10 }}>
         <Button size="sm" variant={recording ? 'destructive' : 'primary'} icon={recording ? 'pause' : 'mic'} onClick={onToggleRecord}>
           {recording ? 'Stop' : 'Record'}
         </Button>
         {recording ? <StatusDot status="busy" label="Recording" /> : null}
-        <text style={{ fontSize: 11, color: t.muted, fontFamily: FONT, flexGrow: 1, textAlign: 'right' }}>{safeSegments.length} segments</text>
+        <text style={{ fontSize: 11, color: t.muted, fontFamily: FONT, flexGrow: 1, textAlign: 'right', lineHeight: 1 }}>{safeSegments.length} segments</text>
       </div>
-      <TranscriptSync segments={safeSegments} activeIndex={activeIndex} waveform={waveform} durationMs={durationMs} onSeek={onSeek} />
+      <TranscriptSync segments={safeSegments} activeIndex={activeIndex} waveform={waveform} durationMs={durationMs} onSeek={onSeek} bordered={false} />
     </div>
   )
 }

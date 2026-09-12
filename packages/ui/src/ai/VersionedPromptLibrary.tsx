@@ -61,17 +61,17 @@ export function VersionedPromptLibrary({ prompts, onRestore }: VersionedPromptLi
 
       <div style={{ flexGrow: 1, display: 'flex', flexDirection: 'column', gap: 10, overflowY: 'scroll' }}>
         {sel && sel.versions.length > 1 ? (
-          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingBottom: 6, borderBottomWidth: 1, borderColor: border.subtle }}>
+          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingBottom: 10, borderBottomWidth: 1, borderColor: border.subtle }}>
             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 8 }}>
-              <text style={{ fontSize: 11, color: t.muted, fontFamily: FONT }}>from</text>
+              <text style={{ fontSize: 12, color: t.muted, fontFamily: FONT, lineHeight: 1 }}>from</text>
               <Button size="sm" variant="ghost" onClick={() => setFrom((f) => Math.max(0, f - 1))}>-</Button>
-              <div style={{ backgroundColor: '#1E1E22', paddingLeft: 6, paddingRight: 6, paddingTop: 2, paddingBottom: 2, borderRadius: 4 }}>
-                <text style={{ fontSize: 11.5, color: t.primary, fontFamily: FONT }}>{sel.versions[from]?.label}</text>
+              <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', backgroundColor: '#1E1E22', paddingLeft: 8, paddingRight: 8, height: 26, borderRadius: 6, borderWidth: 1, borderColor: border.subtle }}>
+                <text style={{ fontSize: 11.5, color: t.primary, fontFamily: FONT, lineHeight: 1 }}>{sel.versions[from]?.label}</text>
               </div>
               <Button size="sm" variant="ghost" onClick={() => setFrom((f) => Math.min(sel.versions.length - 2, f + 1))}>+</Button>
-              <text style={{ fontSize: 11, color: t.muted, fontFamily: FONT }}>to</text>
-              <div style={{ backgroundColor: '#1E1E22', paddingLeft: 6, paddingRight: 6, paddingTop: 2, paddingBottom: 2, borderRadius: 4 }}>
-                <text style={{ fontSize: 11.5, color: t.primary, fontFamily: FONT }}>{sel.versions[to]?.label}</text>
+              <text style={{ fontSize: 12, color: t.muted, fontFamily: FONT, lineHeight: 1, marginLeft: 4 }}>to</text>
+              <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', backgroundColor: '#1E1E22', paddingLeft: 8, paddingRight: 8, height: 26, borderRadius: 6, borderWidth: 1, borderColor: border.subtle }}>
+                <text style={{ fontSize: 11.5, color: t.primary, fontFamily: FONT, lineHeight: 1 }}>{sel.versions[to]?.label}</text>
               </div>
             </div>
             {toVersion ? (
