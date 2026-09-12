@@ -122,14 +122,19 @@ export function MentionInput({
       {open && filtered.length > 0 ? (
         <div
           style={{
+            position: 'absolute',
+            top: 48,
+            left: 0,
+            right: 0,
+            marginTop: 6,
             display: 'flex',
             flexDirection: 'column',
-            padding: 4,
+            padding: 6,
             borderRadius: 10,
             borderWidth: 1,
             borderColor: border.strong,
             backgroundColor: surface.overlay,
-            boxShadow: { offsetX: 0, offsetY: 6, blurRadius: 24, spreadRadius: 0, color: '#00000066' },
+            boxShadow: { offsetX: 0, offsetY: 8, blurRadius: 24, spreadRadius: 0, color: '#00000088' },
             maxHeight: 220,
             overflowY: 'scroll',
           }}

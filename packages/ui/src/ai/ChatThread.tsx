@@ -46,17 +46,26 @@ export function ChatThread({ title, messages = [], onSend, loading = false, plac
       <div
         style={{
           width: '100%',
-          height: 44,
+          height: 48,
           flexShrink: 0,
           flexDirection: 'row',
           alignItems: 'center',
-          paddingLeft: 14,
-          paddingRight: 14,
+          justifyContent: 'space-between',
+          paddingLeft: 16,
+          paddingRight: 16,
           borderBottomWidth: 1,
           borderColor: border.subtle,
         }}
       >
-        <text style={{ fontSize: 13, fontWeight: 600, color: text.primary, fontFamily: FONT }}>{title ?? 'Chat'}</text>
+        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+          <text style={{ fontSize: 13, fontWeight: 600, color: text.primary, fontFamily: FONT }}>{title ?? 'Chat'}</text>
+          <div style={{ width: 7, height: 7, borderRadius: 4, backgroundColor: '#22C55E' }} />
+        </div>
+        {loading && (
+          <div style={{ backgroundColor: '#3B82F618', borderRadius: 4, paddingLeft: 6, paddingRight: 6, paddingTop: 2, paddingBottom: 2 }}>
+            <text style={{ fontSize: 10.5, color: '#60A5FA', fontFamily: FONT }}>GENERATING…</text>
+          </div>
+        )}
       </div>
 
       <div style={{ flexGrow: 1, minHeight: 0, display: 'flex', flexDirection: 'column' }}>

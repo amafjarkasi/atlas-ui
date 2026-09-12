@@ -37,7 +37,7 @@ export function VirtualizedGrid<T>({
       estimatedItemHeight={estimatedRowHeight}
       height={height}
       renderItem={(row) => (
-        <div style={{ display: 'flex', flexDirection: 'row', gap }}>
+        <div style={{ display: 'flex', flexDirection: 'row', gap, paddingBottom: gap }}>
           {row.map((item, j) => (
             <div key={j} style={{ flexGrow: 1, flexBasis: 0, minWidth: 0 }}>
               {renderCell(item, j)}

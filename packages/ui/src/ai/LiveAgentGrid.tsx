@@ -23,6 +23,7 @@ export function LiveAgentGrid({ agents, columns = 2, height = '100%' }: LiveAgen
     <VirtualizedGrid<AgentRunSummary>
       items={agents}
       columns={columns}
+      gap={12}
       estimatedRowHeight={180}
       height={height}
       renderCell={(a) => (

@@ -1,5 +1,4 @@
-/** @atlas/ui — AssistWorkspace — chat + context browser + usage in one shell. */
-import { border } from '../tokens'
+import { border, surface, text as t, FONT } from '../tokens'
 import { ChatThread, type ChatThreadMessage } from './ChatThread'
 import { ContextBrowser, type ContextChunk } from './ContextBrowser'
 import { ContextRing } from './ContextRing'
@@ -23,13 +22,20 @@ export function AssistWorkspace({ messages, onSend, chunks = [], query = '', onQ
   return (
     <div style={{ display: 'flex', flexDirection: 'row', height: '100%', width: '100%' }}>
       <div style={{ flexGrow: 1, minWidth: 0, display: 'flex', flexDirection: 'column' }}>
-        <ChatThread title="Assistant" messages={messages} onSend={onSend} loading={streaming} />
+        <ChatThread title="Assistant Workspace" messages={messages} onSend={onSend} loading={streaming} />
       </div>
-      <div style={{ width: 300, flexShrink: 0, borderLeftWidth: 1, borderColor: border.subtle, padding: 10, display: 'flex', flexDirection: 'column', gap: 12, overflowY: 'scroll' }}>
-        <ContextRing used={used} limit={limit} />
-        <AgentRunCard title="Current run" steps={runSteps} progress={runProgress} />
-        <ContextBrowser chunks={chunks} query={query} height={400} />
-        {onQueryChange ? <input value={query} onChange={(e) => onQueryChange(e.value ?? '')} placeholder="Filter context…" style={{ fontSize: 12 }} /> : null}
+      <div style={{ width: 320, flexShrink: 0, borderLeftWidth: 1, borderColor: border.subtle, padding: 12, display: 'flex', flexDirection: 'column', gap: 12, overflowY: 'scroll', backgroundColor: surface.card }}>
+        <div style={{ height: 48, flexShrink: 0, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', borderBottomWidth: 1, borderColor: border.subtle, paddingBottom: 4 }}>
+          <text style={{ fontSize: 13, fontWeight: 600, color: t.primary, fontFamily: FONT }}>Session Context</text>
+          <div style={{ backgroundColor: '#3B82F618', borderRadius: 4, paddingLeft: 6, paddingRight: 6, paddingTop: 2, paddingBottom: 2 }}>
+            <text style={{ fontSize: 10.5, color: '#60A5FA', fontFamily: FONT }}>{`${chunks.length} chunks`}</text>
+          </div>
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 4 }}>
+          <ContextRing used={used} limit={limit} size={110} />
+        </div>
+        <AgentRunCard title="Active Run" steps={runSteps} progress={runProgress} />
+        <ContextBrowser chunks={chunks} query={query} height={360} />
       </div>
     </div>
   )

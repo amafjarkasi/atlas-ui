@@ -40,12 +40,30 @@ const ICON: Record<MessageStatusValue, 'clock' | 'check' | 'checkCircle' | 'aler
 export function MessageStatus({ status, onRetry }: MessageStatusProps) {
   const isError = status === 'error'
   return (
-    <div
-      onClick={isError ? onRetry : undefined}
-      style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 4, cursor: isError && onRetry ? 'pointer' : 'default' }}
-    >
-      <Icon name={ICON[status]} size={11} color={COLOR[status]} />
-      <text style={{ fontSize: 10.5, color: COLOR[status], fontFamily: FONT }}>{LABEL[status]}</text>
+    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+      <div
+        onClick={isError ? onRetry : undefined}
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          gap: 6,
+          paddingLeft: 10,
+          paddingRight: 10,
+          paddingTop: 4,
+          paddingBottom: 4,
+          borderRadius: 12,
+          backgroundColor: '#1E1E22',
+          borderWidth: 1,
+          borderColor: isError ? '#ED424555' : status === 'delivered' ? '#22C55E44' : '#2A2A2F',
+          cursor: isError && onRetry ? 'pointer' : 'default',
+        }}
+      >
+        <Icon name={ICON[status]} size={12} color={COLOR[status]} />
+        <text style={{ fontSize: 11, color: COLOR[status], fontFamily: FONT, fontWeight: 500, whiteSpace: 'nowrap' }}>
+          {LABEL[status]}
+        </text>
+      </div>
     </div>
   )
 }

@@ -1,5 +1,5 @@
 /** @atlas/ui — ConfigDiffReview — review an agent's proposed config/JSON change. */
-import { border, text as t } from '../tokens'
+import { border, surface, text as t } from '../tokens'
 import { FONT_MONO } from '../tokens'
 import { Button } from '../atoms/Button'
 import { diffLines } from './diff'
@@ -22,17 +22,40 @@ export function ConfigDiffReview({ before, after, title = 'Proposed change', acc
   const prefix = { add: '+', del: '-', keep: ' ' } as const
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 8, borderWidth: 1, borderColor: border.subtle, borderRadius: 10, padding: 10 }}>
-      <text style={{ fontSize: 12.5, fontWeight: 600, color: t.primary, fontFamily: FONT_MONO }}>{title}</text>
-      <div style={{ display: 'flex', flexDirection: 'column', maxHeight: 260, overflowY: 'scroll' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 8, borderWidth: 1, borderColor: border.subtle, borderRadius: 10, padding: 12, backgroundColor: surface.card }}>
+      <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+        <text style={{ fontSize: 12.5, fontWeight: 600, color: t.primary, fontFamily: FONT_MONO }}>{title}</text>
+        <text style={{ fontSize: 11, color: t.muted, fontFamily: FONT_MONO }}>{lines.length} lines</text>
+      </div>
+      <div style={{ display: 'flex', flexDirection: 'column', maxHeight: 260, overflowY: 'scroll', backgroundColor: '#0D0D10', borderRadius: 6, padding: 6, borderWidth: 1, borderColor: '#26262B' }}>
         {lines.map((l, i) => (
-          <text key={i} style={{ fontSize: 11.5, color: color[l.type], fontFamily: FONT_MONO, lineHeight: 1.5, whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>
-            {prefix[l.type]} {l.text}
-          </text>
+          <div
+            key={i}
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
+              minHeight: 20,
+              paddingLeft: 6,
+              paddingRight: 6,
+              borderRadius: 3,
+              backgroundColor: l.type === 'add' ? '#22C55E14' : l.type === 'del' ? '#ED424514' : 'transparent',
+              gap: 6,
+            }}
+          >
+            <div style={{ width: 14, flexShrink: 0 }}>
+              <text style={{ fontSize: 11.5, color: color[l.type], fontFamily: FONT_MONO, fontWeight: 600 }}>
+                {prefix[l.type]}
+              </text>
+            </div>
+            <text style={{ fontSize: 11.5, color: color[l.type], fontFamily: FONT_MONO, lineHeight: 1.45, whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>
+              {l.text}
+            </text>
+          </div>
         ))}
       </div>
       {onAccept || onReject ? (
-        <div style={{ display: 'flex', flexDirection: 'row', gap: 8, justifyContent: 'flex-end' }}>
+        <div style={{ display: 'flex', flexDirection: 'row', gap: 8, justifyContent: 'flex-end', paddingTop: 4 }}>
           {onReject ? <Button size="sm" variant="ghost" onClick={onReject}>{rejectLabel}</Button> : null}
           {onAccept ? <Button size="sm" onClick={onAccept}>{acceptLabel}</Button> : null}
         </div>

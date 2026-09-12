@@ -25,14 +25,18 @@ export function SystemPromptCard({ value = '', onChange, label = 'System prompt'
       <textarea
         value={value}
         minRows={3}
-        maxRows={10}
+        maxRows={8}
         onChange={(e) => onChange?.(e.value ?? '')}
-        style={{ fontSize: 12.5, color: textTokens.primary, fontFamily: FONT, backgroundColor: '#101012', borderRadius: 8, borderWidth: 1, borderColor: textTokens.ghost, padding: 10 }}
+        style={{ fontSize: 12.5, color: textTokens.primary, fontFamily: FONT, backgroundColor: '#101012', borderRadius: 8, borderWidth: 1, borderColor: '#26262B', padding: 10, lineHeight: 1.5 }}
       />
-      <ProgressBar value={pct} height={3} color={over ? '#ED4245' : '#3B82F6'} />
-      <text style={{ fontSize: 10.5, color: over ? '#ED4245' : textTokens.ghost, fontFamily: FONT }}>
-        {value.length} / {maxLength} chars
-      </text>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginTop: 4, width: '100%' }}>
+        <ProgressBar value={pct} height={4} color={over ? '#ED4245' : '#3B82F6'} />
+        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end' }}>
+          <text style={{ fontSize: 11, color: over ? '#ED4245' : textTokens.muted, fontFamily: FONT, whiteSpace: 'nowrap' }}>
+            {`${value.length.toLocaleString()} / ${maxLength.toLocaleString()} chars`}
+          </text>
+        </div>
+      </div>
     </Field>
   )
 }

@@ -20,9 +20,9 @@ export interface ModelJourneyProps {
 export function ModelJourney({ turns }: ModelJourneyProps) {
   return (
     <Timeline
-      items={turns.map((x) => ({
-        id: x.id,
-        title: x.label,
+      items={turns.map((x, i) => ({
+        id: x.id ?? `turn-${i}`,
+        title: x.label || x.model || `Step ${i + 1}`,
         time: `${x.model}${x.ms !== undefined ? ` · ${x.ms}ms` : ''}${x.tokens !== undefined ? ` · ${x.tokens.toLocaleString()} tok` : ''}${x.cost !== undefined ? ` · $${x.cost.toFixed(4)}` : ''}${x.error ? ' · failed' : ''}`,
         dotColor: x.error ? '#ED4245' : undefined,
       }))}

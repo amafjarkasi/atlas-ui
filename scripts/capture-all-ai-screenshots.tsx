@@ -335,7 +335,11 @@ const sampleProps: Record<string, any> = {
   },
   ReviewPanel: {
     title: 'Code Review: packages/ui/src/ai',
-    feedback: 'All 58 AI Workspace components render with zero errors, proper text colors, and responsive borders.'
+    feedback: 'All 58 AI Workspace components render with zero errors, proper text colors, and responsive borders.',
+    code: 'export function useGPUIXLayout() {\n  return useMemo(() => computeLayoutTree(), []);\n}',
+    language: 'typescript',
+    configBefore: { maxTokens: 2048, model: 'claude-3-5-sonnet', temperature: 0.7 },
+    configAfter: { maxTokens: 4096, model: 'claude-3-7-sonnet', temperature: 0.2 }
   },
   RunCostCard: {
     inputTokens: 38400,

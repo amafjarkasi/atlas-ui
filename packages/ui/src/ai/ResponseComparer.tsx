@@ -24,30 +24,38 @@ export interface ResponseComparerProps {
 }
 
 function Pane({ r, onCopy }: { r?: ComparableResponse; onCopy?: (id: string, content: string) => void }) {
-  if (!r) return <Card padding={12} width="50%" />
+  if (!r) return <Card padding={14}><text style={{ color: textTokens.muted, fontFamily: FONT }}>No response</text></Card>
   return (
-    <Card padding={12} width="50%">
-      <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 8, paddingBottom: 8 }}>
-        <text style={{ fontSize: 12, fontWeight: 600, color: textTokens.secondary, fontFamily: FONT, flexGrow: 1 }}>{r.label ?? 'Response'}</text>
-        <CopyButton value={r.content ?? ''} onCopy={onCopy ? () => onCopy(r.id, r.content ?? '') : undefined} />
+    <Card padding={14}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 10, height: '100%' }}>
+        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingBottom: 8, borderBottomWidth: 1, borderColor: '#27272A' }}>
+          <text style={{ fontSize: 13, fontWeight: 600, color: textTokens.primary, fontFamily: FONT }}>{r.label ?? 'Response'}</text>
+          <CopyButton value={r.content ?? ''} onCopy={onCopy ? () => onCopy(r.id, r.content ?? '') : undefined} />
+        </div>
+        <div style={{ flexGrow: 1, overflowY: 'scroll' }}>
+          <text style={{ fontSize: 12.5, color: textTokens.secondary, fontFamily: FONT, whiteSpace: 'normal', lineHeight: 1.6 }}>{r.content ?? ''}</text>
+        </div>
       </div>
-      <text style={{ fontSize: 12.5, color: textTokens.primary, fontFamily: FONT, whiteSpace: 'normal', lineHeight: 1.5 }}>{r.content ?? ''}</text>
     </Card>
   )
 }
 
 export function ResponseComparer({ left, right, onPick, onCopy }: ResponseComparerProps) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 10, width: '100%' }}>
-      <div style={{ display: 'flex', flexDirection: 'row', gap: 10, alignItems: 'stretch' }}>
-        <Pane r={left} onCopy={onCopy} />
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 12, width: '100%' }}>
+      <div style={{ display: 'flex', flexDirection: 'row', gap: 14, alignItems: 'stretch' }}>
+        <div style={{ flexGrow: 1, flexBasis: 0, minWidth: 0 }}>
+          <Pane r={left} onCopy={onCopy} />
+        </div>
         <Divider orientation="vertical" />
-        <Pane r={right} onCopy={onCopy} />
+        <div style={{ flexGrow: 1, flexBasis: 0, minWidth: 0 }}>
+          <Pane r={right} onCopy={onCopy} />
+        </div>
       </div>
       {onPick ? (
-        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', gap: 8 }}>
-          <Button size="sm" variant="ghost" onClick={() => onPick(left.id)}>Use A</Button>
-          <Button size="sm" onClick={() => onPick(right.id)}>Use B</Button>
+        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', gap: 10 }}>
+          <Button size="sm" variant="ghost" onClick={() => onPick(left.id)}>Use {left?.label ?? 'Variant A'}</Button>
+          <Button size="sm" variant="primary" onClick={() => onPick(right.id)}>Use {right?.label ?? 'Variant B'}</Button>
         </div>
       ) : null}
     </div>

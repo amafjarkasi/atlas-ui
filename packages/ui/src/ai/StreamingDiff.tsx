@@ -43,13 +43,50 @@ export function StreamingDiff({ before, after, active = true, speedMs = 120 }: S
   const shown = new Set(changeIdx.slice(0, revealed))
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', fontFamily: FONT_MONO }}>
-      {all.map((l: DiffLine, i) => (
-        <text key={i} style={{ fontSize: 12, fontFamily: FONT_MONO, lineHeight: 1.5, color: COLOR[l.type], opacity: l.type !== 'keep' && !shown.has(i) ? 0.25 : 1 }}>
-          {l.type === 'add' ? '+ ' : l.type === 'del' ? '- ' : '  '}
-          {l.text}
-        </text>
-      ))}
+    <div style={{ display: 'flex', flexDirection: 'column', backgroundColor: '#0D0D10', borderRadius: 8, borderWidth: 1, borderColor: '#26262B', overflow: 'hidden', width: '100%' }}>
+      <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingLeft: 12, paddingRight: 12, height: 32, backgroundColor: '#141418', borderBottomWidth: 1, borderColor: '#26262B' }}>
+        <text style={{ fontSize: 11, color: '#8A8A90', fontFamily: FONT_MONO }}>streaming-diff</text>
+        {active && revealed < changeIdx.length ? (
+          <text style={{ fontSize: 10.5, color: '#60A5FA', fontFamily: FONT_MONO }}>streaming edits…</text>
+        ) : (
+          <text style={{ fontSize: 10.5, color: '#22C55E', fontFamily: FONT_MONO }}>synced</text>
+        )}
+      </div>
+      <div style={{ display: 'flex', flexDirection: 'column', padding: 6, maxHeight: 300, overflowY: 'scroll' }}>
+        {all.map((l: DiffLine, i) => {
+          const isVisible = l.type === 'keep' || shown.has(i)
+          const bg = l.type === 'add' ? '#22C55E18' : l.type === 'del' ? '#ED424518' : 'transparent'
+          return (
+            <div
+              key={i}
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                minHeight: 20,
+                paddingLeft: 6,
+                paddingRight: 6,
+                borderRadius: 3,
+                backgroundColor: bg,
+                opacity: isVisible ? 1 : 0.25,
+                gap: 8,
+              }}
+            >
+              <div style={{ width: 24, flexShrink: 0 }}>
+                <text style={{ fontSize: 10.5, color: '#55555D', fontFamily: FONT_MONO, textAlign: 'right' }}>{i + 1}</text>
+              </div>
+              <div style={{ width: 14, flexShrink: 0 }}>
+                <text style={{ fontSize: 11.5, color: COLOR[l.type], fontFamily: FONT_MONO, fontWeight: 600 }}>
+                  {l.type === 'add' ? '+' : l.type === 'del' ? '-' : ' '}
+                </text>
+              </div>
+              <text style={{ fontSize: 11.5, fontFamily: FONT_MONO, lineHeight: 1.45, color: COLOR[l.type], whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>
+                {l.text}
+              </text>
+            </div>
+          )
+        })}
+      </div>
     </div>
   )
 }

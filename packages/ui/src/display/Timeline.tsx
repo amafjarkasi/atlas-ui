@@ -57,10 +57,12 @@ export function Timeline({ items, dotColor = semantic.accent }: TimelineProps) {
             }}
           />
 
-          <text style={{ fontSize: 13, fontWeight: 600, color: text.primary, fontFamily: FONT }}>{item.title}</text>
-          {item.time ? (
-            <text style={{ fontSize: 11, color: text.muted, fontFamily: FONT }}>{item.time}</text>
-          ) : null}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+            <text style={{ fontSize: 13, fontWeight: 600, color: text.primary, fontFamily: FONT }}>{item.title}</text>
+            {item.time ? (
+              <text style={{ fontSize: 11, color: text.muted, fontFamily: FONT }}>{item.time}</text>
+            ) : null}
+          </div>
           {item.description ? (
             <text style={{ fontSize: 12, color: text.secondary, fontFamily: FONT, lineHeight: 1.4 }}>
               {item.description}
