@@ -24,16 +24,22 @@ export function ContextRing({ used = 0, limit = 200000, label = 'Context', size 
   return (
     <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 12 }}>
       <RadialGauge value={pct} size={size} strokeWidth={compact ? 6 : 8} color={ringColor} label={`${pct}%`} />
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+      <div style={{ display: 'flex', flexDirection: 'column' }}>
         {!compact && label ? (
-          <text style={{ fontSize: 11, fontWeight: 600, color: textTokens.muted, fontFamily: FONT, whiteSpace: 'nowrap', lineHeight: 1 }}>{label.toUpperCase()}</text>
+          <div style={{ height: 14 }}>
+            <text style={{ fontSize: 11, fontWeight: 600, color: textTokens.muted, fontFamily: FONT, whiteSpace: 'nowrap', lineHeight: 1 }}>{label.toUpperCase()}</text>
+          </div>
         ) : null}
-        <text style={{ fontSize: compact ? 13 : 15, fontWeight: 700, color: textTokens.primary, fontFamily: FONT, whiteSpace: 'nowrap', lineHeight: 1.2 }}>
-          {compact ? `${safeUsed.toLocaleString()} / ${safeLimit.toLocaleString()}` : safeUsed.toLocaleString()}
-        </text>
-        <text style={{ fontSize: 10.5, color: textTokens.secondary, fontFamily: FONT, whiteSpace: 'nowrap', lineHeight: 1 }}>
-          {compact ? 'tokens used' : `of ${safeLimit.toLocaleString()} tokens`}
-        </text>
+        <div style={{ height: compact ? 16 : 18, marginTop: !compact && label ? 2 : 0 }}>
+          <text style={{ fontSize: compact ? 13 : 15, fontWeight: 700, color: textTokens.primary, fontFamily: FONT, whiteSpace: 'nowrap', lineHeight: 1 }}>
+            {compact ? `${safeUsed.toLocaleString()} / ${safeLimit.toLocaleString()}` : safeUsed.toLocaleString()}
+          </text>
+        </div>
+        <div style={{ height: 14, marginTop: 2 }}>
+          <text style={{ fontSize: 10.5, color: textTokens.secondary, fontFamily: FONT, whiteSpace: 'nowrap', lineHeight: 1 }}>
+            {compact ? 'tokens used' : `of ${safeLimit.toLocaleString()} tokens`}
+          </text>
+        </div>
       </div>
     </div>
   )
