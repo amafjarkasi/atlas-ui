@@ -34,6 +34,8 @@ export interface ChatThreadProps {
   suggestions?: string[]
   userName?: string
   assistantName?: string
+  /** Shrink to message content instead of filling a fixed parent height. */
+  fitContent?: boolean
 }
 
 export function ChatThread({
@@ -45,6 +47,7 @@ export function ChatThread({
   suggestions,
   userName,
   assistantName,
+  fitContent = false,
 }: ChatThreadProps) {
   const [draft, setDraft] = useState('')
   const safeMessages = messages ?? []
@@ -56,18 +59,38 @@ export function ChatThread({
     setDraft('')
   }
 
+  const messageNodes = safeMessages.map((m) => {
+    const isUser = m.role === 'user'
+    const authorName = m.name ?? (isUser ? userName : assistantName)
+    const letter = m.avatarLetter ?? (isUser ? 'U' : 'A')
+    return (
+      <ChatBubble
+        key={m.id}
+        role={m.role}
+        content={m.content}
+        name={authorName}
+        avatarLetter={letter}
+        avatarSrc={m.avatarSrc}
+        timestamp={m.timestamp}
+      />
+    )
+  })
+
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', width: '100%' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', height: fitContent ? 'auto' : '100%', width: '100%' }}>
       <div
         style={{
           width: '100%',
-          height: 48,
+          minHeight: 40,
           flexShrink: 0,
+          display: 'flex',
           flexDirection: 'row',
           alignItems: 'center',
           justifyContent: 'space-between',
-          paddingLeft: 16,
-          paddingRight: 16,
+          paddingLeft: 12,
+          paddingRight: 12,
+          paddingTop: 10,
+          paddingBottom: 10,
           borderBottomWidth: 1,
           borderColor: border.subtle,
         }}
@@ -83,28 +106,21 @@ export function ChatThread({
         )}
       </div>
 
-      <div style={{ flexGrow: 1, minHeight: 0, display: 'flex', flexDirection: 'column' }}>
-        <MessageScroller height="100%">
-          {safeMessages.map((m) => {
-            const isUser = m.role === 'user'
-            const authorName = m.name ?? (isUser ? userName : assistantName)
-            const letter = m.avatarLetter ?? (isUser ? 'U' : 'A')
-            return (
-              <ChatBubble
-                key={m.id}
-                role={m.role}
-                content={m.content}
-                name={authorName}
-                avatarLetter={letter}
-                avatarSrc={m.avatarSrc}
-                timestamp={m.timestamp}
-              />
-            )
-          })}
-        </MessageScroller>
-      </div>
+      {fitContent ? (
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          {messageNodes.map((node, i) => (
+            <div key={i} style={{ paddingLeft: 12, paddingRight: 12, paddingTop: 6, paddingBottom: 6 }}>
+              {node}
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div style={{ flexGrow: 1, minHeight: 0, display: 'flex', flexDirection: 'column' }}>
+          <MessageScroller height="100%">{messageNodes}</MessageScroller>
+        </div>
+      )}
 
-      <div style={{ padding: 12, borderTopWidth: 1, borderColor: border.subtle }}>
+      <div style={{ paddingLeft: 12, paddingRight: 12, paddingTop: 12, paddingBottom: 12, borderTopWidth: 1, borderColor: border.subtle }}>
         <PromptInput value={draft} onChange={setDraft} onSubmit={send} loading={loading} placeholder={placeholder} suggestions={suggestions} />
       </div>
     </div>
