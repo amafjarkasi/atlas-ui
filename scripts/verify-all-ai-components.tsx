@@ -235,7 +235,7 @@ const sampleProps: Record<string, any> = {
     content: '### Streaming Response\n\nAtlas UI is fast.'
   },
   SystemPromptCard: {
-    prompt: 'You are an autonomous AI coding engineer.'
+    value: 'You are an autonomous AI coding engineer.'
   },
   TaskDoneBanner: {
     title: 'Refactoring Finished',

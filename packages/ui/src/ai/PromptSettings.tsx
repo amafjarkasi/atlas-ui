@@ -20,7 +20,7 @@ export function PromptSettings({ models, model, onModelChange, sampler, onSample
     <FormCard title="Prompt settings" onSubmit={onSave} width={480}>
       {models ? <ModelPicker models={models} value={model} onChange={onModelChange} /> : null}
       {sampler && onSamplerChange ? <SamplerControls values={sampler} onChange={onSamplerChange} /> : null}
-      <SystemPromptCard value={systemPrompt ?? ''} onChange={onSystemPromptChange} />
+      <SystemPromptCard value={systemPrompt ?? ''} onChange={onSystemPromptChange} embedded />
     </FormCard>
   )
 }
