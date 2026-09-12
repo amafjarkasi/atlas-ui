@@ -94,6 +94,25 @@ Native OS-level paradigms.
 * `CommandMenu`, `WindowDragArea`, `ShortcutSettingsList`, `EmojiPicker`
 
 ## Architecture Notes
+
+```mermaid
+flowchart TD
+    A[React Application] -->|Imports| B["@atlas/ui (Components)"]
+    B -->|JSX Primitives| C["@gpuix/react (Reconciler)"]
+    C -->|FFI Bindings| D[Rust GPUIX Engine]
+    D -->|Native Draw Calls| E[(GPU: DirectX 12 / Metal / Vulkan)]
+
+    classDef react fill:#222,stroke:#61dafb,stroke-width:2px,color:#fff;
+    classDef atlas fill:#222,stroke:#8b5cf6,stroke-width:2px,color:#fff;
+    classDef rust fill:#222,stroke:#e43716,stroke-width:2px,color:#fff;
+    classDef gpu fill:#222,stroke:#10b981,stroke-width:2px,color:#fff;
+
+    class A react
+    class B atlas
+    class C,D rust
+    class E gpu
+```
+
 Because GPUIX lacks a DOM, Atlas UI implements its own headless engines for:
 * **Roving Tabindex**: Fully custom `useRovingFocus` logic for arrow-key navigation.
 * **Virtual Anchors**: Pointer-based positioning for `ContextMenu` without `getBoundingClientRect`.
