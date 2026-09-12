@@ -20,11 +20,13 @@ const PREFIX = { add: '+', del: '-', keep: ' ' }
 export function PromptDiff({ before, after }: PromptDiffProps) {
   const lines = diffLines(before, after)
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', fontFamily: FONT_MONO }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 4, fontFamily: FONT_MONO }}>
       {lines.map((l, i) => (
-        <text key={i} style={{ fontSize: 12, color: COLOR[l.type], fontFamily: FONT_MONO, lineHeight: 1.5 }}>
-          {PREFIX[l.type]} {l.text}
-        </text>
+        <div key={i} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+          <text style={{ fontSize: 12, color: COLOR[l.type], fontFamily: FONT_MONO }}>
+            {`${PREFIX[l.type]} ${l.text}`}
+          </text>
+        </div>
       ))}
     </div>
   )

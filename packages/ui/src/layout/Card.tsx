@@ -27,7 +27,6 @@ export function Card({ children, padding = 16, width, interactive = false, onCli
     <div
       onClick={onClick}
       style={{
-        alignSelf: 'flex-start',
         backgroundColor: surface.card,
         borderWidth: 1,
         borderColor: border.subtle,

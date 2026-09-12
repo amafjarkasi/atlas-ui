@@ -24,7 +24,14 @@ export function LiveAgentGrid({ agents, columns = 2, height = '100%' }: LiveAgen
       columns={columns}
       estimatedRowHeight={180}
       height={height}
-      renderCell={(a) => <AgentRunCard title={a.title} steps={a.steps ?? []} progress={a.progress} status={a.status} />}
+      renderCell={(a) => (
+        <AgentRunCard
+          title={a.title ?? (a as any).name ?? `Agent ${a.id}`}
+          steps={a.steps ?? []}
+          progress={a.progress}
+          status={a.status}
+        />
+      )}
     />
   )
 }

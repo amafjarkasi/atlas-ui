@@ -13,16 +13,19 @@ export interface RunCostCardProps {
   inputTokens?: number
   outputTokens?: number
   totalTokens?: number
+  limit?: number
+  maxTokens?: number
   cost?: number
   currency?: string
   title?: string
 }
 
-export function RunCostCard({ inputTokens, outputTokens, totalTokens, cost, currency = '$', title = 'Run cost' }: RunCostCardProps) {
+export function RunCostCard({ inputTokens, outputTokens, totalTokens, limit, maxTokens, cost, currency = '$', title = 'Run cost' }: RunCostCardProps) {
   const total = totalTokens ?? (inputTokens ?? 0) + (outputTokens ?? 0)
+  const tokenLimit = limit ?? maxTokens ?? (total > 0 ? Math.round(total * 1.5) : 1000)
   return (
     <Card padding={14}>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
           <text style={{ fontSize: 13, fontWeight: 600, color: textTokens.primary, fontFamily: FONT }}>{title}</text>
           {cost !== undefined ? (
@@ -32,13 +35,21 @@ export function RunCostCard({ inputTokens, outputTokens, totalTokens, cost, curr
             </text>
           ) : null}
         </div>
-        {inputTokens !== undefined ? (
-          <div style={{ display: 'flex', flexDirection: 'row', gap: 16 }}>
-            <text style={{ fontSize: 11, color: textTokens.muted, fontFamily: FONT }}>{inputTokens.toLocaleString()} in</text>
-            {outputTokens !== undefined ? <text style={{ fontSize: 11, color: textTokens.muted, fontFamily: FONT }}>{outputTokens.toLocaleString()} out</text> : null}
+        {inputTokens !== undefined || outputTokens !== undefined ? (
+          <div style={{ display: 'flex', flexDirection: 'row', gap: 16, alignItems: 'center' }}>
+            {inputTokens !== undefined ? (
+              <div style={{ display: 'flex', flexDirection: 'row' }}>
+                <text style={{ fontSize: 11, color: textTokens.muted, fontFamily: FONT }}>{`${inputTokens.toLocaleString()} in`}</text>
+              </div>
+            ) : null}
+            {outputTokens !== undefined ? (
+              <div style={{ display: 'flex', flexDirection: 'row' }}>
+                <text style={{ fontSize: 11, color: textTokens.muted, fontFamily: FONT }}>{`${outputTokens.toLocaleString()} out`}</text>
+              </div>
+            ) : null}
           </div>
         ) : null}
-        <TokenMeter used={total} limit={Math.max(total, 1)} label="tokens" />
+        <TokenMeter used={total} limit={tokenLimit} label="tokens" />
       </div>
     </Card>
   )

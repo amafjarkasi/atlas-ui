@@ -26,7 +26,7 @@ export function TokenMeter({ used = 0, limit = 100, label = 'tokens', color = '#
       <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
         <text style={{ fontSize: 11, color: text.muted, fontFamily: FONT }}>{label}</text>
         <text style={{ fontSize: 11, color: text.secondary, fontFamily: FONT }}>
-          {safeUsed.toLocaleString()} / {safeLimit.toLocaleString()}
+          {`${safeUsed.toLocaleString()} / ${safeLimit.toLocaleString()}`}
         </text>
       </div>
 

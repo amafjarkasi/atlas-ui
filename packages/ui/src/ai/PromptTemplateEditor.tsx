@@ -29,7 +29,9 @@ export function PromptTemplateEditor({ template = '', onTemplateChange, values =
 
       {names.map((n) => (
         <div key={n} style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-          <text style={{ fontSize: 11.5, color: textTokens.muted, fontFamily: FONT }}>{"{{"} {n} {"}}"}</text>
+          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+            <text style={{ fontSize: 11.5, color: textTokens.muted, fontFamily: FONT }}>{`{{${n}}}`}</text>
+          </div>
           <input value={values[n] ?? ''} placeholder={`Value for ${n}`} onChange={(e) => onValuesChange?.({ ...values, [n]: e.value ?? '' })} style={{ fontSize: 12.5, fontFamily: FONT, color: textTokens.primary, backgroundColor: surface.card, borderRadius: 6, borderWidth: 1, borderColor: border.subtle, padding: 6 }} />
         </div>
       ))}
