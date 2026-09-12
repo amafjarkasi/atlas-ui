@@ -43,22 +43,21 @@ export function ModelPicker({ models, value, onChange, label = 'Model', disabled
             display: 'flex',
             flexDirection: 'row',
             alignItems: 'center',
+            justifyContent: 'space-between',
             gap: 8,
+            height: 32,
             paddingLeft: 12,
-            paddingRight: 12,
-            paddingTop: 7,
-            paddingBottom: 7,
+            paddingRight: 10,
             borderRadius: 8,
             borderWidth: 1,
             borderColor: open ? '#3B82F6' : border.subtle,
             backgroundColor: surface.card,
             cursor: 'pointer',
             minWidth: 190,
-            justifyContent: 'space-between',
             hover: { borderColor: border.strong },
           }}
         >
-          <text style={{ fontSize: 12.5, fontWeight: 500, color: current ? text.primary : text.muted, fontFamily: FONT }}>
+          <text style={{ fontSize: 12.5, fontWeight: 500, color: current ? text.primary : text.muted, fontFamily: FONT, lineHeight: 1 }}>
             {current?.label ?? 'Select model'}
           </text>
           <Icon name="chevronDown" size={12} color={text.muted} />

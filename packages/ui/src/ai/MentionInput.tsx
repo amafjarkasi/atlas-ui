@@ -68,10 +68,13 @@ export function MentionInput({
         style={{
           display: 'flex',
           flexDirection: 'row',
-          alignItems: 'flex-end',
+          alignItems: 'center',
           gap: 8,
-          padding: 10,
-          borderRadius: 12,
+          paddingLeft: 12,
+          paddingRight: 8,
+          paddingTop: 6,
+          paddingBottom: 6,
+          borderRadius: 8,
           borderWidth: 1,
           borderColor: border.strong,
           backgroundColor: surface.card,
@@ -81,7 +84,7 @@ export function MentionInput({
           value={value}
           placeholder={placeholder ?? `Type ${trigger} to mention…`}
           minRows={1}
-          maxRows={6}
+          maxRows={4}
           onChange={(e) => set(e.value ?? '')}
           onKeyDown={(e) => {
             const k = e.key?.toLowerCase()
@@ -94,7 +97,7 @@ export function MentionInput({
               submit()
             }
           }}
-          style={{ flexGrow: 1, fontSize: 13, color: text.primary, fontFamily: FONT }}
+          style={{ flexGrow: 1, fontSize: 12.5, color: text.primary, fontFamily: FONT, lineHeight: 1.4 }}
         />
 
         {loading ? (
@@ -103,9 +106,9 @@ export function MentionInput({
           <div
             onClick={value ? submit : undefined}
             style={{
-              width: 30,
-              height: 30,
-              borderRadius: 15,
+              width: 26,
+              height: 26,
+              borderRadius: 13,
               backgroundColor: value ? semantic.accent : surface.selected,
               display: 'flex',
               alignItems: 'center',
@@ -114,7 +117,7 @@ export function MentionInput({
               flexShrink: 0,
             }}
           >
-            <Icon name="send" size={13} color={value ? '#FFFFFF' : text.muted} />
+            <Icon name="send" size={12} color={value ? '#FFFFFF' : text.muted} />
           </div>
         )}
       </div>
@@ -123,10 +126,10 @@ export function MentionInput({
         <div
           style={{
             position: 'absolute',
-            top: 48,
+            top: 40,
             left: 0,
             right: 0,
-            marginTop: 6,
+            marginTop: 8,
             display: 'flex',
             flexDirection: 'column',
             padding: 6,
@@ -148,8 +151,8 @@ export function MentionInput({
                 flexDirection: 'row',
                 alignItems: 'center',
                 gap: 8,
-                paddingLeft: 8,
-                paddingRight: 8,
+                paddingLeft: 10,
+                paddingRight: 10,
                 paddingTop: 6,
                 paddingBottom: 6,
                 borderRadius: 6,

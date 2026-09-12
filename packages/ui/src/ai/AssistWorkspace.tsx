@@ -24,18 +24,18 @@ export function AssistWorkspace({ messages, onSend, chunks = [], query = '', onQ
       <div style={{ flexGrow: 1, minWidth: 0, display: 'flex', flexDirection: 'column' }}>
         <ChatThread title="Assistant Workspace" messages={messages} onSend={onSend} loading={streaming} />
       </div>
-      <div style={{ width: 320, flexShrink: 0, borderLeftWidth: 1, borderColor: border.subtle, padding: 12, display: 'flex', flexDirection: 'column', gap: 12, overflowY: 'scroll', backgroundColor: surface.card }}>
-        <div style={{ height: 48, flexShrink: 0, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', borderBottomWidth: 1, borderColor: border.subtle, paddingBottom: 4 }}>
-          <text style={{ fontSize: 13, fontWeight: 600, color: t.primary, fontFamily: FONT }}>Session Context</text>
-          <div style={{ backgroundColor: '#3B82F618', borderRadius: 4, paddingLeft: 6, paddingRight: 6, paddingTop: 2, paddingBottom: 2 }}>
-            <text style={{ fontSize: 10.5, color: '#60A5FA', fontFamily: FONT }}>{`${chunks.length} chunks`}</text>
+      <div style={{ width: 280, flexShrink: 0, borderLeftWidth: 1, borderColor: border.subtle, padding: 12, display: 'flex', flexDirection: 'column', gap: 12, overflowY: 'scroll', backgroundColor: surface.card }}>
+        <div style={{ height: 32, flexShrink: 0, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', borderBottomWidth: 1, borderColor: border.subtle, paddingBottom: 6 }}>
+          <text style={{ fontSize: 13, fontWeight: 600, color: t.primary, fontFamily: FONT, lineHeight: 1 }}>Session Context</text>
+          <div style={{ backgroundColor: '#3B82F618', borderRadius: 4, paddingLeft: 6, paddingRight: 6, height: 20, display: 'flex', alignItems: 'center' }}>
+            <text style={{ fontSize: 10.5, color: '#60A5FA', fontFamily: FONT, lineHeight: 1 }}>{`${chunks.length} chunks`}</text>
           </div>
         </div>
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 4 }}>
-          <ContextRing used={used} limit={limit} size={110} />
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <ContextRing used={used} limit={limit} size={80} compact />
         </div>
-        <AgentRunCard title="Active Run" steps={runSteps} progress={runProgress} />
-        <ContextBrowser chunks={chunks} query={query} height={360} />
+        <AgentRunCard title="Active Run" steps={runSteps} progress={runProgress} padding={12} />
+        <ContextBrowser chunks={chunks} query={query} height={280} />
       </div>
     </div>
   )

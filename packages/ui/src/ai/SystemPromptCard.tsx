@@ -4,7 +4,7 @@
  * An editable system prompt with a live character budget (composes `Field` +
  * `ProgressBar`).
  */
-import { text as textTokens } from '../tokens'
+import { border, text as textTokens } from '../tokens'
 import { FONT } from '../tokens'
 import { Field } from '../inputs/Field'
 import { ProgressBar } from '../inputs/ProgressBar'
@@ -24,15 +24,15 @@ export function SystemPromptCard({ value = '', onChange, label = 'System prompt'
     <Field label={label}>
       <textarea
         value={value}
-        minRows={3}
+        minRows={4}
         maxRows={8}
         onChange={(e) => onChange?.(e.value ?? '')}
-        style={{ fontSize: 12.5, color: textTokens.primary, fontFamily: FONT, backgroundColor: '#101012', borderRadius: 8, borderWidth: 1, borderColor: '#26262B', padding: 10, lineHeight: 1.5 }}
+        style={{ fontSize: 12.5, color: textTokens.primary, fontFamily: FONT, backgroundColor: '#101012', borderRadius: 8, borderWidth: 1, borderColor: border.subtle, padding: 10, lineHeight: 1.5 }}
       />
       <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginTop: 4, width: '100%' }}>
         <ProgressBar value={pct} height={4} color={over ? '#ED4245' : '#3B82F6'} />
-        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end' }}>
-          <text style={{ fontSize: 11, color: over ? '#ED4245' : textTokens.muted, fontFamily: FONT, whiteSpace: 'nowrap' }}>
+        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' }}>
+          <text style={{ fontSize: 11, color: over ? '#ED4245' : textTokens.muted, fontFamily: FONT, whiteSpace: 'nowrap', lineHeight: 1 }}>
             {`${value.length.toLocaleString()} / ${maxLength.toLocaleString()} chars`}
           </text>
         </div>

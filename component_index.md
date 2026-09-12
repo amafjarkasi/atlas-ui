@@ -33,8 +33,15 @@ Below is the exhaustive list of all 200+ native GPUIX components, hooks, and lay
 
 <details>
 <summary><b>🖥️ Desktop Integrations (23)</b></summary>
+<p>Native desktop chrome from <code>@atlas/ui/desktop</code>. GPU screenshots: <code>screenshots/desktop-components/</code>.</p>
 <p>
-<code>AboutDialog</code>, <code>AutoSavePill</code>, <code>ConnectBar</code>, <code>CrashDialog</code>, <code>DownloadCard</code>, <code>EmojiPicker</code>, <code>FavoritesBar</code>, <code>FindBar</code>, <code>FontPicker</code>, <code>GroupedSidebarNav</code>, <code>LicensesDialog</code>, <code>PermissionGate</code>, <code>PreviewPane</code>, <code>PropertyGrid</code>, <code>RecentFilesList</code>, <code>ReleaseNotesDialog</code>, <code>ShortcutSettingsList</code>, <code>ThemeSwitcher</code>, <code>ToolboxRail</code>, <code>UnsavedChangesDialog</code>, <code>VersionFooter</code>, <code>WordCountBar</code>, <code>ZoomControls</code>
+<b>System dialogs:</b> <code>AboutDialog</code>, <code>CrashDialog</code>, <code>LicensesDialog</code>, <code>ReleaseNotesDialog</code>, <code>UnsavedChangesDialog</code>, <code>PermissionGate</code>
+</p>
+<p>
+<b>Status / feedback:</b> <code>AutoSavePill</code>, <code>ConnectBar</code>, <code>DownloadCard</code>, <code>VersionFooter</code>, <code>WordCountBar</code>, <code>ZoomControls</code>
+</p>
+<p>
+<b>Content / nav:</b> <code>EmojiPicker</code>, <code>FavoritesBar</code>, <code>FindBar</code>, <code>FontPicker</code>, <code>GroupedSidebarNav</code>, <code>PreviewPane</code>, <code>PropertyGrid</code>, <code>RecentFilesList</code>, <code>ShortcutSettingsList</code>, <code>ThemeSwitcher</code>, <code>ToolboxRail</code>
 </p>
 </details>
 

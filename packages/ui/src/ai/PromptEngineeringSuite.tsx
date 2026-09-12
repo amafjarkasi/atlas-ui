@@ -21,9 +21,9 @@ export function PromptEngineeringSuite({ template, onTemplateChange, values, onV
     <div style={{ display: 'flex', flexDirection: 'column', gap: 14, width: '100%' }}>
       <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: 12, borderRadius: 10, borderWidth: 1, borderColor: border.subtle, backgroundColor: surface.card }}>
         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 8 }}>
-          <text style={{ fontSize: 13, fontWeight: 600, color: t.primary, fontFamily: FONT }}>Prompt Engineering Suite</text>
-          <div style={{ backgroundColor: '#8B5CF61A', borderWidth: 1, borderColor: '#8B5CF640', borderRadius: 10, paddingLeft: 8, paddingRight: 8, paddingTop: 2, paddingBottom: 2 }}>
-            <text style={{ fontSize: 10.5, color: '#A78BFA', fontWeight: 600, fontFamily: FONT }}>STUDIO</text>
+          <text style={{ fontSize: 13, fontWeight: 600, color: t.primary, fontFamily: FONT, lineHeight: 1 }}>Prompt Engineering Suite</text>
+          <div style={{ backgroundColor: '#8B5CF61A', borderWidth: 1, borderColor: '#8B5CF640', borderRadius: 10, height: 20, paddingLeft: 8, paddingRight: 8, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <text style={{ fontSize: 10.5, color: '#A78BFA', fontWeight: 600, fontFamily: FONT, lineHeight: 1 }}>STUDIO</text>
           </div>
         </div>
         {onSave ? (

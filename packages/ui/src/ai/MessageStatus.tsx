@@ -48,10 +48,9 @@ export function MessageStatus({ status, onRetry }: MessageStatusProps) {
           flexDirection: 'row',
           alignItems: 'center',
           gap: 6,
-          paddingLeft: 10,
-          paddingRight: 10,
-          paddingTop: 4,
-          paddingBottom: 4,
+          height: 24,
+          paddingLeft: 8,
+          paddingRight: 8,
           borderRadius: 12,
           backgroundColor: '#1E1E22',
           borderWidth: 1,
@@ -60,7 +59,7 @@ export function MessageStatus({ status, onRetry }: MessageStatusProps) {
         }}
       >
         <Icon name={ICON[status]} size={12} color={COLOR[status]} />
-        <text style={{ fontSize: 11, color: COLOR[status], fontFamily: FONT, fontWeight: 500, whiteSpace: 'nowrap' }}>
+        <text style={{ fontSize: 11, color: COLOR[status], fontFamily: FONT, fontWeight: 500, whiteSpace: 'nowrap', lineHeight: 1 }}>
           {LABEL[status]}
         </text>
       </div>

@@ -3,9 +3,8 @@
  *
  * A/B side-by-side comparison of two model answers with copy + pick actions.
  */
-import { text as textTokens } from '../tokens'
+import { surface, border, text as textTokens } from '../tokens'
 import { FONT } from '../tokens'
-import { Card } from '../layout/Card'
 import { CopyButton } from '../atoms/CopyButton'
 import { Button } from '../atoms/Button'
 import { Divider } from '../display/Divider'
@@ -24,19 +23,23 @@ export interface ResponseComparerProps {
 }
 
 function Pane({ r, onCopy }: { r?: ComparableResponse; onCopy?: (id: string, content: string) => void }) {
-  if (!r) return <Card padding={14}><text style={{ color: textTokens.muted, fontFamily: FONT }}>No response</text></Card>
-  return (
-    <Card padding={14}>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 10, height: '100%' }}>
-        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingBottom: 8, borderBottomWidth: 1, borderColor: '#27272A' }}>
-          <text style={{ fontSize: 13, fontWeight: 600, color: textTokens.primary, fontFamily: FONT }}>{r.label ?? 'Response'}</text>
-          <CopyButton value={r.content ?? ''} onCopy={onCopy ? () => onCopy(r.id, r.content ?? '') : undefined} />
-        </div>
-        <div style={{ flexGrow: 1, overflowY: 'scroll' }}>
-          <text style={{ fontSize: 12.5, color: textTokens.secondary, fontFamily: FONT, whiteSpace: 'normal', lineHeight: 1.6 }}>{r.content ?? ''}</text>
-        </div>
+  if (!r) {
+    return (
+      <div style={{ height: 180, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 10, borderWidth: 1, borderColor: border.subtle, backgroundColor: surface.card }}>
+        <text style={{ color: textTokens.muted, fontFamily: FONT, fontSize: 12.5 }}>No response</text>
       </div>
-    </Card>
+    )
+  }
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', height: 180, borderRadius: 10, borderWidth: 1, borderColor: border.subtle, backgroundColor: surface.card, overflow: 'hidden' }}>
+      <div style={{ height: 32, paddingLeft: 12, paddingRight: 8, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', borderBottomWidth: 1, borderColor: border.subtle }}>
+        <text style={{ fontSize: 12.5, fontWeight: 600, color: textTokens.primary, fontFamily: FONT, lineHeight: 1 }}>{r.label ?? 'Response'}</text>
+        <CopyButton value={r.content ?? ''} onCopy={onCopy ? () => onCopy(r.id, r.content ?? '') : undefined} />
+      </div>
+      <div style={{ flexGrow: 1, padding: 12, overflowY: 'scroll' }}>
+        <text style={{ fontSize: 12.5, color: textTokens.secondary, fontFamily: FONT, whiteSpace: 'normal', lineHeight: 1.5 }}>{r.content ?? ''}</text>
+      </div>
+    </div>
   )
 }
 

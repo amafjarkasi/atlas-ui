@@ -1,7 +1,6 @@
 /** @atlas/ui — ModelJourney — per-turn model/timing/token history. */
-import { text as t } from '../tokens'
+import { text as t, border } from '../tokens'
 import { FONT } from '../tokens'
-import { Timeline } from '../display/Timeline'
 
 export interface JourneyTurn {
   id: string
@@ -19,13 +18,42 @@ export interface ModelJourneyProps {
 
 export function ModelJourney({ turns }: ModelJourneyProps) {
   return (
-    <Timeline
-      items={turns.map((x, i) => ({
-        id: x.id ?? `turn-${i}`,
-        title: x.label || x.model || `Step ${i + 1}`,
-        time: `${x.model}${x.ms !== undefined ? ` · ${x.ms}ms` : ''}${x.tokens !== undefined ? ` · ${x.tokens.toLocaleString()} tok` : ''}${x.cost !== undefined ? ` · $${x.cost.toFixed(4)}` : ''}${x.error ? ' · failed' : ''}`,
-        dotColor: x.error ? '#ED4245' : undefined,
-      }))}
-    />
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
+      {turns.map((x, i) => {
+        const metaParts = [
+          x.ms !== undefined ? `${x.ms}ms` : null,
+          x.tokens !== undefined ? `${x.tokens.toLocaleString()} tok` : null,
+          x.cost !== undefined ? `\$${x.cost.toFixed(4)}` : null,
+          x.error ? 'failed' : null,
+        ].filter(Boolean)
+        const meta = metaParts.join(' · ')
+        const dotColor = x.error ? '#ED4245' : '#3B82F6'
+        return (
+          <div
+            key={x.id ?? i}
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
+              gap: 10,
+              paddingTop: 9,
+              paddingBottom: 9,
+              borderBottomWidth: i < turns.length - 1 ? 1 : 0,
+              borderColor: border.subtle,
+            }}
+          >
+            <div style={{ width: 7, height: 7, borderRadius: 4, backgroundColor: dotColor, flexShrink: 0 }} />
+            <div style={{ flexGrow: 1, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
+              <text style={{ fontSize: 12.5, fontWeight: 600, color: x.error ? '#ED4245' : t.primary, fontFamily: FONT, lineHeight: 1 }}>
+                {x.label || x.model || `Step ${i + 1}`}
+              </text>
+              {meta ? (
+                <text style={{ fontSize: 11, color: t.muted, fontFamily: FONT, lineHeight: 1, whiteSpace: 'nowrap' }}>{meta}</text>
+              ) : null}
+            </div>
+          </div>
+        )
+      })}
+    </div>
   )
 }

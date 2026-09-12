@@ -20,6 +20,7 @@ export interface AgentRunCardProps {
   progress?: number
   status?: string
   durationMs?: number
+  padding?: number
 }
 
 const STATUS_COLOR: Record<string, string> = {
@@ -32,13 +33,13 @@ const STATUS_COLOR: Record<string, string> = {
   error: '#ED4245',
 }
 
-export function AgentRunCard({ title = 'Agent run', steps, progress, status, durationMs }: AgentRunCardProps) {
+export function AgentRunCard({ title = 'Agent run', steps, progress, status, durationMs, padding = 14 }: AgentRunCardProps) {
   const safeSteps = steps ?? []
   const statusKey = (status ?? 'pending').toLowerCase()
   const statusColor = STATUS_COLOR[statusKey] ?? '#71717A'
 
   return (
-    <Card padding={14}>
+    <Card padding={padding}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
           <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 8 }}>

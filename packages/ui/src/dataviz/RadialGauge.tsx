@@ -19,14 +19,16 @@ export interface RadialGaugeProps {
 }
 
 export function RadialGauge({ value, size = 120, strokeWidth = 12, color = '#3B82F6', label }: RadialGaugeProps) {
+  const rounded = Math.round(value)
+  const isDuplicateLabel = !label || label === `${rounded}%` || label === `${rounded}`
   return (
     <CircularProgress value={value} size={size} strokeWidth={strokeWidth} color={color}>
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 1 }}>
-        <text style={{ fontSize: Math.round(size * 0.22), fontWeight: 700, color: text.primary, fontFamily: FONT }}>
-          {Math.round(value)}
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+        <text style={{ fontSize: Math.round(size * 0.24), fontWeight: 700, color: text.primary, fontFamily: FONT, lineHeight: 1 }}>
+          {`${rounded}%`}
         </text>
-        {label ? (
-          <text style={{ fontSize: 10, color: text.muted, fontFamily: FONT }}>{label}</text>
+        {!isDuplicateLabel ? (
+          <text style={{ fontSize: 10, color: text.muted, fontFamily: FONT, marginTop: 2 }}>{label}</text>
         ) : null}
       </div>
     </CircularProgress>

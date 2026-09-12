@@ -22,12 +22,12 @@ export function ConfigDiffReview({ before, after, title = 'Proposed change', acc
   const prefix = { add: '+', del: '-', keep: ' ' } as const
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 10, padding: 16, borderRadius: 10, borderWidth: 1, borderColor: border.subtle, backgroundColor: surface.card }}>
-      <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 16, borderRadius: 10, borderWidth: 1, borderColor: border.subtle, backgroundColor: surface.card }}>
+      <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', height: 28 }}>
         <text style={{ fontSize: 13, fontWeight: 600, color: t.primary, fontFamily: FONT, lineHeight: 1 }}>{title}</text>
         <text style={{ fontSize: 11, color: t.muted, fontFamily: FONT, lineHeight: 1 }}>{lines.length} lines</text>
       </div>
-      <div style={{ display: 'flex', flexDirection: 'column', maxHeight: 260, overflowY: 'scroll', backgroundColor: surface.code, borderRadius: 8, padding: 8, borderWidth: 1, borderColor: border.subtle }}>
+      <div style={{ display: 'flex', flexDirection: 'column', marginTop: 2, maxHeight: 260, overflowY: 'scroll', backgroundColor: surface.code, borderRadius: 8, padding: 8, borderWidth: 1, borderColor: border.subtle }}>
         {lines.map((l, i) => (
           <div
             key={i}

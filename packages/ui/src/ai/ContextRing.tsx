@@ -12,24 +12,27 @@ export interface ContextRingProps {
   limit: number
   label?: string
   size?: number
+  compact?: boolean
 }
 
-export function ContextRing({ used = 0, limit = 200000, label = 'Context', size = 76 }: ContextRingProps) {
+export function ContextRing({ used = 0, limit = 200000, label = 'Context', size = 76, compact = false }: ContextRingProps) {
   const safeUsed = used ?? 0
   const safeLimit = limit ?? 200000
   const pct = Math.max(0, Math.min(100, Math.round((safeUsed / Math.max(1, safeLimit)) * 100)))
   const ringColor = pct >= 90 ? '#ED4245' : pct >= 75 ? '#F59E0B' : '#3B82F6'
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 14 }}>
-      <RadialGauge value={pct} size={size} strokeWidth={8} color={ringColor} label={`${pct}%`} />
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-        <text style={{ fontSize: 11, fontWeight: 600, color: textTokens.muted, fontFamily: FONT, whiteSpace: 'nowrap' }}>{label.toUpperCase()}</text>
-        <text style={{ fontSize: 15, fontWeight: 700, color: textTokens.primary, fontFamily: FONT, whiteSpace: 'nowrap' }}>
-          {safeUsed.toLocaleString()}
+    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 12 }}>
+      <RadialGauge value={pct} size={size} strokeWidth={compact ? 6 : 8} color={ringColor} label={`${pct}%`} />
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+        {!compact && label ? (
+          <text style={{ fontSize: 11, fontWeight: 600, color: textTokens.muted, fontFamily: FONT, whiteSpace: 'nowrap', lineHeight: 1 }}>{label.toUpperCase()}</text>
+        ) : null}
+        <text style={{ fontSize: compact ? 13 : 15, fontWeight: 700, color: textTokens.primary, fontFamily: FONT, whiteSpace: 'nowrap', lineHeight: 1.2 }}>
+          {compact ? `${safeUsed.toLocaleString()} / ${safeLimit.toLocaleString()}` : safeUsed.toLocaleString()}
         </text>
-        <text style={{ fontSize: 11, color: textTokens.secondary, fontFamily: FONT, whiteSpace: 'nowrap' }}>
-          {`of ${safeLimit.toLocaleString()} tokens`}
+        <text style={{ fontSize: 10.5, color: textTokens.secondary, fontFamily: FONT, whiteSpace: 'nowrap', lineHeight: 1 }}>
+          {compact ? 'tokens used' : `of ${safeLimit.toLocaleString()} tokens`}
         </text>
       </div>
     </div>

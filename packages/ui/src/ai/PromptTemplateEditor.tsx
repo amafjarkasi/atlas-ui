@@ -46,15 +46,15 @@ export function PromptTemplateEditor({ template = '', onTemplateChange, values =
           <text style={{ fontSize: 11, fontWeight: 600, color: textTokens.muted, fontFamily: FONT }}>TEMPLATE VARIABLES</text>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
             {names.map((n) => (
-              <div key={n} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 8 }}>
-                <div style={{ width: 100, flexShrink: 0 }}>
-                  <text style={{ fontSize: 11.5, color: textTokens.secondary, fontFamily: FONT }}>{n}</text>
+              <div key={n} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 10 }}>
+                <div style={{ width: 100, flexShrink: 0, display: 'flex', alignItems: 'center' }}>
+                  <text style={{ fontSize: 11.5, color: textTokens.secondary, fontFamily: FONT, lineHeight: 1 }}>{n}</text>
                 </div>
                 <input
                   value={values[n] ?? ''}
                   placeholder={`Value for ${n}`}
                   onChange={(e) => onValuesChange?.({ ...values, [n]: e.value ?? '' })}
-                  style={{ flexGrow: 1, fontSize: 12, fontFamily: FONT, color: textTokens.primary, backgroundColor: '#101012', borderRadius: 6, borderWidth: 1, borderColor: border.subtle, paddingLeft: 8, paddingRight: 8, height: 32 }}
+                  style={{ flexGrow: 1, height: 28, borderRadius: 6, borderWidth: 1, borderColor: border.subtle, backgroundColor: '#101012', paddingLeft: 8, paddingRight: 8, fontSize: 12, fontFamily: FONT, color: textTokens.primary, display: 'flex', alignItems: 'center' }}
                 />
               </div>
             ))}
@@ -69,8 +69,8 @@ export function PromptTemplateEditor({ template = '', onTemplateChange, values =
             <text style={{ fontSize: 10, color: '#22C55E', fontFamily: FONT }}>LIVE</text>
           </div>
         </div>
-        <div style={{ backgroundColor: '#101012', borderRadius: 6, padding: 10, borderWidth: 1, borderColor: '#26262B' }}>
-          <text style={{ fontSize: 12, color: textTokens.secondary, fontFamily: FONT, whiteSpace: 'normal', lineHeight: 1.5 }}>{preview}</text>
+        <div style={{ backgroundColor: '#101012', borderRadius: 6, padding: 12, borderWidth: 1, borderColor: border.subtle, marginTop: 4 }}>
+          <text style={{ fontSize: 12.5, color: textTokens.primary, fontFamily: FONT, whiteSpace: 'normal', lineHeight: 1.5 }}>{preview}</text>
         </div>
       </div>
     </div>

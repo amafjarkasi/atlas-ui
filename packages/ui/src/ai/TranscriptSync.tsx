@@ -40,8 +40,8 @@ export function TranscriptSync({ segments = [], activeIndex = -1, waveform = [],
           : {}),
       }}
     >
-      {waveform.length > 0 ? <AudioWaveform data={waveform} progress={progress} height={44} /> : null}
-      <div style={{ display: 'flex', flexDirection: 'column', maxHeight: 280, overflowY: 'scroll', gap: 2 }}>
+      {waveform.length > 0 ? <AudioWaveform data={waveform} progress={progress} height={36} /> : null}
+      <div style={{ display: 'flex', flexDirection: 'column', maxHeight: 160, overflowY: 'scroll', gap: 4 }}>
         {segments.map((s, i) => {
           const active = i === activeIndex
           const sec = typeof s.startMs === 'number' && !isNaN(s.startMs) ? (s.startMs / 1000).toFixed(1) : '0.0'

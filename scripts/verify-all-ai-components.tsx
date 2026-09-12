@@ -58,8 +58,8 @@ const sampleProps: Record<string, any> = {
   ChatThread: {
     title: 'Chat Session',
     messages: [
-      { id: 'm1', role: 'user', content: 'Explain GPUIX' },
-      { id: 'm2', role: 'assistant', content: 'GPUIX is a GPU-native React framework.' }
+      { id: 'm1', role: 'user', name: 'User', avatarLetter: 'U', content: 'Explain GPUIX' },
+      { id: 'm2', role: 'assistant', name: 'Atlas', avatarLetter: 'A', content: 'GPUIX is a GPU-native React framework.' }
     ]
   },
   ConfigDiffReview: {

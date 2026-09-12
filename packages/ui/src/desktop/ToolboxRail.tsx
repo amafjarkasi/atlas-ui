@@ -1,5 +1,5 @@
 /** @atlas/ui — ToolboxRail — vertical tool rail with tooltips. */
-import { border, text as t } from '../tokens'
+import { border, surface, text as t } from '../tokens'
 import { IconButton } from '../atoms/IconButton'
 import { Tooltip } from '../display/Tooltip'
 import type { IconName } from '../atoms/Icon'
@@ -19,14 +19,39 @@ export interface ToolboxRailProps {
 
 export function ToolboxRail({ tools, activeId, onSelect, vertical = true }: ToolboxRailProps) {
   return (
-    <div style={{ display: 'flex', flexDirection: vertical ? 'column' : 'row', gap: 2, padding: 6, borderWidth: 1, borderColor: border.subtle, borderRadius: 10, alignSelf: 'flex-start' }}>
-      {tools.map((tool) => (
-        <Tooltip key={tool.id} label={tool.label} side={vertical ? 'right' : 'top'}>
-          <div onClick={() => onSelect?.(tool.id)} style={{ borderRadius: 6, backgroundColor: activeId === tool.id ? '#3B82F622' : undefined, borderWidth: activeId === tool.id ? 1 : 0, borderColor: '#3B82F6' }}>
-            <IconButton icon={tool.icon} size={15} pad={30} color={activeId === tool.id ? '#3B82F6' : t.muted} />
-          </div>
-        </Tooltip>
-      ))}
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: vertical ? 'column' : 'row',
+        gap: 4,
+        padding: 6,
+        borderWidth: 1,
+        borderColor: border.subtle,
+        borderRadius: 10,
+        backgroundColor: surface.card,
+        alignSelf: 'flex-start',
+        width: vertical ? 44 : undefined,
+      }}
+    >
+      {tools.map((tool) => {
+        const active = activeId === tool.id
+        return (
+          <Tooltip key={tool.id} label={tool.label} side={vertical ? 'right' : 'top'}>
+            <div
+              onClick={() => onSelect?.(tool.id)}
+              style={{
+                borderRadius: 7,
+                backgroundColor: active ? '#3B82F622' : undefined,
+                borderWidth: 1,
+                borderColor: active ? '#3B82F6' : 'transparent',
+                alignSelf: 'flex-start',
+              }}
+            >
+              <IconButton icon={tool.icon} size={14} pad={28} color={active ? '#3B82F6' : t.muted} />
+            </div>
+          </Tooltip>
+        )
+      })}
     </div>
   )
 }

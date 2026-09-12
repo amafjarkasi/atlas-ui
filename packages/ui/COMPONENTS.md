@@ -87,6 +87,9 @@ atoms, `Timeline`, `Divider`, `StepIndicator`, `DescriptionList`, `Marker`,
 `BudgetBar`, `AllocationDonut`, `CandlestickChart`
 
 ## desktop
+Native desktop chrome (`@atlas/ui/desktop`). GPU screenshots:
+`screenshots/desktop-components/` (`bun run capture:desktop`).
+
 System dialogs: `UnsavedChangesDialog`, `AboutDialog`, `CrashDialog`,
 `ReleaseNotesDialog`, `LicensesDialog`, `PermissionGate`.
 Status/feedback: `ConnectBar`, `DownloadCard`, `AutoSavePill`, `VersionFooter`,

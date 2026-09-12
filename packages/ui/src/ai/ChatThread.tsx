@@ -19,6 +19,10 @@ export interface ChatThreadMessage {
   id: string
   role: ChatRole
   content: string
+  name?: string
+  avatarLetter?: string
+  avatarSrc?: string
+  timestamp?: string
 }
 
 export interface ChatThreadProps {
@@ -28,9 +32,20 @@ export interface ChatThreadProps {
   loading?: boolean
   placeholder?: string
   suggestions?: string[]
+  userName?: string
+  assistantName?: string
 }
 
-export function ChatThread({ title, messages = [], onSend, loading = false, placeholder, suggestions }: ChatThreadProps) {
+export function ChatThread({
+  title,
+  messages = [],
+  onSend,
+  loading = false,
+  placeholder,
+  suggestions,
+  userName,
+  assistantName,
+}: ChatThreadProps) {
   const [draft, setDraft] = useState('')
   const safeMessages = messages ?? []
 
@@ -70,9 +85,22 @@ export function ChatThread({ title, messages = [], onSend, loading = false, plac
 
       <div style={{ flexGrow: 1, minHeight: 0, display: 'flex', flexDirection: 'column' }}>
         <MessageScroller height="100%">
-          {safeMessages.map((m) => (
-            <ChatBubble key={m.id} role={m.role} content={m.content} />
-          ))}
+          {safeMessages.map((m) => {
+            const isUser = m.role === 'user'
+            const authorName = m.name ?? (isUser ? userName : assistantName)
+            const letter = m.avatarLetter ?? (isUser ? 'U' : 'A')
+            return (
+              <ChatBubble
+                key={m.id}
+                role={m.role}
+                content={m.content}
+                name={authorName}
+                avatarLetter={letter}
+                avatarSrc={m.avatarSrc}
+                timestamp={m.timestamp}
+              />
+            )
+          })}
         </MessageScroller>
       </div>
 

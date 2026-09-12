@@ -13,9 +13,9 @@ export interface AgentMonitorProps {
 
 export function AgentMonitor({ agents, inputTokens, outputTokens, cost, done = false }: AgentMonitorProps) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
       {done ? <TaskDoneBanner title="All agents finished" celebrate /> : null}
-      <LiveAgentGrid agents={agents} columns={2} height={360} />
+      <LiveAgentGrid agents={agents} columns={2} height={320} />
       <RunCostCard inputTokens={inputTokens} outputTokens={outputTokens} cost={cost} />
     </div>
   )

@@ -17,7 +17,7 @@ export interface PromptSettingsProps {
 
 export function PromptSettings({ models, model, onModelChange, sampler, onSamplerChange, systemPrompt, onSystemPromptChange, onSave }: PromptSettingsProps) {
   return (
-    <FormCard title="Prompt settings" onSubmit={onSave} width={420}>
+    <FormCard title="Prompt settings" onSubmit={onSave} width={480}>
       {models ? <ModelPicker models={models} value={model} onChange={onModelChange} /> : null}
       {sampler && onSamplerChange ? <SamplerControls values={sampler} onChange={onSamplerChange} /> : null}
       <SystemPromptCard value={systemPrompt ?? ''} onChange={onSystemPromptChange} />

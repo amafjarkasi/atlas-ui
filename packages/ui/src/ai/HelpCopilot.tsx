@@ -11,18 +11,21 @@ export interface HelpCopilotProps {
   onAsk?: (question: string, context: string) => void
   loading?: boolean
   answers?: { id: string; content: string }[]
+  height?: number | string
 }
 
-export function HelpCopilot({ chunks, question, onQuestionChange, onAsk, loading = false, answers = [] }: HelpCopilotProps) {
+export function HelpCopilot({ chunks, question, onQuestionChange, onAsk, loading = false, answers = [], height = 480 }: HelpCopilotProps) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', width: '100%', borderRadius: 12, borderWidth: 1, borderColor: border.subtle, backgroundColor: surface.card, padding: 12, gap: 12 }}>
-      <text style={{ fontSize: 14, fontWeight: 600, color: t.primary, fontFamily: FONT }}>Help copilot</text>
-      <div style={{ flexGrow: 1, minHeight: 0, overflowY: 'scroll', padding: 8, display: 'flex', flexDirection: 'column', gap: 10, borderRadius: 8, backgroundColor: surface.base }}>
+    <div style={{ display: 'flex', flexDirection: 'column', height, width: '100%', borderRadius: 12, borderWidth: 1, borderColor: border.subtle, backgroundColor: surface.card, padding: 12, gap: 12 }}>
+      <text style={{ fontSize: 14, fontWeight: 600, color: t.primary, fontFamily: FONT, lineHeight: 1 }}>Help copilot</text>
+      <div style={{ flexGrow: 1, minHeight: 0, overflowY: 'scroll', padding: 10, display: 'flex', flexDirection: 'column', gap: 10, borderRadius: 8, backgroundColor: surface.base }}>
         {answers.map((a) => (
-          <ChatBubble key={a.id} role="assistant" content={a.content} />
+          <div key={a.id} style={{ display: 'flex', flexDirection: 'row', alignItems: 'flex-start' }}>
+            <ChatBubble role="assistant" avatarLetter="A" content={a.content} />
+          </div>
         ))}
       </div>
-      <DocumentQAPanel chunks={chunks} question={question} onQuestionChange={onQuestionChange} onAsk={onAsk} loading={loading} />
+      <DocumentQAPanel chunks={chunks} question={question} onQuestionChange={onQuestionChange} onAsk={onAsk} loading={loading} height={260} />
     </div>
   )
 }

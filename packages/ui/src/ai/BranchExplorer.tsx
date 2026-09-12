@@ -37,14 +37,18 @@ export function BranchExplorer({ branches, onPick }: BranchExplorerProps) {
           onClick={() => n.status === 'untried' && onPick?.(n)}
           style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 8, paddingTop: 5, paddingBottom: 5, paddingLeft: depth * 14, cursor: n.status === 'untried' ? 'pointer' : 'default' }}
         >
-          <Icon name={n.children ? 'chevronRight' : 'dot'} size={11} color={textTokens.muted} />
+          {n.children && n.children.length > 0 ? (
+            <Icon name="chevronRight" size={11} color={textTokens.muted} />
+          ) : (
+            <div style={{ width: 6, height: 6, borderRadius: 3, backgroundColor: textTokens.muted, flexShrink: 0, marginLeft: 2, marginRight: 2 }} />
+          )}
           <text style={{ fontSize: 12.5, color: textTokens.primary, fontFamily: FONT, flexGrow: 1 }}>{n.label ?? (n as any).name ?? n.id}</text>
           {(() => {
             const st = STATUS[n.status] ?? STATUS.untried
             return <Badge variant="label" label={st.label} color={st.color} />
           })()}
         </div>
-        {n.children ? render(n.children, depth + 1) : null}
+        {n.children && n.children.length > 0 ? render(n.children, depth + 1) : null}
       </div>
     ))
 

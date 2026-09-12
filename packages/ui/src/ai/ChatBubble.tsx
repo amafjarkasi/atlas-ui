@@ -47,31 +47,38 @@ export function ChatBubble({
         justifyContent: isUser ? 'flex-end' : 'flex-start',
       }}
     >
-      {!isUser && <Avatar src={avatarSrc} letter={avatarLetter ?? 'A'} size={28} />}
+      {!isUser && (
+        <div style={{ flexShrink: 0, display: 'flex', alignItems: 'center' }}>
+          <Avatar src={avatarSrc} letter={avatarLetter ?? 'A'} size={28} />
+        </div>
+      )}
 
       <div
         style={{
           display: 'flex',
           flexDirection: 'column',
-          gap: 2,
+          gap: 4,
           alignItems: isUser ? 'flex-end' : 'flex-start',
           maxWidth: '75%',
         }}
       >
         {name && !isUser ? (
-          <text style={{ fontSize: 11, color: text.muted, fontFamily: FONT }}>{name}</text>
+          <text style={{ fontSize: 11, color: text.muted, fontFamily: FONT, lineHeight: 1 }}>{name}</text>
         ) : null}
 
         <div
           style={{
             paddingLeft: 14,
             paddingRight: 14,
-            paddingTop: 10,
-            paddingBottom: 10,
-            borderRadius: 12,
+            paddingTop: 8,
+            paddingBottom: 8,
+            minHeight: 36,
+            borderRadius: 10,
             backgroundColor: bubbleBg,
             borderWidth: isUser ? 0 : 1,
             borderColor: border.subtle,
+            display: 'flex',
+            alignItems: 'center',
           }}
         >
           {markdown ? (
@@ -92,11 +99,15 @@ export function ChatBubble({
         </div>
 
         {timestamp ? (
-          <text style={{ fontSize: 10, color: text.ghost, fontFamily: FONT }}>{timestamp}</text>
+          <text style={{ fontSize: 10, color: text.ghost, fontFamily: FONT, lineHeight: 1 }}>{timestamp}</text>
         ) : null}
       </div>
 
-      {isUser && <Avatar src={avatarSrc} letter={avatarLetter ?? 'U'} size={28} />}
+      {isUser && (
+        <div style={{ flexShrink: 0, display: 'flex', alignItems: 'center' }}>
+          <Avatar src={avatarSrc} letter={avatarLetter ?? 'U'} size={28} />
+        </div>
+      )}
     </div>
   )
 }

@@ -16,9 +16,10 @@ export interface DocumentQAPanelProps {
   onQuestionChange?: (q: string) => void
   onAsk?: (question: string, context: string) => void
   loading?: boolean
+  height?: number | string
 }
 
-export function DocumentQAPanel({ chunks = [], question, onQuestionChange, onAsk, loading = false }: DocumentQAPanelProps) {
+export function DocumentQAPanel({ chunks = [], question, onQuestionChange, onAsk, loading = false, height = 260 }: DocumentQAPanelProps) {
   const safeChunks = chunks ?? []
   const [selectedId, setSelectedId] = useState<string>(safeChunks[0]?.id ?? '')
   const currentChunk = safeChunks.find((c) => c.id === selectedId) ?? safeChunks[0]
@@ -30,8 +31,8 @@ export function DocumentQAPanel({ chunks = [], question, onQuestionChange, onAsk
   }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'row', height: 420, width: '100%', borderRadius: 10, borderWidth: 1, borderColor: border.subtle, backgroundColor: surface.card, overflow: 'hidden' }}>
-      <div style={{ width: 240, flexShrink: 0, borderRightWidth: 1, borderColor: border.subtle, padding: 10, display: 'flex', flexDirection: 'column' }}>
+    <div style={{ display: 'flex', flexDirection: 'row', height, width: '100%', borderRadius: 10, borderWidth: 1, borderColor: border.subtle, backgroundColor: surface.card, overflow: 'hidden' }}>
+      <div style={{ width: 210, flexShrink: 0, borderRightWidth: 1, borderColor: border.subtle, padding: 10, display: 'flex', flexDirection: 'column' }}>
         <SearchableList<DocChunk>
           items={safeChunks}
           getLabel={(c) => c?.title ?? (c as any)?.source ?? ''}
@@ -69,13 +70,13 @@ export function DocumentQAPanel({ chunks = [], question, onQuestionChange, onAsk
           </div>
         </div>
 
-        <div style={{ flexGrow: 1, padding: 14, overflowY: 'scroll', backgroundColor: '#101012' }}>
+        <div style={{ flexGrow: 1, padding: 12, overflowY: 'scroll', backgroundColor: '#101012' }}>
           <text style={{ fontSize: 12.5, color: t.secondary, fontFamily: FONT, lineHeight: 1.6, whiteSpace: 'normal' }}>
             {currentChunk?.content ?? 'Select a document chunk to inspect its contents.'}
           </text>
         </div>
 
-        <div style={{ padding: 10, borderTopWidth: 1, borderColor: border.subtle, backgroundColor: surface.card }}>
+        <div style={{ padding: 8, borderTopWidth: 1, borderColor: border.subtle, backgroundColor: surface.card }}>
           <PromptInput value={question ?? ''} onChange={onQuestionChange} onSubmit={ask} loading={loading} placeholder="Ask about this document…" />
         </div>
       </div>

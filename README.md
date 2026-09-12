@@ -44,6 +44,7 @@ Traditional desktop web wrappers like Electron or Tauri bundle Chromium or WebKi
 | **Input & Floating Anchors** | Browser events & DOM `getBoundingClientRect()` | **Native OS window coordinates & custom roving focus** |
 | **DataViz & Charts** | Canvas 2D Web API / SVG / WebGL | **Native GPUI `<canvas>` hardware context** |
 | **AI / Copilot UI** | Requires 3rd-party composite packages | **58+ Built-in Agentic AI & Copilot primitives** |
+| **Desktop chrome** | Browser dialogs / Electron chrome | **23 native dialogs, status bars, rails, and inspectors** |
 
 ---
 
@@ -70,7 +71,7 @@ flowchart TB
         subgraph AdvancedModules [Specialized Workspaces]
             AI["ai/ (AgentFlowGraph, ChatThread, PromptStudio, ToolCard)"]
             DataViz["dataviz/ (Sparklines, Heatmap, AudioWaveform, Charts)"]
-            Desktop["desktop/ (CommandMenu, WindowDragArea, ToolRail)"]
+            Desktop["desktop/ (AboutDialog, GroupedSidebarNav, ToolboxRail)"]
             Finance["finance/ (CandlestickChart, PnlBadge, OrderBook)"]
         end
 
@@ -178,6 +179,7 @@ export function App() {
           <TabsContent value="ai">
             {/* Native AI Workspace primitives */}
           </TabsContent>
+          {/* Desktop chrome: import { FindBar, ToolboxRail } from '@atlas/ui/desktop' */}
         </Tabs>
         
         {/* Global module-level Toast viewport */}
@@ -235,8 +237,15 @@ Below is the exhaustive list of all 200+ native GPUIX components, hooks, and lay
 
 <details>
 <summary><b>🖥️ Desktop Integrations (23)</b></summary>
+<p>Native desktop chrome from <code>@atlas/ui/desktop</code> — system dialogs, status/feedback, and nav/content helpers. See the <a href="#desktop-integrations-gallery">visual gallery</a>.</p>
 <p>
-<code>AboutDialog</code>, <code>AutoSavePill</code>, <code>ConnectBar</code>, <code>CrashDialog</code>, <code>DownloadCard</code>, <code>EmojiPicker</code>, <code>FavoritesBar</code>, <code>FindBar</code>, <code>FontPicker</code>, <code>GroupedSidebarNav</code>, <code>LicensesDialog</code>, <code>PermissionGate</code>, <code>PreviewPane</code>, <code>PropertyGrid</code>, <code>RecentFilesList</code>, <code>ReleaseNotesDialog</code>, <code>ShortcutSettingsList</code>, <code>ThemeSwitcher</code>, <code>ToolboxRail</code>, <code>UnsavedChangesDialog</code>, <code>VersionFooter</code>, <code>WordCountBar</code>, <code>ZoomControls</code>
+<b>System dialogs:</b> <code>AboutDialog</code>, <code>CrashDialog</code>, <code>LicensesDialog</code>, <code>ReleaseNotesDialog</code>, <code>UnsavedChangesDialog</code>, <code>PermissionGate</code>
+</p>
+<p>
+<b>Status / feedback:</b> <code>AutoSavePill</code>, <code>ConnectBar</code>, <code>DownloadCard</code>, <code>VersionFooter</code>, <code>WordCountBar</code>, <code>ZoomControls</code>
+</p>
+<p>
+<b>Content / nav:</b> <code>EmojiPicker</code>, <code>FavoritesBar</code>, <code>FindBar</code>, <code>FontPicker</code>, <code>GroupedSidebarNav</code>, <code>PreviewPane</code>, <code>PropertyGrid</code>, <code>RecentFilesList</code>, <code>ShortcutSettingsList</code>, <code>ThemeSwitcher</code>, <code>ToolboxRail</code>
 </p>
 </details>
 
@@ -288,6 +297,53 @@ Below is the exhaustive list of all 200+ native GPUIX components, hooks, and lay
 <code>AllocationDonut</code>, <code>BalanceCard</code>, <code>BudgetBar</code>, <code>CandlestickChart</code>, <code>KpiGrid</code>, <code>PnlBadge</code>, <code>TransactionList</code>
 </p>
 </details>
+
+---
+
+## Desktop Integrations Gallery
+
+23 GPU-rendered desktop chrome primitives in `@atlas/ui/desktop`. Cards, rails, and inspectors use a fixed natural width so they do not stretch across the window. Dialogs center on a dimmed overlay.
+
+```tsx
+import { GroupedSidebarNav, ToolboxRail, FindBar, AboutDialog } from '@atlas/ui/desktop'
+```
+
+Regenerate these shots after visual changes:
+
+```bash
+bun run build:ui
+bun run capture:desktop
+```
+
+AI workspace shots live in [`screenshots/ai-components/`](./screenshots/ai-components/) (`bun run capture:ai`).
+
+### System dialogs
+
+| About | Crash | Licenses |
+|:---:|:---:|:---:|
+| <img src="./screenshots/desktop-components/AboutDialog.png" alt="AboutDialog" /> | <img src="./screenshots/desktop-components/CrashDialog.png" alt="CrashDialog" /> | <img src="./screenshots/desktop-components/LicensesDialog.png" alt="LicensesDialog" /> |
+| **Release notes** | **Unsaved changes** | **Permission gate** |
+| <img src="./screenshots/desktop-components/ReleaseNotesDialog.png" alt="ReleaseNotesDialog" /> | <img src="./screenshots/desktop-components/UnsavedChangesDialog.png" alt="UnsavedChangesDialog" /> | <img src="./screenshots/desktop-components/PermissionGate.png" alt="PermissionGate" /> |
+
+### Status & feedback
+
+| Auto-save | Connect | Download |
+|:---:|:---:|:---:|
+| <img src="./screenshots/desktop-components/AutoSavePill.png" alt="AutoSavePill" /> | <img src="./screenshots/desktop-components/ConnectBar.png" alt="ConnectBar" /> | <img src="./screenshots/desktop-components/DownloadCard.png" alt="DownloadCard" /> |
+| **Version** | **Word count** | **Zoom** |
+| <img src="./screenshots/desktop-components/VersionFooter.png" alt="VersionFooter" /> | <img src="./screenshots/desktop-components/WordCountBar.png" alt="WordCountBar" /> | <img src="./screenshots/desktop-components/ZoomControls.png" alt="ZoomControls" /> |
+
+### Content & navigation
+
+| Sidebar | Toolbox | Favorites |
+|:---:|:---:|:---:|
+| <img src="./screenshots/desktop-components/GroupedSidebarNav.png" alt="GroupedSidebarNav" /> | <img src="./screenshots/desktop-components/ToolboxRail.png" alt="ToolboxRail" /> | <img src="./screenshots/desktop-components/FavoritesBar.png" alt="FavoritesBar" /> |
+| **Recent files** | **Preview** | **Find** |
+| <img src="./screenshots/desktop-components/RecentFilesList.png" alt="RecentFilesList" /> | <img src="./screenshots/desktop-components/PreviewPane.png" alt="PreviewPane" /> | <img src="./screenshots/desktop-components/FindBar.png" alt="FindBar" /> |
+| **Font picker** | **Emoji** | **Property grid** |
+| <img src="./screenshots/desktop-components/FontPicker.png" alt="FontPicker" /> | <img src="./screenshots/desktop-components/EmojiPicker.png" alt="EmojiPicker" /> | <img src="./screenshots/desktop-components/PropertyGrid.png" alt="PropertyGrid" /> |
+| **Shortcuts** | **Theme** | |
+| <img src="./screenshots/desktop-components/ShortcutSettingsList.png" alt="ShortcutSettingsList" /> | <img src="./screenshots/desktop-components/ThemeSwitcher.png" alt="ThemeSwitcher" /> | |
 
 ---
 

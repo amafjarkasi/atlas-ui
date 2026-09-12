@@ -11,6 +11,8 @@
     "verify": "bun run scripts/verify-render.tsx",
     "test": "bun run scripts/verify-all.ts",
     "build:ui": "tsc -p packages/ui/tsconfig.build.json",
+    "capture:ai": "bun scripts/capture-all-ai-screenshots.tsx",
+    "capture:desktop": "bun scripts/capture-all-desktop-screenshots.tsx",
     "release:preview": "bun run scripts/release-preview.mjs",
     "release:pack": "bun run build:ui && bun run scripts/release-preview.mjs --pack",
     "typecheck": "tsc --noEmit && tsc --noEmit -p packages/ui/tsconfig.json"

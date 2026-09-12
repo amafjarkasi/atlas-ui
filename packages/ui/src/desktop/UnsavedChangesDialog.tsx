@@ -15,7 +15,7 @@ export function UnsavedChangesDialog({ open, onOpenChange, onSave, onDiscard, la
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogOverlay>
         <DialogContent width={380}>
-          <DialogTitle>Discard changes?</DialogTitle>
+          <DialogTitle>Unsaved changes</DialogTitle>
           <DialogBody>{label}</DialogBody>
           <DialogFooter>
             <Button variant="ghost" onClick={() => onOpenChange(false)}>Cancel</Button>

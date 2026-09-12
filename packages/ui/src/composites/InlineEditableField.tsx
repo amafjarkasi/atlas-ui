@@ -19,10 +19,11 @@ export interface InlineEditableFieldProps {
   value: string
   onSave: (value: string) => void
   multiline?: boolean
+  startEditing?: boolean
 }
 
-export function InlineEditableField({ label, value, onSave, multiline = false }: InlineEditableFieldProps) {
-  const [editing, setEditing] = useState(false)
+export function InlineEditableField({ label, value, onSave, multiline = false, startEditing = false }: InlineEditableFieldProps) {
+  const [editing, setEditing] = useState(startEditing)
   const [draft, setDraft] = useState(value)
 
   const save = () => {
@@ -42,9 +43,9 @@ export function InlineEditableField({ label, value, onSave, multiline = false }:
             setDraft(value)
             setEditing(true)
           }}
-          style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 6, padding: 6, borderRadius: 6, cursor: 'pointer', hover: { backgroundColor: '#FFFFFF0A' } }}
+          style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 6, paddingTop: 4, paddingBottom: 4, paddingLeft: 4, paddingRight: 4, borderRadius: 6, cursor: 'pointer', hover: { backgroundColor: '#FFFFFF0A' } }}
         >
-          <text style={{ fontSize: 13, color: text.primary, fontFamily: FONT, flexGrow: 1 }}>{value || '—'}</text>
+          <text style={{ fontSize: 13, color: text.primary, fontFamily: FONT, flexGrow: 1, lineHeight: 1.35 }}>{value || '—'}</text>
           <Icon name="edit" size={12} color={text.muted} />
         </div>
       </Field>

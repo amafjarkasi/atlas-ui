@@ -36,7 +36,7 @@ export function RunInspector({ steps, lines, used = 0, limit = 200000 }: RunInsp
         </div>
       </div>
 
-      <SandboxStepLog lines={lines} height={200} />
+      <SandboxStepLog lines={lines} height={160} />
     </div>
   )
 }

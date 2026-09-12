@@ -125,8 +125,8 @@ const sampleProps: Record<string, any> = {
   ChatThread: {
     title: 'Copilot Chat Session',
     messages: [
-      { id: 'm1', role: 'user', content: 'How does Atlas UI handle context menus?' },
-      { id: 'm2', role: 'assistant', content: 'Atlas UI uses virtual anchors and pointer events without calling `getBoundingClientRect`.' }
+      { id: 'm1', role: 'user', name: 'User', avatarLetter: 'U', content: 'How does Atlas UI handle context menus?' },
+      { id: 'm2', role: 'assistant', name: 'Atlas', avatarLetter: 'A', content: 'Atlas UI uses virtual anchors and pointer events without calling `getBoundingClientRect`.' }
     ],
     onSend: () => {}
   },

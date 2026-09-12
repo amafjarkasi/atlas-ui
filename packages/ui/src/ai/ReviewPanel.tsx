@@ -20,8 +20,8 @@ export function ReviewPanel({ title, feedback, code, language, configBefore, con
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12, width: '100%' }}>
       {(title || feedback || !hasDiffs) && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 10, padding: 16, borderRadius: 10, borderWidth: 1, borderColor: border.subtle, backgroundColor: surface.card }}>
-          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 16, borderRadius: 10, borderWidth: 1, borderColor: border.subtle, backgroundColor: surface.card }}>
+          <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', height: 28 }}>
             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 8 }}>
               <text style={{ fontSize: 13, fontWeight: 600, color: t.primary, fontFamily: FONT, lineHeight: 1 }}>{title ?? 'Code Review'}</text>
               <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', backgroundColor: '#3B82F61A', borderWidth: 1, borderColor: '#3B82F640', borderRadius: 10, paddingLeft: 8, paddingRight: 8, height: 20 }}>
@@ -29,7 +29,7 @@ export function ReviewPanel({ title, feedback, code, language, configBefore, con
               </div>
             </div>
             {onApply || onReject ? (
-              <div style={{ display: 'flex', flexDirection: 'row', gap: 8 }}>
+              <div style={{ display: 'flex', flexDirection: 'row', gap: 8, alignItems: 'center' }}>
                 {onReject ? <Button size="sm" variant="ghost" onClick={onReject}>Reject</Button> : null}
                 {onApply ? <Button size="sm" onClick={onApply}>Accept Changes</Button> : null}
               </div>

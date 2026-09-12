@@ -14,7 +14,7 @@ export interface ModelLabProps {
 
 export function ModelLab({ models, metricLabels, comparer, criteria, onPick }: ModelLabProps) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 16, width: '100%' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 12, width: '100%' }}>
       {models ? (
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
           <text style={{ fontSize: 13, fontWeight: 600, color: text.primary, fontFamily: FONT }}>Model performance benchmarks</text>
