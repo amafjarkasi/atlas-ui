@@ -1,10 +1,19 @@
-
 ## Complete Component Index
 
 Below is the exhaustive list of all 200+ native GPUIX components, hooks, and layouts included in `@atlas/ui`.
 
+### Visual galleries
+
+| Gallery | Screenshots | Anchor |
+| :--- | :--- | :--- |
+| AI Workspaces (58) | [`screenshots/ai-components/`](./screenshots/ai-components/) | [View gallery](./README.md#ai-workspaces-gallery) |
+| Desktop Integrations (23) | [`screenshots/desktop-components/`](./screenshots/desktop-components/) | [View gallery](./README.md#desktop-integrations-gallery) |
+
+Regenerate baselines: `bun run build:ui` → `bun run capture:ai` / `bun run capture:desktop`. See [Screenshot workflow](./README.md#screenshot-workflow).
+
 <details>
 <summary><b>🤖 AI Workspaces (58)</b></summary>
+<p>Agentic copilot primitives from <code>@atlas/ui/ai</code>. See the <a href="./README.md#ai-workspaces-gallery">visual gallery</a> (<code>screenshots/ai-components/</code>).</p>
 <p>
 <code>AgentFlowGraph</code>, <code>AgentMonitor</code>, <code>AgentRunCard</code>, <code>AgentRunSteps</code>, <code>AgentTrajectory</code>, <code>AssistWorkspace</code>, <code>BranchExplorer</code>, <code>ChatBubble</code>, <code>ChatSearchBar</code>, <code>ChatThread</code>, <code>ConfigDiffReview</code>, <code>ContextBrowser</code>, <code>ContextRing</code>, <code>DocumentQAPanel</code>, <code>GeneratedCodeCard</code>, <code>HelpCopilot</code>, <code>InlineCitations</code>, <code>InlineCodeChip</code>, <code>InterruptibleComposer</code>, <code>LatencyLog</code>, <code>LiveAgentGrid</code>, <code>MentionInput</code>, <code>MessageScroller</code>, <code>MessageStatus</code>, <code>ModelJourney</code>, <code>ModelLab</code>, <code>ModelPerformanceTable</code>, <code>ModelPicker</code>, <code>PromptDiff</code>, <code>PromptEngineeringSuite</code>, <code>PromptHistoryList</code>, <code>PromptInput</code>, <code>PromptSettings</code>, <code>PromptTemplateEditor</code>, <code>RegenerateBar</code>, <code>ResponseComparer</code>, <code>ReviewPanel</code>, <code>RunCostCard</code>, <code>RunInspector</code>, <code>SamplerControls</code>, <code>SandboxStepLog</code>, <code>ScoringPanel</code>, <code>SelectAndAsk</code>, <code>SelectionToPrompt</code>, <code>SourceList</code>, <code>StreamingDiff</code>, <code>StreamingMarkdown</code>, <code>SystemPromptCard</code>, <code>TaskDoneBanner</code>, <code>ThinkingIndicator</code>, <code>ThoughtCodeSplit</code>, <code>TokenMeter</code>, <code>ToolCallCard</code>, <code>ToolPermissionPrompt</code>, <code>TranscriptSync</code>, <code>UsageBudgetCard</code>, <code>VersionedPromptLibrary</code>, <code>VoiceStudio</code>
 </p>
@@ -33,7 +42,7 @@ Below is the exhaustive list of all 200+ native GPUIX components, hooks, and lay
 
 <details>
 <summary><b>🖥️ Desktop Integrations (23)</b></summary>
-<p>Native desktop chrome from <code>@atlas/ui/desktop</code>. GPU screenshots: <code>screenshots/desktop-components/</code>.</p>
+<p>Native desktop chrome from <code>@atlas/ui/desktop</code>. See the <a href="./README.md#desktop-integrations-gallery">visual gallery</a> (<code>screenshots/desktop-components/</code>).</p>
 <p>
 <b>System dialogs:</b> <code>AboutDialog</code>, <code>CrashDialog</code>, <code>LicensesDialog</code>, <code>ReleaseNotesDialog</code>, <code>UnsavedChangesDialog</code>, <code>PermissionGate</code>
 </p>
