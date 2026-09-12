@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./assets/banner.jpg" alt="Atlas UI Banner" width="100%" style="border-radius: 12px; margin-bottom: 20px;" />
+  <img src="./assets/logo.jpg" alt="Atlas UI Logo" width="200" style="border-radius: 24px; margin-bottom: 20px;" />
   <h1>@atlas/ui</h1>
   <p><b>A massive, high-performance, GPU-accelerated React component library for desktop applications.</b></p>
   
