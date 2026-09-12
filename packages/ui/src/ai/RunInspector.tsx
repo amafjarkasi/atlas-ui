@@ -11,11 +11,13 @@ export interface RunInspectorProps {
   limit?: number
 }
 
+const CARD_PAD = { paddingTop: 16, paddingBottom: 16, paddingLeft: 16, paddingRight: 16 }
+
 export function RunInspector({ steps, lines, used = 0, limit = 200000 }: RunInspectorProps) {
   const pct = Math.round((used / Math.max(limit, 1)) * 100)
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 14, width: '100%' }}>
-      <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: 16, borderRadius: 10, borderWidth: 1, borderColor: border.subtle, backgroundColor: surface.card }}>
+      <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', ...CARD_PAD, borderRadius: 10, borderWidth: 1, borderColor: border.subtle, backgroundColor: surface.card }}>
         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 8 }}>
           <text style={{ fontSize: 13, fontWeight: 600, color: t.primary, fontFamily: FONT, lineHeight: 1 }}>Run Inspector</text>
           <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', backgroundColor: '#22C55E1A', borderWidth: 1, borderColor: '#22C55E40', borderRadius: 10, paddingLeft: 8, paddingRight: 8, height: 20 }}>
@@ -27,16 +29,16 @@ export function RunInspector({ steps, lines, used = 0, limit = 200000 }: RunInsp
         </text>
       </div>
 
-      <div style={{ display: 'flex', flexDirection: 'row', gap: 12, alignItems: 'stretch' }}>
-        <div style={{ width: 240, flexShrink: 0, padding: 16, borderRadius: 10, borderWidth: 1, borderColor: border.subtle, backgroundColor: surface.card, display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
+      <div style={{ display: 'flex', flexDirection: 'row', gap: 12, alignItems: 'flex-start' }}>
+        <div style={{ width: 240, flexShrink: 0, ...CARD_PAD, borderRadius: 10, borderWidth: 1, borderColor: border.subtle, backgroundColor: surface.card }}>
           <ContextRing used={used} limit={limit} size={76} />
         </div>
-        <div style={{ flexGrow: 1, padding: 16, borderRadius: 10, borderWidth: 1, borderColor: border.subtle, backgroundColor: surface.card }}>
+        <div style={{ flexGrow: 1, ...CARD_PAD, borderRadius: 10, borderWidth: 1, borderColor: border.subtle, backgroundColor: surface.card }}>
           <AgentTrajectory steps={steps} />
         </div>
       </div>
 
-      <SandboxStepLog lines={lines} height={160} />
+      <SandboxStepLog lines={lines} height="auto" />
     </div>
   )
 }

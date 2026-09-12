@@ -27,7 +27,7 @@ export function AgentTrajectory({ steps = [], totalMs }: AgentTrajectoryProps) {
   const safeSteps = steps ?? []
   const maxMs = totalMs ?? Math.max(...safeSteps.map((s) => s.ms ?? 0), 1)
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 10, paddingTop: 2, paddingBottom: 2 }}>
       {safeSteps.map((s) => (
         <div key={s.id} style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
           <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
