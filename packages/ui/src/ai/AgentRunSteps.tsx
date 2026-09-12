@@ -38,10 +38,11 @@ const COLOR: Record<AgentStepStatus, string> = {
   error: '#ED4245',
 }
 
-export function AgentRunSteps({ steps }: AgentRunStepsProps) {
+export function AgentRunSteps({ steps = [] }: AgentRunStepsProps) {
+  const safeSteps = steps ?? []
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
-      {steps.map((s, i) => {
+      {safeSteps.map((s, i) => {
         const isRunning = s.status === 'running'
         const isDone = s.status === 'done'
         const isError = s.status === 'error'

@@ -20,15 +20,16 @@ export interface VirtualizedGridProps<T> {
 }
 
 export function VirtualizedGrid<T>({
-  items,
+  items = [],
   renderCell,
   columns = 4,
   gap = 8,
   estimatedRowHeight = 120,
   height = '100%',
 }: VirtualizedGridProps<T>) {
+  const safeItems = items ?? []
   const rows: T[][] = []
-  for (let i = 0; i < items.length; i += columns) rows.push(items.slice(i, i + columns))
+  for (let i = 0; i < safeItems.length; i += columns) rows.push(safeItems.slice(i, i + columns))
 
   return (
     <VirtualList<T[]>

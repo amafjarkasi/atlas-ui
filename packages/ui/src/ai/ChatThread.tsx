@@ -30,8 +30,9 @@ export interface ChatThreadProps {
   suggestions?: string[]
 }
 
-export function ChatThread({ title, messages, onSend, loading = false, placeholder, suggestions }: ChatThreadProps) {
+export function ChatThread({ title, messages = [], onSend, loading = false, placeholder, suggestions }: ChatThreadProps) {
   const [draft, setDraft] = useState('')
+  const safeMessages = messages ?? []
 
   const send = () => {
     const t = draft.trim()
@@ -60,7 +61,7 @@ export function ChatThread({ title, messages, onSend, loading = false, placehold
 
       <div style={{ flexGrow: 1, minHeight: 0, display: 'flex', flexDirection: 'column' }}>
         <MessageScroller height="100%">
-          {messages.map((m) => (
+          {safeMessages.map((m) => (
             <ChatBubble key={m.id} role={m.role} content={m.content} />
           ))}
         </MessageScroller>

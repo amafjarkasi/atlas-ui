@@ -20,7 +20,7 @@ export interface SearchableListProps<T> {
 }
 
 export function SearchableList<T>({
-  items,
+  items = [],
   renderItem,
   getLabel,
   placeholder = 'Search…',
@@ -28,7 +28,11 @@ export function SearchableList<T>({
   height = '100%',
 }: SearchableListProps<T>) {
   const [query, setQuery] = useState('')
-  const filtered = items.filter((i) => getLabel(i).toLowerCase().includes(query.toLowerCase()))
+  const safeItems = items ?? []
+  const filtered = safeItems.filter((i) => {
+    const lbl = getLabel ? getLabel(i) : String(i ?? '')
+    return lbl.toLowerCase().includes(query.toLowerCase())
+  })
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 8, height, width: '100%' }}>

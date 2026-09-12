@@ -17,18 +17,20 @@ export interface InlineCitationsProps {
   fontSize?: number
 }
 
-export function InlineCitations({ text, sources, fontSize = 13 }: InlineCitationsProps) {
+export function InlineCitations({ text = '', sources = [], fontSize = 13 }: InlineCitationsProps) {
+  const safeText = text ?? ''
+  const safeSources = sources ?? []
   // Split on "[n]" markers.
   const parts: (string | { index: number })[] = []
   const re = /\[(\d+)\]/g
   let last = 0
   let m: RegExpExecArray | null
-  while ((m = re.exec(text))) {
-    if (m.index > last) parts.push(text.slice(last, m.index))
+  while ((m = re.exec(safeText))) {
+    if (m.index > last) parts.push(safeText.slice(last, m.index))
     parts.push({ index: Number(m[1]) - 1 })
     last = m.index + m[0].length
   }
-  if (last < text.length) parts.push(text.slice(last))
+  if (last < safeText.length) parts.push(safeText.slice(last))
 
   return (
     <div style={{ flexDirection: 'row', flexWrap: 'wrap', alignItems: 'baseline' }}>
@@ -37,13 +39,13 @@ export function InlineCitations({ text, sources, fontSize = 13 }: InlineCitation
           <text key={i} style={{ fontSize, color: textTokens.primary, fontFamily: FONT }}>
             {p}
           </text>
-        ) : sources[p.index] ? (
+        ) : safeSources[p.index] ? (
           <CitationTooltip
             key={i}
             index={p.index + 1}
-            title={sources[p.index]!.title}
-            url={sources[p.index]!.url}
-            snippet={sources[p.index]!.snippet}
+            title={safeSources[p.index]!.title}
+            url={safeSources[p.index]!.url}
+            snippet={safeSources[p.index]!.snippet}
           />
         ) : (
           <text key={i} style={{ fontSize, color: textTokens.muted, fontFamily: FONT }}>

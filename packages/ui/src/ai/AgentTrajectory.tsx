@@ -23,11 +23,12 @@ export interface AgentTrajectoryProps {
 
 const STATE_COLOR: Record<TrajectoryState, string> = { pending: '#3F3F46', active: '#3B82F6', done: '#22C55E', error: '#ED4245' }
 
-export function AgentTrajectory({ steps, totalMs }: AgentTrajectoryProps) {
-  const maxMs = totalMs ?? Math.max(...steps.map((s) => s.ms ?? 0), 1)
+export function AgentTrajectory({ steps = [], totalMs }: AgentTrajectoryProps) {
+  const safeSteps = steps ?? []
+  const maxMs = totalMs ?? Math.max(...safeSteps.map((s) => s.ms ?? 0), 1)
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-      {steps.map((s) => (
+      {safeSteps.map((s) => (
         <div key={s.id} style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
           <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
             <text style={{ fontSize: 12, color: textTokens.secondary, fontFamily: FONT }}>{s.label}</text>

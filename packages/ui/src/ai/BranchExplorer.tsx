@@ -38,8 +38,11 @@ export function BranchExplorer({ branches, onPick }: BranchExplorerProps) {
           style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 8, paddingTop: 5, paddingBottom: 5, paddingLeft: depth * 14, cursor: n.status === 'untried' ? 'pointer' : 'default' }}
         >
           <Icon name={n.children ? 'chevronRight' : 'dot'} size={11} color={textTokens.muted} />
-          <text style={{ fontSize: 12.5, color: textTokens.primary, fontFamily: FONT, flexGrow: 1 }}>{n.label}</text>
-          <Badge variant="label" label={STATUS[n.status].label} color={STATUS[n.status].color} />
+          <text style={{ fontSize: 12.5, color: textTokens.primary, fontFamily: FONT, flexGrow: 1 }}>{n.label ?? (n as any).name ?? n.id}</text>
+          {(() => {
+            const st = STATUS[n.status] ?? STATUS.untried
+            return <Badge variant="label" label={st.label} color={st.color} />
+          })()}
         </div>
         {n.children ? render(n.children, depth + 1) : null}
       </div>

@@ -6,9 +6,11 @@ export interface DiffLine {
 }
 
 /** Classic LCS-based line diff. */
-export function diffLines(before: string, after: string): DiffLine[] {
-  const a = before.split('\n')
-  const b = after.split('\n')
+export function diffLines(before: string = '', after: string = ''): DiffLine[] {
+  const safeBefore = before ?? ''
+  const safeAfter = after ?? ''
+  const a = safeBefore.split('\n')
+  const b = safeAfter.split('\n')
   const n = a.length
   const m = b.length
   const dp: number[][] = Array.from({ length: n + 1 }, () => Array<number>(m + 1).fill(0))

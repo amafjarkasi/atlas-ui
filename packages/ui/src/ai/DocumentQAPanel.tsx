@@ -18,10 +18,11 @@ export interface DocumentQAPanelProps {
   loading?: boolean
 }
 
-export function DocumentQAPanel({ chunks, question, onQuestionChange, onAsk, loading = false }: DocumentQAPanelProps) {
+export function DocumentQAPanel({ chunks = [], question, onQuestionChange, onAsk, loading = false }: DocumentQAPanelProps) {
+  const safeChunks = chunks ?? []
   const ask = () => {
     if (!question?.trim()) return
-    onAsk?.(question, chunks.map((c) => c.content).join('\n\n'))
+    onAsk?.(question, safeChunks.map((c) => c?.content ?? '').join('\n\n'))
     onQuestionChange?.('')
   }
 
@@ -29,10 +30,10 @@ export function DocumentQAPanel({ chunks, question, onQuestionChange, onAsk, loa
     <div style={{ display: 'flex', flexDirection: 'row', height: '100%', width: '100%' }}>
       <div style={{ width: 260, flexShrink: 0, borderRightWidth: 1, borderColor: border.subtle, padding: 8 }}>
         <SearchableList<DocChunk>
-          items={chunks}
-          getLabel={(c) => c.title}
+          items={safeChunks}
+          getLabel={(c) => c?.title ?? (c as any)?.source ?? ''}
           height="100%"
-          renderItem={(c) => <text style={{ fontSize: 12, color: t.primary, fontFamily: FONT, padding: 4 }}>{c.title}</text>}
+          renderItem={(c) => <text style={{ fontSize: 12, color: t.primary, fontFamily: FONT, padding: 4 }}>{c?.title ?? (c as any)?.source ?? ''}</text>}
         />
       </div>
       <div style={{ flexGrow: 1, padding: 10, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', gap: 8 }}>

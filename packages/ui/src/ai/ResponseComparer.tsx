@@ -23,14 +23,15 @@ export interface ResponseComparerProps {
   onCopy?: (id: string, content: string) => void
 }
 
-function Pane({ r, onCopy }: { r: ComparableResponse; onCopy?: (id: string, content: string) => void }) {
+function Pane({ r, onCopy }: { r?: ComparableResponse; onCopy?: (id: string, content: string) => void }) {
+  if (!r) return <Card padding={12} width="50%" />
   return (
     <Card padding={12} width="50%">
       <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 8, paddingBottom: 8 }}>
-        <text style={{ fontSize: 12, fontWeight: 600, color: textTokens.secondary, fontFamily: FONT, flexGrow: 1 }}>{r.label}</text>
-        <CopyButton value={r.content} onCopy={onCopy ? () => onCopy(r.id, r.content) : undefined} />
+        <text style={{ fontSize: 12, fontWeight: 600, color: textTokens.secondary, fontFamily: FONT, flexGrow: 1 }}>{r.label ?? 'Response'}</text>
+        <CopyButton value={r.content ?? ''} onCopy={onCopy ? () => onCopy(r.id, r.content ?? '') : undefined} />
       </div>
-      <text style={{ fontSize: 12.5, color: textTokens.primary, fontFamily: FONT, whiteSpace: 'normal', lineHeight: 1.5 }}>{r.content}</text>
+      <text style={{ fontSize: 12.5, color: textTokens.primary, fontFamily: FONT, whiteSpace: 'normal', lineHeight: 1.5 }}>{r.content ?? ''}</text>
     </Card>
   )
 }

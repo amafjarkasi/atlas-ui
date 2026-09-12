@@ -23,7 +23,7 @@ export interface StreamingTextProps {
 }
 
 export function StreamingText({
-  text,
+  text = '',
   active = true,
   speed = 20,
   fontSize = 13,
@@ -31,17 +31,18 @@ export function StreamingText({
   fontWeight = 400,
   showCursor = true,
 }: StreamingTextProps) {
-  const [shown, setShown] = useState(active ? 0 : text.length)
+  const safeText = text ?? ''
+  const [shown, setShown] = useState(active ? 0 : safeText.length)
 
   useEffect(() => {
     if (!active) {
-      setShown(text.length)
+      setShown(safeText.length)
       return
     }
     setShown(0)
     const id = setInterval(() => {
       setShown((s) => {
-        if (s >= text.length) {
+        if (s >= safeText.length) {
           clearInterval(id)
           return s
         }
@@ -49,13 +50,13 @@ export function StreamingText({
       })
     }, speed)
     return () => clearInterval(id)
-  }, [text, active, speed])
+  }, [safeText, active, speed])
 
-  const caret = showCursor && active && shown < text.length
+  const caret = showCursor && active && shown < safeText.length
 
   return (
     <text style={{ fontSize, color, fontWeight, fontFamily: FONT, whiteSpace: 'normal', lineHeight: 1.5 }}>
-      {text.slice(0, shown)}
+      {safeText.slice(0, shown)}
       {caret ? '▍' : ''}
     </text>
   )

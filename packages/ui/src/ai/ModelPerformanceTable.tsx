@@ -18,8 +18,9 @@ export interface ModelPerformanceTableProps {
   metricMax?: Record<string, number>
 }
 
-export function ModelPerformanceTable({ models, metricLabels = {}, metricMax = {} }: ModelPerformanceTableProps) {
-  const metricKeys = models.length > 0 ? Object.keys(models[0]!.metrics) : []
+export function ModelPerformanceTable({ models = [], metricLabels = {}, metricMax = {} }: ModelPerformanceTableProps) {
+  const safeModels = models ?? []
+  const metricKeys = safeModels.length > 0 && safeModels[0]?.metrics ? Object.keys(safeModels[0].metrics) : []
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', borderRadius: 8, borderWidth: 1, borderColor: border.subtle, overflow: 'hidden' }}>
@@ -29,8 +30,8 @@ export function ModelPerformanceTable({ models, metricLabels = {}, metricMax = {
           <text key={k} style={{ flexGrow: 1, fontSize: 11, fontWeight: 600, color: text.muted, fontFamily: FONT }}>{metricLabels[k] ?? k}</text>
         ))}
       </div>
-      {models.map((m) => (
-        <div key={m.id} style={{ display: 'flex', flexDirection: 'row', height: 34, alignItems: 'center', paddingLeft: 10, borderBottomWidth: 1, borderColor: border.subtle, hover: { backgroundColor: '#FFFFFF06' } }}>
+      {safeModels.map((m, idx) => (
+        <div key={m.id ?? m.name ?? idx} style={{ display: 'flex', flexDirection: 'row', height: 34, alignItems: 'center', paddingLeft: 10, borderBottomWidth: 1, borderColor: border.subtle, hover: { backgroundColor: '#FFFFFF06' } }}>
           <text style={{ width: 110, flexShrink: 0, fontSize: 12.5, fontWeight: 600, color: text.primary, fontFamily: FONT }}>{m.name}</text>
           {metricKeys.map((k) => {
             const max = metricMax[k] ?? 100

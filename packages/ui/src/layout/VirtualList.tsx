@@ -24,7 +24,7 @@ export interface VirtualListProps<T> {
 }
 
 export function VirtualList<T>({
-  items,
+  items = [],
   renderItem,
   estimatedItemHeight = 58,
   overdraw = 2,
@@ -33,6 +33,7 @@ export function VirtualList<T>({
   footer,
   onVisibleRange,
 }: VirtualListProps<T>) {
+  const safeItems = items ?? []
   return (
     <virtual-list
       estimatedItemHeight={estimatedItemHeight}
@@ -41,7 +42,7 @@ export function VirtualList<T>({
       onVisibleRange={onVisibleRange as any}
       style={{ height, flexGrow: 1 }}
     >
-      {items.map((item, i) => (
+      {safeItems.map((item, i) => (
         <div key={i}>{renderItem(item, i)}</div>
       ))}
       {footer}

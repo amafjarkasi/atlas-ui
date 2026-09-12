@@ -30,9 +30,12 @@ export interface PromptHistoryListProps {
   searchable?: boolean
 }
 
-export function PromptHistoryList({ items, activeId, onSelect, onDelete, searchable = true }: PromptHistoryListProps) {
+export function PromptHistoryList({ items = [], activeId, onSelect, onDelete, searchable = true }: PromptHistoryListProps) {
   const [query, setQuery] = useState('')
-  const filtered = searchable ? items.filter((i) => i.title.toLowerCase().includes(query.toLowerCase())) : items
+  const safeItems = items ?? []
+  const filtered = searchable
+    ? safeItems.filter((i) => (i?.title ? i.title.toLowerCase().includes(query.toLowerCase()) : false))
+    : safeItems
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 8, height: '100%', width: '100%' }}>
