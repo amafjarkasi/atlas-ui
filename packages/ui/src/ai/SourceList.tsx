@@ -23,7 +23,7 @@ export interface SourceListProps {
 
 export function SourceList({ sources }: SourceListProps) {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
       {sources.map((s, i) => (
         <HoverCard
           key={i}
@@ -34,14 +34,19 @@ export function SourceList({ sources }: SourceListProps) {
                 display: 'flex',
                 flexDirection: 'row',
                 alignItems: 'center',
-                gap: 6,
-                padding: 6,
+                gap: 8,
+                paddingTop: 10,
+                paddingBottom: 10,
+                paddingLeft: 10,
+                paddingRight: 10,
                 borderRadius: 6,
                 hover: { backgroundColor: '#FFFFFF0A' },
               }}
             >
-              <text style={{ fontSize: 11, fontWeight: 600, color: text.muted, fontFamily: FONT }}>[{i + 1}]</text>
-              <text style={{ fontSize: 12.5, color: text.secondary, fontFamily: FONT }}>{s.title}</text>
+              <text style={{ fontSize: 11, fontWeight: 600, color: text.muted, fontFamily: FONT, whiteSpace: 'nowrap', lineHeight: 1, flexShrink: 0 }}>
+                {`[${i + 1}]`}
+              </text>
+              <text style={{ fontSize: 12.5, color: text.secondary, fontFamily: FONT, lineHeight: 1.4, flexGrow: 1 }}>{s.title}</text>
             </div>
           }
         >
