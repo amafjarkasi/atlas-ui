@@ -23,10 +23,19 @@ export interface FormCardProps {
 }
 
 export function FormCard({ title, description, children, actions, submitLabel = 'Save', cancelLabel = 'Cancel', onSubmit, onCancel, width }: FormCardProps) {
+  const footer =
+    actions ??
+    (onSubmit || onCancel ? (
+      <>
+        {onCancel ? <Button variant="ghost" onClick={onCancel}>{cancelLabel}</Button> : null}
+        {onSubmit ? <Button onClick={onSubmit}>{submitLabel}</Button> : null}
+      </>
+    ) : null)
+
   return (
     <Card padding={16} width={width}>
       {title || description ? (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 3, paddingBottom: 14 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 4, marginBottom: 14 }}>
           {title ? <text style={{ fontSize: 14, fontWeight: 600, color: textTokens.primary, fontFamily: FONT }}>{title}</text> : null}
           {description ? <text style={{ fontSize: 12, color: textTokens.muted, fontFamily: FONT }}>{description}</text> : null}
         </div>
@@ -34,15 +43,11 @@ export function FormCard({ title, description, children, actions, submitLabel = 
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>{children}</div>
 
-      <div style={{ display: 'flex', flexDirection: 'row', gap: 8, justifyContent: 'flex-end', paddingTop: 14, borderTopWidth: 1, borderColor: border.subtle, marginTop: 14 }}>
-        {actions ??
-          (onSubmit || onCancel ? (
-            <>
-              {onCancel ? <Button variant="ghost" onClick={onCancel}>{cancelLabel}</Button> : null}
-              {onSubmit ? <Button onClick={onSubmit}>{submitLabel}</Button> : null}
-            </>
-          ) : null)}
-      </div>
+      {footer ? (
+        <div style={{ display: 'flex', flexDirection: 'row', gap: 8, justifyContent: 'flex-end', paddingTop: 14, borderTopWidth: 1, borderColor: border.subtle, marginTop: 14 }}>
+          {footer}
+        </div>
+      ) : null}
     </Card>
   )
 }

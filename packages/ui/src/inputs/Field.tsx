@@ -28,7 +28,7 @@ export function Field({ label, helper, error, children, required = false, disabl
   const hintColor = error ? semantic.mention : text.muted
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 5, opacity: disabled ? 0.5 : 1 }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 8, opacity: disabled ? 0.5 : 1 }}>
       {label ? (
         <text style={{ fontSize: 12, fontWeight: 600, color: text.secondary, fontFamily: FONT }}>
           {label}
