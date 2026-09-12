@@ -7,8 +7,8 @@
  * `LinearGradientBackground` renders as an underline accent beneath them.
  *
  * @example
- *   <GradientText stops={[{ color: '#3B82F6', position: 0 }, { color: '#8B5CF6', position: 1 }]}>
- *     Atlas Weekly
+ *   <GradientText gradient={{ angle: 90, stops: [{color: '#ff0000', position: 0}, {color: '#0000ff', position: 1}] }}>
+ *     Atlas UI
  *   </GradientText>
  */
 import type { LinearGradientBackground } from '@gpuix/react'

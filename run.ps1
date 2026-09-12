@@ -15,5 +15,5 @@ if (-not (Test-Path $bunPath)) {
 
 $env:PATH = "$env:USERPROFILE\.bun\bin;C:\Program Files\nodejs;$env:PATH"
 
-Write-Host "Starting Atlas Weekly GPUIX application via Bun..." -ForegroundColor Cyan
-& $bunPath --hot src/app.tsx
+Write-Host "Starting Atlas UI Component Gallery via Bun..." -ForegroundColor Cyan
+bun --hot src/app.tsx
