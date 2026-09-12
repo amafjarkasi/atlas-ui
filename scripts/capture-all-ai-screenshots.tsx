@@ -475,6 +475,10 @@ const sampleProps: Record<string, any> = {
   }
 }
 
+const viewportHeights: Record<string, number> = {
+  PromptEngineeringSuite: 900,
+}
+
 const componentNames = Object.keys(AI).filter(k => !k.endsWith('Props') && typeof (AI as any)[k] === 'function')
 console.log(`Rendering and capturing screenshots for all ${componentNames.length} AI components...`)
 
@@ -484,7 +488,8 @@ let failCount = 0
 for (const name of componentNames) {
   const Comp = (AI as any)[name]
   const props = sampleProps[name] || {}
-  const { render: testRender, renderer: testRenderer } = createTestRoot({ width: 900, height: 600 })
+  const height = viewportHeights[name] ?? 600
+  const { render: testRender, renderer: testRenderer } = createTestRoot({ width: 900, height })
   
   try {
     testRender(

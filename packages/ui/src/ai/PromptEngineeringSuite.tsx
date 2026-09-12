@@ -41,7 +41,7 @@ export function PromptEngineeringSuite({ template, onTemplateChange, values, onV
       ) : null}
 
       {tokenLimit !== undefined ? (
-        <div style={{ padding: 12, borderRadius: 10, borderWidth: 1, borderColor: border.subtle, backgroundColor: surface.card }}>
+        <div style={{ display: 'flex', flexDirection: 'column', flexGrow: 0, flexShrink: 0, paddingLeft: 16, paddingRight: 16, paddingTop: 14, paddingBottom: 14, borderRadius: 10, borderWidth: 1, borderColor: border.subtle, backgroundColor: surface.card, width: '100%' }}>
           <TokenMeter used={tokenUsed ?? 0} limit={tokenLimit} label="Prompt tokens" />
         </div>
       ) : null}
