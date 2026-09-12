@@ -12,10 +12,19 @@
 
 ## Overview
 
-`@atlas/ui` is an enterprise-grade component library built exclusively for **GPUIX**. 
-It completely bypasses the browser DOM, HTML, and CSS, rendering directly to the GPU via **DirectX 12 (Windows), Metal (macOS), and Vulkan (Linux)**.
+`@atlas/ui` is an enterprise-grade, highly modular component library engineered specifically for the **GPUIX** framework. By completely bypassing the traditional browser DOM, HTML, and CSS, Atlas UI unlocks a new tier of desktop application performance. Every component in this library renders directly to the GPU using native graphics APIs—**DirectX 12 on Windows, Metal on macOS, and Vulkan on Linux**.
 
-With over **150+ native components**, it provides everything you need to build hyper-fast, deeply integrated desktop software, ranging from basic UI atoms to complex financial charts and autonomous AI workspaces.
+### Built for the Post-DOM Era
+Traditional Electron or Tauri apps suffer from Chromium/WebKit bloat and DOM layout thrashing. Atlas UI solves this by leveraging a lightweight React 19 reconciler that translates your JSX directly into a Rust-powered retained scene graph. The result? **Silky smooth 120fps animations, sub-millisecond layout calculations, and a memory footprint a fraction of the size of a webview.**
+
+### Massive Scale & Domain-Specific Modularity
+With over **150+ native components**, Atlas UI goes far beyond basic buttons and inputs. It provides specialized, production-ready modules for:
+*   **WAI-ARIA Compliant Foundations**: Fully custom headless engines for roving tabindex, focus trapping, and keyboard navigation in a DOM-less world.
+*   **Agentic AI Interfaces**: Pre-built chat threads, thought-process tracers, and token meters for LLM copilots.
+*   **Native Desktop Paradigms**: Command palettes, split panes, floating context menus, and native window drag areas.
+*   **Hardware-Accelerated DataViz**: Real-time rendering of candlestick charts, sparklines, and heatmaps via the GPUIX `<canvas>` primitive.
+
+Whether you are building a high-frequency trading dashboard, a native email client, or the next generation of AI workspaces, `@atlas/ui` provides the foundational blocks to build it fast, without compromising on bare-metal performance.
 
 ## Why Atlas UI?
 
