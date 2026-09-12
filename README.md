@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./assets/logo.svg" alt="Atlas UI Logo" width="200" style="border-radius: 24px; margin-bottom: 20px;" />
+  <img src="./packages/ui/assets/logo.svg" alt="Atlas UI Logo" width="400" />
   <h1>Atlas UI</h1>
   <p><b>A massive, high-performance, GPU-accelerated React component library for desktop applications.</b></p>
   
@@ -130,3 +130,4 @@ Because GPUIX lacks a DOM, Atlas UI implements its own headless engines for:
 
 ---
 *Built for the future of desktop applications.*
+
