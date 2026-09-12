@@ -28,7 +28,11 @@ export function ContextBrowser({ chunks, query = '', height = '100%' }: ContextB
         <div style={{ display: 'flex', flexDirection: 'column', gap: 3, padding: 8, borderBottomWidth: 1, borderColor: border.subtle }}>
           <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
             <text style={{ fontSize: 12, fontWeight: 600, color: t.primary, fontFamily: FONT }}>{c.title}</text>
-            {c.tokens !== undefined ? <text style={{ fontSize: 10.5, color: t.muted, fontFamily: FONT }}>{c.tokens} tok</text> : null}
+            {c.tokens !== undefined ? (
+              <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', flexShrink: 0 }}>
+                <text style={{ fontSize: 10.5, color: t.muted, fontFamily: FONT, whiteSpace: 'nowrap' }}>{`${c.tokens.toLocaleString()} tok`}</text>
+              </div>
+            ) : null}
           </div>
           <SearchHighlights text={c.text} query={query} fontSize={11.5} />
         </div>

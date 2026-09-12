@@ -26,15 +26,19 @@ export function CitationTooltip({ index, title, url, snippet }: CitationTooltipP
       trigger={
         <div
           style={{
-            paddingLeft: 5,
-            paddingRight: 5,
-            paddingTop: 1,
-            paddingBottom: 1,
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            paddingLeft: 6,
+            paddingRight: 6,
+            paddingTop: 2,
+            paddingBottom: 2,
             borderRadius: 4,
             backgroundColor: surface.selected,
+            whiteSpace: 'nowrap',
           }}
         >
-          <text style={{ fontSize: 10.5, fontWeight: 600, color: text.secondary, fontFamily: FONT }}>[{index}]</text>
+          <text style={{ fontSize: 10.5, fontWeight: 600, color: text.secondary, fontFamily: FONT, whiteSpace: 'nowrap' }}>{`[${index}]`}</text>
         </div>
       }
     >

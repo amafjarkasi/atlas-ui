@@ -1,5 +1,5 @@
 /** @atlas/ui — DocumentQAPanel — searchable document + ask panel (RAG shell). */
-import { border, text as t } from '../tokens'
+import { surface, border, text as t } from '../tokens'
 import { FONT } from '../tokens'
 import { SearchableList } from '../display/SearchableList'
 import { PromptInput } from './PromptInput'
@@ -27,16 +27,16 @@ export function DocumentQAPanel({ chunks = [], question, onQuestionChange, onAsk
   }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'row', height: '100%', width: '100%' }}>
-      <div style={{ width: 260, flexShrink: 0, borderRightWidth: 1, borderColor: border.subtle, padding: 8 }}>
+    <div style={{ display: 'flex', flexDirection: 'row', height: '100%', width: '100%', borderRadius: 10, borderWidth: 1, borderColor: border.subtle, backgroundColor: surface.card, overflow: 'hidden' }}>
+      <div style={{ width: 260, flexShrink: 0, borderRightWidth: 1, borderColor: border.subtle, padding: 10 }}>
         <SearchableList<DocChunk>
           items={safeChunks}
           getLabel={(c) => c?.title ?? (c as any)?.source ?? ''}
           height="100%"
-          renderItem={(c) => <text style={{ fontSize: 12, color: t.primary, fontFamily: FONT, padding: 4 }}>{c?.title ?? (c as any)?.source ?? ''}</text>}
+          renderItem={(c) => <text style={{ fontSize: 12, color: t.primary, fontFamily: FONT, padding: 6 }}>{c?.title ?? (c as any)?.source ?? ''}</text>}
         />
       </div>
-      <div style={{ flexGrow: 1, padding: 10, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', gap: 8 }}>
+      <div style={{ flexGrow: 1, padding: 14, display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', gap: 10 }}>
         <PromptInput value={question ?? ''} onChange={onQuestionChange} onSubmit={ask} loading={loading} placeholder="Ask about this document…" />
       </div>
     </div>

@@ -17,18 +17,22 @@ export function InlineCodeChip({ code }: InlineCodeChipProps) {
   return (
     <div
       style={{
-        paddingLeft: 6,
-        paddingRight: 6,
-        paddingTop: 2,
-        paddingBottom: 2,
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingLeft: 8,
+        paddingRight: 8,
+        paddingTop: 3,
+        paddingBottom: 3,
         borderRadius: 5,
         backgroundColor: surface.code,
         borderWidth: 1,
         borderColor: border.subtle,
         alignSelf: 'flex-start',
+        whiteSpace: 'nowrap',
       }}
     >
-      <text style={{ fontSize: 11.5, color: text.secondary, fontFamily: FONT_MONO }}>{code}</text>
+      <text style={{ fontSize: 11.5, color: text.secondary, fontFamily: FONT_MONO, whiteSpace: 'nowrap' }}>{code}</text>
     </div>
   )
 }

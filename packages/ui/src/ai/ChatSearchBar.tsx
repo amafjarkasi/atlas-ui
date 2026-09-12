@@ -26,15 +26,15 @@ export function ChatSearchBar({ query, onQueryChange, index = 0, total = 0, onNe
       <div style={{ flexGrow: 1 }}>
         <SearchInput value={query} onChange={onQueryChange} onClear={onClear} placeholder="Search conversation…" />
       </div>
-      <text style={{ fontSize: 11, color: textTokens.muted, fontFamily: FONT, whiteSpace: 'nowrap' }}>
-        {total > 0 ? `${index + 1}/${total}` : '0/0'}
-      </text>
-      <IconButton icon="chevronUp" size={12} onClick={onPrev} />
-      <IconButton icon="chevronDown" size={12} onClick={onNext} />
+      <div style={{ paddingLeft: 8, paddingRight: 8, paddingTop: 3, paddingBottom: 3, borderRadius: 10, backgroundColor: '#27272A', display: 'flex', alignItems: 'center' }}>
+        <text style={{ fontSize: 11, fontWeight: 500, color: textTokens.secondary, fontFamily: FONT }}>
+          {total > 0 ? `${index + 1} of ${total}` : '0 results'}
+        </text>
+      </div>
+      <IconButton icon="chevronUp" size={13} pad={24} onClick={onPrev} />
+      <IconButton icon="chevronDown" size={13} pad={24} onClick={onNext} />
       {onClear ? (
-        <div onClick={onClear} style={{ cursor: 'pointer', padding: 3 }}>
-          <Icon name="x" size={12} color={textTokens.muted} />
-        </div>
+        <IconButton icon="x" size={12} pad={24} onClick={onClear} />
       ) : null}
     </div>
   )

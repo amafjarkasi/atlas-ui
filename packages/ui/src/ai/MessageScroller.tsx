@@ -9,7 +9,7 @@
  *     {messages.map((m) => <ChatBubble key={m.id} role={m.role} content={m.content} />)}
  *   </MessageScroller>
  */
-import type { ReactNode } from 'react'
+import { Children, type ReactNode } from 'react'
 
 export interface MessageScrollerProps {
   children: ReactNode
@@ -26,14 +26,19 @@ export function MessageScroller({
   followTail = true,
   height = '100%',
 }: MessageScrollerProps) {
+  const childArray = Children.toArray(children)
   return (
     <virtual-list
       estimatedItemHeight={estimatedItemHeight}
       overdraw={overdraw}
       followTail={followTail}
-      style={{ height, flexGrow: 1, flexDirection: 'column', gap: 12, padding: 12 }}
+      style={{ height, flexGrow: 1 }}
     >
-      {children}
+      {childArray.map((child, i) => (
+        <div key={i} style={{ paddingLeft: 12, paddingRight: 12, paddingTop: 6, paddingBottom: 6 }}>
+          {child}
+        </div>
+      ))}
     </virtual-list>
   )
 }

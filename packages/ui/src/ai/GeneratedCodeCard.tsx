@@ -5,13 +5,13 @@
  * applied/pending status pill (composes `SyntaxCodeBlock` + `CopyButton` +
  * `Badge`).
  */
-import { text as textTokens } from '../tokens'
+import { surface, border, text as textTokens } from '../tokens'
 import { FONT } from '../tokens'
 import { Badge } from '../atoms/Badge'
 import { CopyButton } from '../atoms/CopyButton'
 import { SyntaxCodeBlock } from '../effects/SyntaxCodeBlock'
 
-export type GeneratedCodeStatus = 'pending' | 'applied' | 'rejected'
+export type GeneratedCodeStatus = 'pending' | 'applied' | 'rejected' | 'success'
 
 export interface GeneratedCodeCardProps {
   code: string
@@ -22,15 +22,16 @@ export interface GeneratedCodeCardProps {
   onCopy?: (code: string) => void
 }
 
-const STATUS_LABEL: Record<GeneratedCodeStatus, string> = { pending: 'New', applied: 'Applied', rejected: 'Skipped' }
-const STATUS_COLOR: Record<GeneratedCodeStatus, string> = { pending: '#3B82F6', applied: '#22C55E', rejected: '#8A8A90' }
+const STATUS_LABEL: Record<GeneratedCodeStatus, string> = { pending: 'New', applied: 'Applied', success: 'Applied', rejected: 'Skipped' }
+const STATUS_COLOR: Record<GeneratedCodeStatus, string> = { pending: '#3B82F6', applied: '#22C55E', success: '#22C55E', rejected: '#8A8A90' }
 
 export function GeneratedCodeCard({ code, language, title, status = 'pending', onApply, onCopy }: GeneratedCodeCardProps) {
+  const displayTitle = title || (language ? `${language.charAt(0).toUpperCase() + language.slice(1)} snippet` : 'Generated snippet')
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-      <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 8 }}>
-        {title ? <text style={{ fontSize: 12.5, fontWeight: 600, color: textTokens.primary, fontFamily: FONT }}>{title}</text> : null}
-        <Badge variant="label" label={STATUS_LABEL[status]} color={STATUS_COLOR[status]} />
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 14, borderRadius: 10, borderWidth: 1, borderColor: border.subtle, backgroundColor: surface.card }}>
+      <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 10 }}>
+        <text style={{ fontSize: 13, fontWeight: 600, color: textTokens.primary, fontFamily: FONT }}>{displayTitle}</text>
+        <Badge variant="label" label={STATUS_LABEL[status] ?? 'New'} color={STATUS_COLOR[status] ?? '#3B82F6'} />
         <div style={{ flexGrow: 1 }} />
         {status === 'pending' && onApply ? <CopyButton value={code} onCopy={onApply} label="Apply" copiedLabel="Applied" /> : null}
         <CopyButton value={code} onCopy={onCopy} />

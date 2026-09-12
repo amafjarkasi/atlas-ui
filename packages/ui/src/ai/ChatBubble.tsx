@@ -64,10 +64,10 @@ export function ChatBubble({
 
         <div
           style={{
-            paddingLeft: 12,
-            paddingRight: 12,
-            paddingTop: 8,
-            paddingBottom: 8,
+            paddingLeft: 14,
+            paddingRight: 14,
+            paddingTop: 10,
+            paddingBottom: 10,
             borderRadius: 12,
             backgroundColor: bubbleBg,
             borderWidth: isUser ? 0 : 1,

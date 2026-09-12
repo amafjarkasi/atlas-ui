@@ -32,7 +32,11 @@ export function AgentTrajectory({ steps = [], totalMs }: AgentTrajectoryProps) {
         <div key={s.id} style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
           <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
             <text style={{ fontSize: 12, color: textTokens.secondary, fontFamily: FONT }}>{s.label}</text>
-            {s.ms !== undefined ? <text style={{ fontSize: 11, color: textTokens.muted, fontFamily: FONT }}>{s.ms}ms</text> : null}
+            {s.ms !== undefined ? (
+              <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                <text style={{ fontSize: 11, color: textTokens.muted, fontFamily: FONT }}>{`${s.ms}ms`}</text>
+              </div>
+            ) : null}
           </div>
           <div style={{ height: 8, borderRadius: 4, backgroundColor: surface.selected, overflow: 'hidden' }}>
             <div style={{ width: `${Math.max(2, ((s.ms ?? 0) / maxMs) * 100)}%`, height: '100%', borderRadius: 4, backgroundColor: STATE_COLOR[s.state] }} />

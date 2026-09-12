@@ -33,7 +33,7 @@ export function InlineCitations({ text = '', sources = [], fontSize = 13 }: Inli
   if (last < safeText.length) parts.push(safeText.slice(last))
 
   return (
-    <div style={{ flexDirection: 'row', flexWrap: 'wrap', alignItems: 'baseline' }}>
+    <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', gap: 6 }}>
       {parts.map((p, i) =>
         typeof p === 'string' ? (
           <text key={i} style={{ fontSize, color: textTokens.primary, fontFamily: FONT }}>
@@ -48,9 +48,11 @@ export function InlineCitations({ text = '', sources = [], fontSize = 13 }: Inli
             snippet={safeSources[p.index]!.snippet}
           />
         ) : (
-          <text key={i} style={{ fontSize, color: textTokens.muted, fontFamily: FONT }}>
-            [{p.index + 1}]
-          </text>
+          <div key={i} style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', whiteSpace: 'nowrap' }}>
+            <text style={{ fontSize, color: textTokens.muted, fontFamily: FONT, whiteSpace: 'nowrap' }}>
+              {`[${p.index + 1}]`}
+            </text>
+          </div>
         ),
       )}
     </div>
