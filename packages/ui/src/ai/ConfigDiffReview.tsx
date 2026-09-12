@@ -1,6 +1,6 @@
 /** @atlas/ui — ConfigDiffReview — review an agent's proposed config/JSON change. */
 import { border, surface, text as t } from '../tokens'
-import { FONT_MONO } from '../tokens'
+import { FONT, FONT_MONO } from '../tokens'
 import { Button } from '../atoms/Button'
 import { diffLines } from './diff'
 
@@ -22,12 +22,12 @@ export function ConfigDiffReview({ before, after, title = 'Proposed change', acc
   const prefix = { add: '+', del: '-', keep: ' ' } as const
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 8, borderWidth: 1, borderColor: border.subtle, borderRadius: 10, padding: 12, backgroundColor: surface.card }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 10, padding: 16, borderRadius: 10, borderWidth: 1, borderColor: border.subtle, backgroundColor: surface.card }}>
       <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-        <text style={{ fontSize: 12.5, fontWeight: 600, color: t.primary, fontFamily: FONT_MONO }}>{title}</text>
-        <text style={{ fontSize: 11, color: t.muted, fontFamily: FONT_MONO }}>{lines.length} lines</text>
+        <text style={{ fontSize: 13, fontWeight: 600, color: t.primary, fontFamily: FONT, lineHeight: 1 }}>{title}</text>
+        <text style={{ fontSize: 11, color: t.muted, fontFamily: FONT, lineHeight: 1 }}>{lines.length} lines</text>
       </div>
-      <div style={{ display: 'flex', flexDirection: 'column', maxHeight: 260, overflowY: 'scroll', backgroundColor: '#0D0D10', borderRadius: 6, padding: 6, borderWidth: 1, borderColor: '#26262B' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', maxHeight: 260, overflowY: 'scroll', backgroundColor: surface.code, borderRadius: 8, padding: 8, borderWidth: 1, borderColor: border.subtle }}>
         {lines.map((l, i) => (
           <div
             key={i}

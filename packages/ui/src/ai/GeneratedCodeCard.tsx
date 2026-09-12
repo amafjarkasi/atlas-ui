@@ -28,9 +28,9 @@ const STATUS_COLOR: Record<GeneratedCodeStatus, string> = { pending: '#3B82F6', 
 export function GeneratedCodeCard({ code, language, title, status = 'pending', onApply, onCopy }: GeneratedCodeCardProps) {
   const displayTitle = title || (language ? `${language.charAt(0).toUpperCase() + language.slice(1)} snippet` : 'Generated snippet')
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 14, borderRadius: 10, borderWidth: 1, borderColor: border.subtle, backgroundColor: surface.card }}>
-      <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 10 }}>
-        <text style={{ fontSize: 13, fontWeight: 600, color: textTokens.primary, fontFamily: FONT }}>{displayTitle}</text>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 10, padding: 16, borderRadius: 10, borderWidth: 1, borderColor: border.subtle, backgroundColor: surface.card }}>
+      <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+        <text style={{ fontSize: 13, fontWeight: 600, color: textTokens.primary, fontFamily: FONT, lineHeight: 1 }}>{displayTitle}</text>
         <Badge variant="label" label={STATUS_LABEL[status] ?? 'New'} color={STATUS_COLOR[status] ?? '#3B82F6'} />
         <div style={{ flexGrow: 1 }} />
         {status === 'pending' && onApply ? <CopyButton value={code} onCopy={onApply} label="Apply" copiedLabel="Applied" /> : null}
