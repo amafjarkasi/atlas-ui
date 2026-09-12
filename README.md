@@ -1,71 +1,186 @@
 <div align="center">
-  <img src="./packages/ui/assets/logo.svg" alt="Atlas UI Logo" width="400" />
-  <h1>Atlas UI</h1>
-  <p><b>A massive, high-performance, GPU-accelerated React component library for desktop applications.</b></p>
-  
-  [![Built for GPUIX](https://img.shields.io/badge/Built%20for-GPUIX-6366f1?style=for-the-badge)](https://github.com/remorses/gpuix)
-  [![React](https://img.shields.io/badge/React-18.x-61dafb?style=for-the-badge&logo=react&logoColor=black)](https://reactjs.org/)
-  [![TypeScript](https://img.shields.io/badge/TypeScript-Strict-3178c6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+  <a href="#atlas-ui">
+    <img src="./assets/logo.svg" alt="Atlas UI - GPU-Accelerated Component Architecture" width="100%" />
+  </a>
+
+  <br/><br/>
+
+  [![GPUIX Exclusive](https://img.shields.io/badge/Runtime-GPUIX%20Exclusive-0284c7?style=for-the-badge&logo=rust&logoColor=white)](https://github.com/remorses/gpuix)
+  [![Zero DOM](https://img.shields.io/badge/DOM-Zero%20HTML%20%2F%20CSS-6366f1?style=for-the-badge)](https://github.com/remorses/gpuix)
+  [![React 19 Reconciler](https://img.shields.io/badge/React-19.x%20Reconciler-61dafb?style=for-the-badge&logo=react&logoColor=black)](https://reactjs.org/)
+  [![Components](https://img.shields.io/badge/Components-200%2B%20Primitives-a855f7?style=for-the-badge)](https://github.com/amafjarkasi/atlas-ui#complete-component-index)
+  [![TypeScript Strict](https://img.shields.io/badge/TypeScript-Strict%20Types-3178c6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 </div>
 
 ---
 
-## Overview
+> [!CAUTION]
+> **GPUIX RUNTIME EXCLUSIVE**: `@atlas/ui` is **NOT** a web library. It does not work in web browsers, Next.js, Vite (web target), Electron, or standard React DOM environments. It requires the native **[GPUIX](https://github.com/remorses/gpuix)** desktop runtime (`@gpuix/react`) backed by Zed's GPUI engine and communicates directly with your GPU via DirectX 12, Metal, or Vulkan.
 
-`@atlas/ui` is an enterprise-grade, highly modular component library engineered specifically for the **GPUIX** framework. By completely bypassing the traditional browser DOM, HTML, and CSS, Atlas UI unlocks a new tier of desktop application performance. Every component in this library renders directly to the GPU using native graphics APIs—**DirectX 12 on Windows, Metal on macOS, and Vulkan on Linux**.
+---
 
-### Built for the Post-DOM Era
-Traditional Electron or Tauri apps suffer from Chromium/WebKit bloat and DOM layout thrashing. Atlas UI solves this by leveraging a lightweight React 19 reconciler that translates your JSX directly into a Rust-powered retained scene graph. The result? **Silky smooth 120fps animations, sub-millisecond layout calculations, and a memory footprint a fraction of the size of a webview.**
+## What is Atlas UI?
 
-### Massive Scale & Domain-Specific Modularity
-With over **150+ native components**, Atlas UI goes far beyond basic buttons and inputs. It provides specialized, production-ready modules for:
-*   **WAI-ARIA Compliant Foundations**: Fully custom headless engines for roving tabindex, focus trapping, and keyboard navigation in a DOM-less world.
-*   **Agentic AI Interfaces**: Pre-built chat threads, thought-process tracers, and token meters for LLM copilots.
-*   **Native Desktop Paradigms**: Command palettes, split panes, floating context menus, and native window drag areas.
-*   **Hardware-Accelerated DataViz**: Real-time rendering of candlestick charts, sparklines, and heatmaps via the GPUIX `<canvas>` primitive.
+**Atlas UI** is a native, hardware-accelerated desktop UI design system and headless component ecosystem engineered from first principles exclusively for **GPUIX** (`@gpuix/react`).
 
-Whether you are building a high-frequency trading dashboard, a native email client, or the next generation of AI workspaces, `@atlas/ui` provides the foundational blocks to build it fast, without compromising on bare-metal performance.
+Traditional desktop web wrappers like Electron or Tauri bundle Chromium or WebKit webviews. While convenient, they drag along decades of legacy browser DOM specifications, reflow recalculations, layout thrashing, heavyweight memory overhead, and frame drops on intense data streams.
+
+**Atlas UI takes a completely different path:**
+* **No DOM, No HTML, No CSS**: Your JSX does not produce `<div>` or `<button>` DOM nodes. Instead, our components render directly into native GPU display lists and retained scene-graphs computed by Zed's high-performance GPUI engine.
+* **Bare-Metal Hardware Pipelines**: All typography, surfaces, rounded borders, shadows, and vector paths render through **DirectX 12 (Windows)**, **Metal (macOS)**, and **Vulkan (Linux)** with zero browser intermediate layers.
+* **120+ FPS Structural Animation**: Animations are powered directly by `@gpuix/react` native `motion.div` GPU interpolators rather than CSS transitions or JavaScript requestAnimationFrame loops.
+* **Zero Layout Thrashing**: Uses the Taffy Rust flexbox engine for sub-millisecond, memory-aligned layout computations.
+
+---
 
 ## Why Atlas UI?
 
-* ⚡ **Zero DOM Overhead**: No HTML nodes, no CSS cascades, no `ResizeObserver` performance hits.
-* 🎨 **Headless by Design**: Inspired by Radix and shadcn/ui, but adapted for raw scene-graph math and floating positioning without DOM elements.
-* 🧠 **AI-Native Components**: Ships with a massive suite of pre-built UI for LLMs, agent trajectories, prompt engineering, and thought-traces.
-* 📈 **Canvas-Driven DataViz**: Sparklines, Candlestick charts, and Heatmaps rendering via native 2D contexts.
+| Capability | Standard React UI (shadcn / Radix / MUI) | Atlas UI for GPUIX |
+| :--- | :--- | :--- |
+| **Runtime Target** | Browser DOM (`react-dom`, WebKit, Chromium) | **GPUIX Native GPU Engine (`@gpuix/react`)** |
+| **Rendering Backend** | Skia / Blink / WebKit Compositor via HTML/CSS | **DirectX 12 (Win), Metal (macOS), Vulkan (Linux)** |
+| **Layout Engine** | Browser CSS Box Model & Cascading Reflow | **Rust Taffy Flexbox (Sub-millisecond compute)** |
+| **DOM Tree Overhead** | Hundreds of HTML DOM nodes per view | **Zero DOM nodes (Pure retained GPU scene graph)** |
+| **Input & Floating Anchors** | Browser events & DOM `getBoundingClientRect()` | **Native OS window coordinates & custom roving focus** |
+| **DataViz & Charts** | Canvas 2D Web API / SVG / WebGL | **Native GPUI `<canvas>` hardware context** |
+| **AI / Copilot UI** | Requires 3rd-party composite packages | **58+ Built-in Agentic AI & Copilot primitives** |
 
-## Installation
+---
 
-The library is designed to be consumed within a Bun workspace.
+## Component Architecture & Domains
+
+Atlas UI is split into modular domains designed to provide complete architectural coverage for native desktop apps:
+
+```mermaid
+flowchart TB
+    subgraph AppLayer [Developer Application]
+        direction LR
+        App[Your Native Desktop App]
+    end
+
+    subgraph AtlasUI ["@atlas/ui Ecosystem (200+ Primitives)"]
+        direction TB
+        subgraph CoreModules [Core & Layout]
+            Atoms["atoms/ (Button, Badge, Avatar, Kbd, Icon)"]
+            Layout["layout/ (ResizablePanel, Tabs, Drawer, ScrollArea)"]
+            Inputs["inputs/ (DatePicker, TagInput, Slider, ColorPicker)"]
+            Overlays["overlays/ (ContextMenu, Dialog, Menubar, Toast)"]
+        end
+
+        subgraph AdvancedModules [Specialized Workspaces]
+            AI["ai/ (AgentFlowGraph, ChatThread, PromptStudio, ToolCard)"]
+            DataViz["dataviz/ (Sparklines, Heatmap, AudioWaveform, Charts)"]
+            Desktop["desktop/ (CommandMenu, WindowDragArea, ToolRail)"]
+            Finance["finance/ (CandlestickChart, PnlBadge, OrderBook)"]
+        end
+
+        subgraph HeadlessEngines [Headless Behaviors]
+            Hooks["hooks/ (useHotkeys, useRovingFocus, usePointerDrag)"]
+        end
+    end
+
+    subgraph GPUIRuntime [Native Engine Pipeline - GPUIX ONLY]
+        direction TB
+        Reconciler["@gpuix/react Reconciler (React 19)"]
+        Taffy["Taffy Flexbox Layout (Rust)"]
+        ZedGPUI["Zed GPUI Core Engine"]
+    end
+
+    subgraph Hardware [Physical GPU Hardware]
+        direction LR
+        DX12[DirectX 12 - Windows]
+        Metal[Metal - macOS]
+        Vulkan[Vulkan - Linux]
+    end
+
+    App --> AtlasUI
+    AtlasUI --> Reconciler
+    Reconciler --> Taffy
+    Taffy --> ZedGPUI
+    ZedGPUI --> DX12
+    ZedGPUI --> Metal
+    ZedGPUI --> Vulkan
+
+    classDef brand fill:#0b0f19,stroke:#38bdf8,stroke-width:2px,color:#fff;
+    classDef runtime fill:#0f172a,stroke:#818cf8,stroke-width:2px,color:#fff;
+    classDef hardware fill:#020617,stroke:#10b981,stroke-width:2px,color:#fff;
+    classDef warning fill:#3b0764,stroke:#c084fc,stroke-width:2px,color:#fff;
+
+    class App brand;
+    class AtlasUI,CoreModules,AdvancedModules,HeadlessEngines warning;
+    class GPUIRuntime,Reconciler,Taffy,ZedGPUI runtime;
+    class Hardware,DX12,Metal,Vulkan hardware;
+```
+
+---
+
+## Installation & Setup
+
+> [!IMPORTANT]
+> Because Atlas UI relies on native GPUIX primitives, ensure your project runs on [Bun](https://bun.sh/) and contains `@gpuix/react`.
 
 ```bash
+# Add Atlas UI to your Bun workspace or project
 bun add @atlas/ui
 ```
 
-Ensure your app is configured for GPUIX with the proper JSX import sources in `tsconfig.json`:
+### 1. Configure TypeScript (`tsconfig.json`)
+
+You must set `jsxImportSource` to `@gpuix/react` so JSX elements compile to GPUIX native tags:
 
 ```json
 {
   "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
     "jsx": "react-jsx",
-    "jsxImportSource": "@gpuix/react"
+    "jsxImportSource": "@gpuix/react",
+    "strict": true
   }
 }
 ```
 
-## Quick Start
+### 2. Basic Quickstart Example
 
 ```tsx
 import { Window } from '@gpuix/react'
 import { ThemeProvider } from '@atlas/ui/core'
-import { Button, Toast, Toaster, toastSuccess } from '@atlas/ui'
+import { 
+  Button, 
+  Tabs, 
+  TabsList, 
+  TabsTrigger, 
+  TabsContent, 
+  Toaster, 
+  toastSuccess 
+} from '@atlas/ui'
 
 export function App() {
   return (
     <ThemeProvider>
-      <Window title="My Atlas App">
-        <Button onClick={() => toastSuccess("Action completed!")}>
-          Click Me
-        </Button>
+      <Window title="Atlas Desktop Workspace" options={{ width: 1080, height: 720 }}>
+        <Tabs defaultValue="overview">
+          <TabsList>
+            <TabsTrigger value="overview">Overview</TabsTrigger>
+            <TabsTrigger value="ai">AI Copilot</TabsTrigger>
+          </TabsList>
+          
+          <TabsContent value="overview">
+            <Button 
+              variant="primary" 
+              onClick={() => toastSuccess("Action triggered on native GPU!")}
+            >
+              Dispatch GPU Action
+            </Button>
+          </TabsContent>
+          
+          <TabsContent value="ai">
+            {/* Native AI Workspace primitives */}
+          </TabsContent>
+        </Tabs>
+        
+        {/* Global module-level Toast viewport */}
         <Toaster />
       </Window>
     </ThemeProvider>
@@ -73,71 +188,24 @@ export function App() {
 }
 ```
 
-## Component Ecosystem
+---
 
-The library is broken down into modular domains to keep your bundle lean.
+## Headless Architecture in a DOM-less Environment
 
-### 🧱 Atoms & Layout (`/atoms`, `/layout`)
-Fundamental building blocks and flex-based positioning grids.
-* `Badge`, `Avatar`, `Button`, `Kbd`, `Icon`
-* `Tabs`, `ResizablePanel`, `ScrollArea`, `VirtualList`, `Drawer`
+Because standard DOM APIs (`window.addEventListener`, `document.querySelector`, `getBoundingClientRect`, CSS `@keyframes`, HTML `tabIndex`) do not exist in GPUIX, Atlas UI embeds dedicated headless behavioral engines:
 
-### 🎛️ Inputs & Forms (`/inputs`)
-Accessible, keyboard-navigable input primitives.
-* `Combobox`, `DatePicker`, `FileDropzone`, `Slider`, `TagInput`, `ColorPicker`
-
-### 🧩 Overlays & Display (`/overlays`, `/display`)
-Floating panels with GPU-accelerated collision detection and WAI-ARIA inspired focus trapping.
-* `ContextMenu`, `Dialog`, `Popover`, `HoverCard`, `Menubar`, `DataGrid`
-
-### 🤖 AI Workspaces (`/ai`)
-A complete toolkit for building Copilots and LLM monitoring tools.
-* `AgentTrajectory`, `ChatThread`, `ThoughtCodeSplit`, `ToolCallCard`, `PromptDiff`
-
-### 📊 Financial & DataViz (`/dataviz`, `/finance`)
-High-performance charting and tracking components.
-* `ActivitySparkline`, `CandlestickChart`, `Heatmap`, `AllocationDonut`, `AudioWaveform`
-
-### 🖥️ Desktop Integrations (`/desktop`)
-Native OS-level paradigms.
-* `CommandMenu`, `WindowDragArea`, `ShortcutSettingsList`, `EmojiPicker`
-
-## Architecture Notes
-
-```mermaid
-flowchart TD
-    A[React Application] -->|Imports| B["@atlas/ui (Components)"]
-    B -->|JSX Primitives| C["@gpuix/react (Reconciler)"]
-    C -->|FFI Bindings| D[Rust GPUIX Engine]
-    D -->|Native Draw Calls| E[(GPU: DirectX 12 / Metal / Vulkan)]
-
-    classDef react fill:#222,stroke:#61dafb,stroke-width:2px,color:#fff;
-    classDef atlas fill:#222,stroke:#8b5cf6,stroke-width:2px,color:#fff;
-    classDef rust fill:#222,stroke:#e43716,stroke-width:2px,color:#fff;
-    classDef gpu fill:#222,stroke:#10b981,stroke-width:2px,color:#fff;
-
-    class A react
-    class B atlas
-    class C,D rust
-    class E gpu
-```
-
-Because GPUIX lacks a DOM, Atlas UI implements its own headless engines for:
-* **Roving Tabindex**: Fully custom `useRovingFocus` logic for arrow-key navigation.
-* **Virtual Anchors**: Pointer-based positioning for `ContextMenu` without `getBoundingClientRect`.
-* **Queue-based Toasts**: A module-level singleton bus for notifications (`toast()`).
-* **Motion States**: Direct bindings to `@gpuix/react`'s `motion.div` for 60fps structural animations.
+1. **Roving Tabindex Engine (`useRovingFocus`)**: Tracks keyboard focus hierarchy across virtual items without browser tab sequence.
+2. **Virtual Anchored Overlays**: Floating menus (`ContextMenu`, `Dialog`, `Popover`) calculate relative bounds against native viewport space coordinates without DOM element bounding boxes.
+3. **Observer Event Bus Toaster (`toast()`)**: A module-level singleton state manager allowing toasts to be dispatched cleanly from outside the React tree with full exit animation orchestration.
+4. **Hardware Canvas Renderers**: Pure 2D vector path calculation matrices powering charts and visual telemetry directly on GPU surfaces.
 
 ---
-*Built for the future of desktop applications.*
-
-
 
 ## Complete Component Index
 
 Below is the exhaustive list of all 200+ native GPUIX components, hooks, and layouts included in `@atlas/ui`.
 
-<details>
+<details open>
 <summary><b>🤖 AI Workspaces (58)</b></summary>
 <p>
 <code>AgentFlowGraph</code>, <code>AgentMonitor</code>, <code>AgentRunCard</code>, <code>AgentRunSteps</code>, <code>AgentTrajectory</code>, <code>AssistWorkspace</code>, <code>BranchExplorer</code>, <code>ChatBubble</code>, <code>ChatSearchBar</code>, <code>ChatThread</code>, <code>ConfigDiffReview</code>, <code>ContextBrowser</code>, <code>ContextRing</code>, <code>DocumentQAPanel</code>, <code>GeneratedCodeCard</code>, <code>HelpCopilot</code>, <code>InlineCitations</code>, <code>InlineCodeChip</code>, <code>InterruptibleComposer</code>, <code>LatencyLog</code>, <code>LiveAgentGrid</code>, <code>MentionInput</code>, <code>MessageScroller</code>, <code>MessageStatus</code>, <code>ModelJourney</code>, <code>ModelLab</code>, <code>ModelPerformanceTable</code>, <code>ModelPicker</code>, <code>PromptDiff</code>, <code>PromptEngineeringSuite</code>, <code>PromptHistoryList</code>, <code>PromptInput</code>, <code>PromptSettings</code>, <code>PromptTemplateEditor</code>, <code>RegenerateBar</code>, <code>ResponseComparer</code>, <code>ReviewPanel</code>, <code>RunCostCard</code>, <code>RunInspector</code>, <code>SamplerControls</code>, <code>SandboxStepLog</code>, <code>ScoringPanel</code>, <code>SelectAndAsk</code>, <code>SelectionToPrompt</code>, <code>SourceList</code>, <code>StreamingDiff</code>, <code>StreamingMarkdown</code>, <code>SystemPromptCard</code>, <code>TaskDoneBanner</code>, <code>ThinkingIndicator</code>, <code>ThoughtCodeSplit</code>, <code>TokenMeter</code>, <code>ToolCallCard</code>, <code>ToolPermissionPrompt</code>, <code>TranscriptSync</code>, <code>UsageBudgetCard</code>, <code>VersionedPromptLibrary</code>, <code>VoiceStudio</code>
@@ -220,3 +288,9 @@ Below is the exhaustive list of all 200+ native GPUIX components, hooks, and lay
 <code>AllocationDonut</code>, <code>BalanceCard</code>, <code>BudgetBar</code>, <code>CandlestickChart</code>, <code>KpiGrid</code>, <code>PnlBadge</code>, <code>TransactionList</code>
 </p>
 </details>
+
+---
+
+<div align="center">
+  <sub>Built with ❤️ exclusively for the native GPUIX runtime.</sub>
+</div>
