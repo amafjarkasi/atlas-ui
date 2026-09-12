@@ -29,10 +29,11 @@ export function RunCostCard({ inputTokens, outputTokens, totalTokens, limit, max
         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
           <text style={{ fontSize: 13, fontWeight: 600, color: textTokens.primary, fontFamily: FONT }}>{title}</text>
           {cost !== undefined ? (
-            <text style={{ fontSize: 14, fontWeight: 700, color: textTokens.primary, fontFamily: FONT }}>
-              {currency}
-              {cost.toFixed(4)}
-            </text>
+            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+              <text style={{ fontSize: 14, fontWeight: 700, color: textTokens.primary, fontFamily: FONT }}>
+                {`${currency}${cost.toFixed(4)}`}
+              </text>
+            </div>
           ) : null}
         </div>
         {inputTokens !== undefined || outputTokens !== undefined ? (

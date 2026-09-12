@@ -18,9 +18,38 @@ const sampleProps: Record<string, any> = {
   },
   AgentMonitor: {
     agents: [
-      { id: 'a1', name: 'AST Parser', status: 'done', durationMs: 340 },
-      { id: 'a2', name: 'Refactor Agent', status: 'running', durationMs: 1420 },
-      { id: 'a3', name: 'Unit Tester', status: 'idle', durationMs: 0 }
+      {
+        id: 'a1',
+        title: 'AST Parser',
+        status: 'done',
+        progress: 100,
+        durationMs: 340,
+        steps: [
+          { id: 's1', label: 'Parse AST tree', status: 'done' },
+          { id: 's2', label: 'Index symbols', status: 'done' }
+        ]
+      },
+      {
+        id: 'a2',
+        title: 'Refactor Agent',
+        status: 'running',
+        progress: 68,
+        durationMs: 1420,
+        steps: [
+          { id: 's1', label: 'Compute diffs', status: 'done' },
+          { id: 's2', label: 'Apply transformations', status: 'running' }
+        ]
+      },
+      {
+        id: 'a3',
+        title: 'Unit Tester',
+        status: 'idle',
+        progress: 0,
+        durationMs: 0,
+        steps: [
+          { id: 's1', label: 'Run test suite', status: 'pending' }
+        ]
+      }
     ],
     inputTokens: 14200,
     outputTokens: 3890,
@@ -163,10 +192,46 @@ const sampleProps: Record<string, any> = {
   },
   LiveAgentGrid: {
     agents: [
-      { id: 'g1', name: 'Parser', status: 'done', durationMs: 240 },
-      { id: 'g2', name: 'Analyzer', status: 'running', durationMs: 890 },
-      { id: 'g3', name: 'Optimizer', status: 'idle', durationMs: 0 },
-      { id: 'g4', name: 'Linter', status: 'done', durationMs: 120 }
+      {
+        id: 'g1',
+        title: 'AST Parser',
+        status: 'done',
+        progress: 100,
+        durationMs: 240,
+        steps: [
+          { id: 's1', label: 'Index symbols', status: 'done' }
+        ]
+      },
+      {
+        id: 'g2',
+        title: 'Refactor Agent',
+        status: 'running',
+        progress: 74,
+        durationMs: 890,
+        steps: [
+          { id: 's1', label: 'Transform AST', status: 'running' }
+        ]
+      },
+      {
+        id: 'g3',
+        title: 'Code Optimizer',
+        status: 'idle',
+        progress: 0,
+        durationMs: 0,
+        steps: [
+          { id: 's1', label: 'Pass 1', status: 'pending' }
+        ]
+      },
+      {
+        id: 'g4',
+        title: 'Linter',
+        status: 'done',
+        progress: 100,
+        durationMs: 120,
+        steps: [
+          { id: 's1', label: 'Zero errors', status: 'done' }
+        ]
+      }
     ]
   },
   MentionInput: {

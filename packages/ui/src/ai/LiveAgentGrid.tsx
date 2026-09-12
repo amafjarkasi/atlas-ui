@@ -9,6 +9,7 @@ export interface AgentRunSummary {
   steps?: AgentStep[]
   progress?: number
   status?: string
+  durationMs?: number
 }
 
 export interface LiveAgentGridProps {
@@ -30,6 +31,7 @@ export function LiveAgentGrid({ agents, columns = 2, height = '100%' }: LiveAgen
           steps={a.steps ?? []}
           progress={a.progress}
           status={a.status}
+          durationMs={a.durationMs ?? (a as any).durationMs}
         />
       )}
     />
