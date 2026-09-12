@@ -1,7 +1,7 @@
 /** @atlas/ui — LicensesDialog — package/license list with expandable text. */
-import { surface, border, text as t } from '../tokens'
-import { FONT_MONO, FONT } from '../tokens'
-import { Dialog, DialogOverlay, DialogContent, DialogTitle, DialogBody, DialogFooter } from '../overlays/Dialog'
+import { surface, text as t } from '../tokens'
+import { FONT_MONO } from '../tokens'
+import { Dialog, DialogOverlay, DialogContent, DialogHeader, DialogTitle, DialogBody, DialogFooter } from '../overlays/Dialog'
 import { Button } from '../atoms/Button'
 import { Accordion } from '../layout/Accordion'
 
@@ -22,7 +22,9 @@ export function LicensesDialog({ open, onOpenChange, entries }: LicensesDialogPr
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogOverlay>
         <DialogContent width={520}>
-          <DialogTitle>Licenses</DialogTitle>
+          <DialogHeader>
+            <DialogTitle>Licenses</DialogTitle>
+          </DialogHeader>
           <DialogBody>
             <Accordion
               items={entries.map((e) => ({
@@ -30,14 +32,16 @@ export function LicensesDialog({ open, onOpenChange, entries }: LicensesDialogPr
                 title: `${e.name} — ${e.license}`,
                 content: (
                   <div style={{ maxHeight: 200, overflowY: 'scroll', padding: 8, backgroundColor: surface.code, borderRadius: 6 }}>
-                    <text style={{ fontSize: 11, color: t.muted, fontFamily: FONT_MONO, whiteSpace: 'normal', lineHeight: 1.5 }}>{e.text ?? 'No license text.'}</text>
+                    <text style={{ fontSize: 11, color: t.muted, fontFamily: FONT_MONO, whiteSpace: 'normal' }}>{e.text ?? 'No license text.'}</text>
                   </div>
                 ),
               }))}
             />
           </DialogBody>
           <DialogFooter>
-            <Button onClick={() => onOpenChange(false)}>Done</Button>
+            <Button size="md" onClick={() => onOpenChange(false)}>
+              Done
+            </Button>
           </DialogFooter>
         </DialogContent>
       </DialogOverlay>

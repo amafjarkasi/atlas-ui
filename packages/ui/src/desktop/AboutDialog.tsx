@@ -32,7 +32,7 @@ function wrapWords(input: string, maxChars: number): string[] {
 }
 
 export function AboutDialog({ open, onOpenChange, appName, version, description, license }: AboutDialogProps) {
-  const descriptionLines = description ? wrapWords(description, 40) : []
+  const descriptionLines = description ? wrapWords(description, 42) : []
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogOverlay>
@@ -41,7 +41,7 @@ export function AboutDialog({ open, onOpenChange, appName, version, description,
             <DialogTitle>About</DialogTitle>
           </DialogHeader>
           <DialogBody>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20, paddingTop: 4, paddingBottom: 4 }}>
               <div
                 style={{
                   width: 56,
@@ -57,13 +57,13 @@ export function AboutDialog({ open, onOpenChange, appName, version, description,
               >
                 <Icon name="sparkle" size={26} color={semantic.accent} />
               </div>
-              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10 }}>
                 <text style={{ fontSize: 18, fontWeight: 700, color: t.primary, fontFamily: FONT }}>{appName}</text>
                 {version ? (
                   <div
                     style={{
-                      paddingTop: 3,
-                      paddingBottom: 3,
+                      paddingTop: 4,
+                      paddingBottom: 4,
                       paddingLeft: 10,
                       paddingRight: 10,
                       borderRadius: 999,
@@ -77,11 +77,21 @@ export function AboutDialog({ open, onOpenChange, appName, version, description,
                 ) : null}
               </div>
               {descriptionLines.length > 0 ? (
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3, paddingTop: 2 }}>
-                  {descriptionLines.map((line) => (
-                    <text key={line} style={{ fontSize: 13, color: t.secondary, fontFamily: FONT, lineHeight: 1.35 }}>
-                      {line}
-                    </text>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', maxWidth: 320 }}>
+                  {descriptionLines.map((line, i) => (
+                    <div
+                      key={i}
+                      style={{
+                        marginTop: i > 0 ? 8 : 0,
+                        paddingTop: 2,
+                        paddingBottom: 2,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      <text style={{ fontSize: 13, color: t.secondary, fontFamily: FONT }}>{line}</text>
+                    </div>
                   ))}
                 </div>
               ) : null}
@@ -109,7 +119,7 @@ export function AboutDialog({ open, onOpenChange, appName, version, description,
             </div>
           </DialogBody>
           <DialogFooter>
-            <Button variant="ghost" onClick={() => onOpenChange(false)}>
+            <Button variant="ghost" size="md" onClick={() => onOpenChange(false)}>
               Close
             </Button>
           </DialogFooter>

@@ -17,23 +17,6 @@ export interface PropertyGridProps {
   onValueChange?: (key: string, value: string) => void
 }
 
-function wrapWords(input: string, maxChars: number): string[] {
-  const words = input.split(/\s+/).filter(Boolean)
-  const lines: string[] = []
-  let current = ''
-  for (const word of words) {
-    const next = current ? `${current} ${word}` : word
-    if (next.length > maxChars && current) {
-      lines.push(current)
-      current = word
-    } else {
-      current = next
-    }
-  }
-  if (current) lines.push(current)
-  return lines
-}
-
 export function PropertyGrid({ items, onValueChange }: PropertyGridProps) {
   const [editingKey, setEditingKey] = useState<string | null>(null)
   return (
@@ -52,7 +35,8 @@ export function PropertyGrid({ items, onValueChange }: PropertyGridProps) {
     >
       {items.map((it, i) => {
         const editing = editingKey === it.key
-        const lines = it.multiline ? wrapWords(it.value, 36) : [it.value || '—']
+        const displayValue = it.value || '—'
+        const isMultiline = Boolean(it.multiline)
         return (
           <div
             key={it.key}
@@ -70,18 +54,17 @@ export function PropertyGrid({ items, onValueChange }: PropertyGridProps) {
               borderColor: border.subtle,
             }}
           >
-            <text
+            <div
               style={{
                 width: 128,
                 flexShrink: 0,
-                fontSize: 11.5,
-                color: t.muted,
-                fontFamily: FONT,
-                lineHeight: 1.35,
+                display: 'flex',
+                alignItems: 'center',
+                minHeight: 18,
               }}
             >
-              {it.label}
-            </text>
+              <text style={{ fontSize: 11.5, color: t.muted, fontFamily: FONT }}>{it.label}</text>
+            </div>
             {editing ? (
               <div style={{ flexGrow: 1, minWidth: 0 }}>
                 <InlineEditableField
@@ -109,14 +92,31 @@ export function PropertyGrid({ items, onValueChange }: PropertyGridProps) {
                   hover: { backgroundColor: '#FFFFFF0A' },
                 }}
               >
-                <div style={{ flexGrow: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 2 }}>
-                  {lines.map((line, li) => (
-                    <text key={`${it.key}-${li}`} style={{ fontSize: 13, color: t.primary, fontFamily: FONT, lineHeight: 1.35 }}>
-                      {line}
-                    </text>
-                  ))}
+                <div style={{ flexGrow: 1, minWidth: 0, display: 'flex', alignItems: 'center', minHeight: 20 }}>
+                  <text
+                    style={{
+                      fontSize: 13,
+                      color: t.primary,
+                      fontFamily: FONT,
+                      flexGrow: 1,
+                      ...(isMultiline
+                        ? { whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }
+                        : {}),
+                    }}
+                  >
+                    {displayValue}
+                  </text>
                 </div>
-                <div style={{ height: 18, display: 'flex', alignItems: 'center', flexShrink: 0 }}>
+                <div
+                  style={{
+                    width: 18,
+                    height: 18,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexShrink: 0,
+                  }}
+                >
                   <Icon name="edit" size={12} color={t.muted} />
                 </div>
               </div>

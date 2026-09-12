@@ -15,7 +15,7 @@ const sampleProps: Record<string, any> = {
     onOpenChange: noop,
     appName: 'Lucid Hubble',
     version: '2.4.1',
-    description: 'A GPU-accelerated UI development environment for high-performance desktop apps.',
+    description: 'GPU-accelerated UI toolkit for high-performance desktop apps.',
     license: 'MIT License',
   },
   AutoSavePill: { state: 'saved' },

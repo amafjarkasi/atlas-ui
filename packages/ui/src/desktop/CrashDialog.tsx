@@ -14,6 +14,7 @@ export interface CrashDialogProps {
 }
 
 export function CrashDialog({ open, onOpenChange, error, onRestart, onReport }: CrashDialogProps) {
+  const stackLines = (error ?? 'Unknown error').split('\n')
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogOverlay>
@@ -22,7 +23,7 @@ export function CrashDialog({ open, onOpenChange, error, onRestart, onReport }: 
             <DialogTitle>Something went wrong</DialogTitle>
           </DialogHeader>
           <DialogBody>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 10, width: '100%' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 12, width: '100%' }}>
               <div
                 style={{
                   display: 'flex',
@@ -54,16 +55,19 @@ export function CrashDialog({ open, onOpenChange, error, onRestart, onReport }: 
                 >
                   <Icon name="alertCircle" size={13} color="#ED4245" />
                 </div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 3, flexGrow: 1, minWidth: 0 }}>
-                  <text style={{ fontSize: 13, fontWeight: 600, color: t.primary, fontFamily: FONT }}>The application crashed</text>
-                  <text style={{ fontSize: 12, color: t.secondary, fontFamily: FONT }}>You can restart or send a report.</text>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 4, flexGrow: 1, minWidth: 0 }}>
+                  <div style={{ minHeight: 17 }}>
+                    <text style={{ fontSize: 13, fontWeight: 600, color: t.primary, fontFamily: FONT }}>The application crashed</text>
+                  </div>
+                  <div style={{ minHeight: 16 }}>
+                    <text style={{ fontSize: 12, color: t.secondary, fontFamily: FONT }}>You can restart or send a report.</text>
+                  </div>
                 </div>
               </div>
               <div
                 style={{
                   display: 'flex',
                   flexDirection: 'column',
-                  gap: 4,
                   width: '100%',
                   minHeight: 88,
                   padding: 12,
@@ -73,18 +77,27 @@ export function CrashDialog({ open, onOpenChange, error, onRestart, onReport }: 
                   backgroundColor: surface.code,
                 }}
               >
-                {(error ?? 'Unknown error').split('\n').map((line, i) => (
-                  <text
+                {stackLines.map((line, i) => (
+                  <div
                     key={i}
                     style={{
-                      fontSize: 11.5,
-                      color: i === 0 ? t.secondary : t.muted,
-                      fontFamily: FONT_MONO,
-                      lineHeight: 1.45,
+                      marginTop: i > 0 ? 6 : 0,
+                      paddingTop: 1,
+                      paddingBottom: 1,
+                      display: 'flex',
+                      alignItems: 'center',
                     }}
                   >
-                    {line.length > 0 ? line : ' '}
-                  </text>
+                    <text
+                      style={{
+                        fontSize: 11.5,
+                        color: i === 0 ? t.primary : t.secondary,
+                        fontFamily: FONT_MONO,
+                      }}
+                    >
+                      {line.length > 0 ? line : ' '}
+                    </text>
+                  </div>
                 ))}
               </div>
             </div>
